@@ -1,0 +1,331 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.4' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     10333,        323]
+NotebookOptionsPosition[      9210,        280]
+NotebookOutlinePosition[      9545,        295]
+CellTagsIndexPosition[      9502,        292]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+ StyleBox[
+  RowBox[{
+   RowBox[{
+   "Derive", " ", "a", " ", "holonomic", " ", "system", " ", "for", " ", 
+    "the", " ", "inner", " ", "double", " ", "integral", "  ", 
+    RowBox[{
+    "of", " ", "the", " ", "expection", " ", "of", " ", "an", " ", "Euler", 
+     " ", "characteristic", " ", "number"}]}], "\[IndentingNewLine]"}], 
+  "Section"]], "Input",
+ CellChangeTimes->{{3.723280170546658*^9, 3.723280187164277*^9}, 
+   3.723529943386504*^9}],
+
+Cell[BoxData[
+ RowBox[{"a", " ", "Derive", " ", "double", " ", "Example", " ", "for", " ", 
+  "holonomic", " ", "in", " ", "inner", " ", "integral", " ", "system", " ", 
+  "the"}]], "Output",
+ CellChangeTimes->{3.723280745585362*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"<<", " ", "RISC`HolonomicFunctions`"}], ";", " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{"load", " ", 
+    RowBox[{"Christoph", "'"}], "s", " ", "package"}], " ", "*)"}]}]], "Input",\
+
+ CellChangeTimes->{{3.7232808158356647`*^9, 3.723280825486648*^9}}],
+
+Cell["\<\
+HolonomicFunctions Package version 1.7.3 (21-Mar-2017)
+written by Christoph Koutschan
+Copyright Research Institute for Symbolic Computation (RISC),
+Johannes Kepler University, Linz, Austria\
+\>", "Text",
+ CellFrame->0.5,
+ GeneratedCell->True,
+ CellAutoOverwrite->True,
+ CellChangeTimes->{3.7232807459017982`*^9},
+ FontColor->RGBColor[0, 0, 0],
+ Background->RGBColor[0.796887, 0.789075, 0.871107],
+ RISC`Copyright`ShowAutoSpellCheck -> False],
+
+Cell[BoxData["\<\"--> Type  ?HolonomicFunctions  for help.\"\>"], "Print",
+ CellChangeTimes->{3.7232801940097303`*^9, 3.72328074593095*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"ann1", " ", "=", " ", 
+   RowBox[{"<<", "ec1_ann1.m"}]}], ";", " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{"input", " ", "a", " ", "D"}], "-", 
+    RowBox[{
+    "finite", " ", "system", " ", "of", " ", "the", " ", "inner", " ", 
+     "single", " ", "integral"}]}], " ", "*)"}]}]], "Input",
+ CellChangeTimes->{{3.7232802120264482`*^9, 3.723280214547858*^9}, {
+  3.723280839886631*^9, 3.7232808705052834`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"ann1", " ", "=", " ", 
+   RowBox[{"ann1", " ", "/.", " ", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"s1", "\[Rule]", "2"}], ",", 
+      RowBox[{"s2", "\[Rule]", "1"}], ",", 
+      RowBox[{"m11", "\[Rule]", "1"}], ",", 
+      RowBox[{"m21", "\[Rule]", 
+       RowBox[{"-", "1"}]}], ",", 
+      RowBox[{"m22", "\[Rule]", "1"}]}], "}"}]}]}], ";", " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "specify", " ", "the", " ", "parameters", " ", "in", " ", "ann1", " ", 
+    "as", " ", "that", " ", "in", " ", "Example", " ", "1"}], " ", 
+   "*)"}]}]], "Input",
+ CellChangeTimes->{{3.723280360765347*^9, 3.723280408014142*^9}, 
+   3.723280928389516*^9}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"supp1", " ", "=", " ", 
+  RowBox[{"{", 
+   RowBox[{"1", ",", " ", 
+    RowBox[{"Der", "[", "b", "]"}], ",", " ", 
+    RowBox[{"Der", "[", "d", "]"}], ",", " ", 
+    RowBox[{
+     RowBox[{"Der", "[", "b", "]"}], "^", "2"}], ",", " ", 
+    RowBox[{
+     RowBox[{"Der", "[", "b", "]"}], " ", 
+     RowBox[{"Der", "[", "d", "]"}]}], ",", " ", 
+    RowBox[{
+     RowBox[{"Der", "[", "d", "]"}], "^", "2"}], ",", " ", 
+    RowBox[{
+     RowBox[{"Der", "[", "d", "]"}], "^", "3"}]}], "}"}], " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "a", " ", "support", " ", "set", " ", "for", " ", "an", " ", "annihilator",
+     " ", "of", " ", "the", " ", "inner", " ", "double", " ", "integral"}], 
+   " ", "*)"}]}]], "Input",
+ CellChangeTimes->{{3.7232805994552937`*^9, 3.7232806314525337`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"1", ",", 
+   RowBox[{"Der", "[", "b", "]"}], ",", 
+   RowBox[{"Der", "[", "d", "]"}], ",", 
+   SuperscriptBox[
+    RowBox[{"Der", "[", "b", "]"}], "2"], ",", 
+   RowBox[{
+    RowBox[{"Der", "[", "b", "]"}], " ", 
+    RowBox[{"Der", "[", "d", "]"}]}], ",", 
+   SuperscriptBox[
+    RowBox[{"Der", "[", "d", "]"}], "2"], ",", 
+   SuperscriptBox[
+    RowBox[{"Der", "[", "d", "]"}], "3"]}], "}"}]], "Output",
+ CellChangeTimes->{3.723280289837906*^9, 3.723280746044932*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Timing", "[", 
+   RowBox[{
+    RowBox[{"op1", "=", 
+     RowBox[{
+      RowBox[{"FindCreativeTelescoping", "[", 
+       RowBox[{"ann1", ",", 
+        RowBox[{"Der", "[", "s", "]"}], ",", " ", 
+        RowBox[{"Support", " ", "\[Rule]", " ", "supp1"}]}], "]"}], "[", 
+      RowBox[{"[", 
+       RowBox[{"1", ",", "1"}], "]"}], "]"}]}], ";"}], "]"}], " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "compute", " ", "an", " ", "annihilator", " ", "op1", " ", "of", " ", 
+    "the", " ", "inner", " ", "double", " ", "integral", " ", "with", " ", 
+    "supports", " ", "in", " ", "supp1"}], " ", "*)"}]}]], "Input",
+ CellChangeTimes->{{3.723280612703754*^9, 3.7232806395168123`*^9}, 
+   3.7232806769053993`*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"1.972243`", ",", "Null"}], "}"}]], "Output",
+ CellChangeTimes->{3.7232803547553*^9, 3.723280461849043*^9, 
+  3.723280748015813*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"supp2", " ", "=", " ", 
+    RowBox[{"{", 
+     RowBox[{"1", ",", " ", 
+      RowBox[{"Der", "[", "b", "]"}], ",", " ", 
+      RowBox[{"Der", "[", "d", "]"}], ",", " ", 
+      RowBox[{
+       RowBox[{"Der", "[", "b", "]"}], "^", "2"}], ",", " ", 
+      RowBox[{
+       RowBox[{"Der", "[", "b", "]"}], " ", 
+       RowBox[{"Der", "[", "d", "]"}]}], ",", " ", 
+      RowBox[{
+       RowBox[{"Der", "[", "d", "]"}], "^", "2"}], ",", " ", 
+      RowBox[{
+       RowBox[{"Der", "[", "b", "]"}], "^", "3"}], ",", " ", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"Der", "[", "b", "]"}], "^", "2"}], " ", 
+       RowBox[{"Der", "[", "d", "]"}]}], ",", " ", 
+      RowBox[{
+       RowBox[{"Der", "[", "b", "]"}], " ", 
+       RowBox[{
+        RowBox[{"Der", "[", "d", "]"}], "^", "2"}]}], ",", " ", 
+      RowBox[{
+       RowBox[{"Der", "[", "d", "]"}], "^", "3"}]}], "}"}]}], ";"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "another", " ", "support", " ", "set", " ", "for", " ", "another", " ", 
+    "annihilator", " ", "of", " ", "the", " ", "inner", " ", "double", " ", 
+    "integral"}], " ", "*)"}]}]], "Input",
+ CellChangeTimes->{{3.723280654431479*^9, 3.7232806580286922`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Timing", "[", 
+   RowBox[{
+    RowBox[{"op2", "=", 
+     RowBox[{
+      RowBox[{"FindCreativeTelescoping", "[", 
+       RowBox[{"ann1", ",", 
+        RowBox[{"Der", "[", "s", "]"}], ",", " ", 
+        RowBox[{"Support", " ", "\[Rule]", " ", "supp2"}]}], "]"}], "[", 
+      RowBox[{"[", 
+       RowBox[{"1", ",", "1"}], "]"}], "]"}]}], ";"}], "]"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "compute", " ", "another", " ", "annihilator", " ", "op2", " ", "of", " ", 
+    "the", " ", "inner", " ", "double", " ", "integral", " ", "with", " ", 
+    "supports", " ", "in", " ", "supp2"}], " ", "*)"}]}]], "Input",
+ CellChangeTimes->{{3.723280662258325*^9, 3.723280675511774*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"41.270155`", ",", "Null"}], "}"}]], "Output",
+ CellChangeTimes->{3.723280527350306*^9, 3.723280789125304*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Timing", "[", 
+   RowBox[{
+    RowBox[{"ann2", " ", "=", " ", 
+     RowBox[{"OreGroebnerBasis", "[", 
+      RowBox[{"{", 
+       RowBox[{"op1", ",", " ", "op2"}], "}"}], "]"}]}], ";"}], "]"}], " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{"compute", " ", "a", " ", "D"}], "-", 
+    RowBox[{
+    "finite", " ", "system", " ", "ann2", " ", "of", " ", "the", " ", "inner",
+      " ", "double", " ", "integral"}]}], " ", "*)"}]}]], "Input",
+ CellChangeTimes->{{3.723280685888381*^9, 3.7232806921400013`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"0.248511`", ",", "Null"}], "}"}]], "Output",
+ CellChangeTimes->{3.72328056111763*^9, 3.723280789402836*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Length", "[", 
+   RowBox[{"UnderTheStaircase", "[", "ann2", "]"}], "]"}], " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{"ann2", " ", "has", " ", "holonomic", " ", "rank", " ", "6"}], 
+   "*)"}]}]], "Input",
+ CellChangeTimes->{{3.723281333818119*^9, 3.723281342284375*^9}}],
+
+Cell[BoxData["6"], "Output",
+ CellChangeTimes->{3.723280570234632*^9, 3.723280789431774*^9, 
+  3.7232813426196938`*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"ann2", " ", ">>", " ", "ec1_ann2.m"}], ";", " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{"output", " ", "ann2"}], " ", "*)"}]}]], "Input",
+ CellChangeTimes->{{3.723280575165386*^9, 3.723280584121299*^9}, {
+  3.723280695777484*^9, 3.723280703767041*^9}}]
+},
+WindowSize->{1920, 1007},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"10.4 for Linux x86 (64-bit) (April 11, 2016)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 464, 11, 88, "Input"],
+Cell[1047, 35, 233, 4, 32, "Output"]
+}, Open  ]],
+Cell[1295, 42, 282, 7, 32, "Input"],
+Cell[1580, 51, 451, 12, 116, "Text"],
+Cell[2034, 65, 139, 1, 23, "Print"],
+Cell[2176, 68, 451, 11, 32, "Input"],
+Cell[2630, 81, 681, 18, 32, "Input"],
+Cell[CellGroupData[{
+Cell[3336, 103, 801, 20, 32, "Input"],
+Cell[4140, 125, 508, 14, 36, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4685, 144, 737, 18, 32, "Input"],
+Cell[5425, 164, 171, 4, 32, "Output"]
+}, Open  ]],
+Cell[5611, 171, 1223, 32, 55, "Input"],
+Cell[CellGroupData[{
+Cell[6859, 207, 707, 17, 32, "Input"],
+Cell[7569, 226, 149, 3, 32, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[7755, 234, 545, 14, 32, "Input"],
+Cell[8303, 250, 147, 3, 32, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[8487, 258, 300, 7, 32, "Input"],
+Cell[8790, 267, 119, 2, 32, "Output"]
+}, Open  ]],
+Cell[8924, 272, 282, 6, 32, "Input"]
+}
+]
+*)
+
