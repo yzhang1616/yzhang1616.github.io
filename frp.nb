@@ -1,518 +1,2966 @@
-(* a Mathematica package for generating full rook placements of a Ferrers board (shape), checking the number of sigma-avoiding full rook placements of a Ferrers board, generating 0-1-fillings of a Ferrers board, and checking the number of 0-1-fillings of a Ferrers board with weight n such that the longest ne-chain has length u and the longest se-chain has length v.
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.4' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     94760,       2958]
+NotebookOptionsPosition[     80635,       2497]
+NotebookOutlinePosition[     82874,       2562]
+CellTagsIndexPosition[     82303,       2546]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ StyleBox[
+  RowBox[{
+   RowBox[{"1", ")"}], "  ", "Load", " ", "the", " ", "package", " ", 
+   "\"\<frp.m\>\"", " "}], "Section"]], "Input",
+ CellChangeTimes->{{3.720593422266107*^9, 3.7205934232429*^9}, {
+   3.720593536913632*^9, 3.720593579412774*^9}, {3.720593654417848*^9, 
+   3.720593698094756*^9}, {3.7205937502421722`*^9, 3.7205937576855803`*^9}, 
+   3.720593926550095*^9},
+ EmphasizeSyntaxErrors->True],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"<<", " ", "frp.m"}], ";"}], " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{
+    "this", " ", "is", " ", "to", " ", "load", " ", "the", " ", "package", 
+     " ", "\"\<frp.m \>\""}], ",", " ", 
+    RowBox[{
+    "which", " ", "has", " ", "to", " ", "be", " ", "put", " ", "in", " ", 
+     "the", " ", "same", " ", "directory", " ", "as", " ", 
+     "\"\<frp.nb\>\""}]}], " ", "*)"}]}]], "Input",
+ CellChangeTimes->{{3.7205937029215107`*^9, 3.720593742783414*^9}, {
+  3.720593939185371*^9, 3.720593978281274*^9}}],
+
+Cell[BoxData[
+ StyleBox[
+  RowBox[{
+   RowBox[{"2", ")"}], " ", "Input", " ", "some", " ", "Ferrers", " ", 
+   "boards", " ", "and", " ", "full", " ", "rook", " ", "placements", " ", 
+   RowBox[{"(", "frp", ")"}], " "}], "Section"]], "Input",
+ CellChangeTimes->{{3.720593773047513*^9, 3.7205937876522512`*^9}, {
+  3.7205938327969847`*^9, 3.72059391698475*^9}, {3.720595699564912*^9, 
+  3.720595701481001*^9}},
+ EmphasizeSyntaxErrors->True],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"fb1", " ", "=", " ", 
+  RowBox[{"{", 
+   RowBox[{"5", ",", " ", "5", ",", " ", "5", ",", " ", "3"}], "}"}], " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{
+    "we", " ", "input", " ", "a", " ", "Ferrers", " ", "board", " ", "by", 
+     " ", "a", " ", "list", " ", "in", " ", "reverse", " ", "sorted", " ", 
+     "order"}], ",", " ", 
+    RowBox[{
+    "which", " ", "appears", " ", "in", " ", "Exampe", " ", "1", " ", "of", 
+     " ", 
+     RowBox[{"Ting", "'"}], "s", " ", "note"}]}], " ", "*)"}]}]], "Input",
+ CellChangeTimes->{{3.720593991081382*^9, 3.720594053603252*^9}, {
+  3.72059485580414*^9, 3.720594876552422*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"5", ",", "5", ",", "5", ",", "3"}], "}"}]], "Output",
+ CellChangeTimes->{3.720594055480895*^9, 3.726733426784163*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"tfb1", " ", "=", " ", 
+  RowBox[{"fbTableForm", "[", "fb1", "]"}], " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "we", " ", "may", " ", "translate", " ", "fb1", " ", "into", " ", "table", 
+    " ", "form", " ", "as", " ", "that", " ", "in", " ", "Example", " ", "1", 
+    " ", "of", " ", 
+    RowBox[{"Ting", "'"}], "s", " ", "note"}], " ", "*)"}]}]], "Input",
+ CellChangeTimes->{{3.720594112761334*^9, 3.720594168921856*^9}, {
+  3.720594767407793*^9, 3.720594770656571*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0", ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0", ",", "0", ",", "0", ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0", ",", "0", ",", "0", ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0", ",", "0", ",", "0", ",", "0"}], "}"}]}], 
+  "}"}]], "Output",
+ CellChangeTimes->{3.720594126237278*^9, 3.720594169622108*^9, 
+  3.726733426823812*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ttfb1", " ", "=", 
+  RowBox[{"TableForm", "[", "tfb1", "]"}], " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{"for", " ", "visualization"}], ",", " ", 
+    RowBox[{
+    "we", " ", "may", " ", "apply", " ", "the", " ", "command", " ", 
+     "\"\<TableForm\>\"", " ", "to", " ", "tfb1"}], ",", " ", 
+    RowBox[{
+    "this", " ", "is", " ", "what", " ", "we", " ", "see", " ", "in", " ", 
+     "Example", " ", "1", " ", "of", " ", 
+     RowBox[{"Ting", "'"}], "s", " ", "note"}]}], " ", "*)"}]}]], "Input",
+ CellChangeTimes->{{3.720594171970296*^9, 3.7205942305840387`*^9}, {
+  3.720594493860344*^9, 3.720594497311707*^9}, {3.720594747191799*^9, 
+  3.720594781319306*^9}, {3.7205956263246717`*^9, 3.7205956268239098`*^9}}],
+
+Cell[BoxData[
+ InterpretationBox[GridBox[{
+    {"0", "0", "0", "\<\"\"\>", "\<\"\"\>"},
+    {"0", "0", "0", "0", "0"},
+    {"0", "0", "0", "0", "0"},
+    {"0", "0", "0", "0", "0"}
+   },
+   GridBoxAlignment->{
+    "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+     "RowsIndexed" -> {}},
+   GridBoxSpacings->{"Columns" -> {
+       Offset[0.27999999999999997`], {
+        Offset[2.0999999999999996`]}, 
+       Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+       Offset[0.2], {
+        Offset[0.4]}, 
+       Offset[0.2]}, "RowsIndexed" -> {}}],
+  TableForm[{{0, 0, 0}, {0, 0, 0, 0, 0}, {0, 0, 0, 0, 0}, {0, 0, 0, 0, 
+    0}}]]], "Output",
+ CellChangeTimes->{3.720594233859276*^9, 3.720594498607492*^9, 
+  3.726733426859379*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"?", "fbTableForm "}]], "Input",
+ CellChangeTimes->{{3.72059424104123*^9, 3.72059433657557*^9}, {
+  3.7205944034805393`*^9, 3.720594424986117*^9}}],
+
+Cell[BoxData[
+ StyleBox["\<\"fbTableForm[fb] gives the Ferrers board of fb in the table \
+form, where fb is a Ferrers board \\nin the reverse sorted list form\"\>", 
+  "MSG"]], "Print", "PrintUsage",
+ CellChangeTimes->{3.7267334269485083`*^9},
+ CellTags->"Info53726737026-6405207"]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"(*", " ", 
+  RowBox[{
+  "the", " ", "above", " ", "command", " ", "gives", " ", "the", " ", 
+   "functionality", " ", "of", " ", "fbTableForm"}], " ", "*)"}]], "Input",
+ CellChangeTimes->{{3.720594430746422*^9, 3.720594471687125*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"frp1", " ", "=", " ", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"0", ",", " ", "1", ",", " ", "0"}], "}"}], ",", " ", 
+    RowBox[{"{", 
+     RowBox[{
+     "1", ",", " ", "0", ",", " ", "0", ",", " ", "0", ",", " ", "1"}], "}"}],
+     ",", " ", 
+    RowBox[{"{", 
+     RowBox[{
+     "0", ",", " ", "0", ",", " ", "1", ",", " ", "0", ",", " ", "0"}], "}"}],
+     ",", " ", 
+    RowBox[{"{", 
+     RowBox[{"0", ",", " ", "0", ",", " ", "0", ",", " ", "1", ",", "0"}], 
+     "}"}]}], "}"}], " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{
+    "we", " ", "input", " ", "a", " ", "full", " ", "rook", " ", "placement", 
+     " ", "of", " ", "fb1"}], ",", " ", 
+    RowBox[{
+    "which", " ", "appears", " ", "in", " ", "Example", " ", "1", " ", "of", 
+     " ", 
+     RowBox[{"Ting", "'"}], "s", " ", "note"}]}], " ", "*)"}]}]], "Input",
+ CellChangeTimes->{{3.720594502337481*^9, 3.720594507266727*^9}, 
+   3.720594740553528*^9, {3.7205948030418453`*^9, 3.720594932263323*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"0", ",", "1", ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "0", ",", "0", ",", "0", ",", "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0", ",", "1", ",", "0", ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0", ",", "0", ",", "1", ",", "0"}], "}"}]}], 
+  "}"}]], "Output",
+ CellChangeTimes->{3.720594508503212*^9, 3.720594933857532*^9, 
+  3.7267334269846363`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"tfrp1", " ", "=", " ", 
+  RowBox[{"TableForm", "[", "frp1", "]"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{"for", " ", "visualization"}], ",", " ", 
+    RowBox[{
+    "we", " ", "may", " ", "apply", " ", "the", " ", "command", " ", 
+     "\"\<TableForm\>\"", " ", "to", " ", "frp1"}], ",", " ", 
+    RowBox[{
+    "this", " ", "is", " ", "what", " ", "we", " ", "see", " ", "in", " ", 
+     "Example", " ", "1", " ", "of", " ", 
+     RowBox[{"Ting", "'"}], "s", " ", "note"}]}], " ", "*)"}]}]], "Input",
+ CellChangeTimes->{{3.720594940691453*^9, 3.720594981033783*^9}, 
+   3.72059533369762*^9, {3.720595618755212*^9, 3.7205956191943893`*^9}}],
+
+Cell[BoxData[
+ InterpretationBox[GridBox[{
+    {"0", "1", "0", "\<\"\"\>", "\<\"\"\>"},
+    {"1", "0", "0", "0", "1"},
+    {"0", "0", "1", "0", "0"},
+    {"0", "0", "0", "1", "0"}
+   },
+   GridBoxAlignment->{
+    "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+     "RowsIndexed" -> {}},
+   GridBoxSpacings->{"Columns" -> {
+       Offset[0.27999999999999997`], {
+        Offset[2.0999999999999996`]}, 
+       Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+       Offset[0.2], {
+        Offset[0.4]}, 
+       Offset[0.2]}, "RowsIndexed" -> {}}],
+  TableForm[{{0, 1, 0}, {1, 0, 0, 0, 1}, {0, 0, 1, 0, 0}, {0, 0, 0, 1, 
+    0}}]]], "Output",
+ CellChangeTimes->{3.720594960326764*^9, 3.720594996966223*^9, 
+  3.726733427012824*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"fb2", " ", "=", " ", 
+  RowBox[{"{", 
+   RowBox[{"5", ",", " ", "5", ",", " ", "5", ",", " ", "5", ",", " ", "5"}], 
+   "}"}], " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{
+    "we", " ", "input", " ", "a", " ", "Ferrers", " ", "board", " ", "by", 
+     " ", "a", " ", "list", " ", "in", " ", "reverse", " ", "sorted", " ", 
+     "order"}], ",", " ", 
+    RowBox[{
+    "which", " ", "appears", " ", "in", " ", "Exampe", " ", "2", " ", "of", 
+     " ", 
+     RowBox[{"Ting", "'"}], "s", " ", "note"}]}], " ", "*)"}]}]], "Input",
+ CellChangeTimes->{{3.720595017012353*^9, 3.720595104404797*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"5", ",", "5", ",", "5", ",", "5", ",", "5"}], "}"}]], "Output",
+ CellChangeTimes->{{3.720595096264435*^9, 3.720595105069613*^9}, 
+   3.726733427042643*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"tfb2", " ", "=", " ", 
+  RowBox[{"fbTableForm", "[", "fb2", "]"}], " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "we", " ", "may", " ", "translate", " ", "fb2", " ", "into", " ", "table", 
+    " ", "form", " ", "as", " ", "that", " ", "in", " ", "Example", " ", "2", 
+    " ", "of", " ", 
+    RowBox[{"Ting", "'"}], "s", " ", "note"}], " ", "*)"}]}]], "Input",
+ CellChangeTimes->{{3.720595118607379*^9, 3.7205951391660223`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0", ",", "0", ",", "0", ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0", ",", "0", ",", "0", ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0", ",", "0", ",", "0", ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0", ",", "0", ",", "0", ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0", ",", "0", ",", "0", ",", "0"}], "}"}]}], 
+  "}"}]], "Output",
+ CellChangeTimes->{{3.7205951231451397`*^9, 3.720595139739813*^9}, 
+   3.726733427069797*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ttfb2", " ", "=", 
+  RowBox[{"TableForm", "[", "tfb2", "]"}], " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{"for", " ", "visualization"}], ",", " ", 
+    RowBox[{
+    "we", " ", "may", " ", "apply", " ", "the", " ", "command", " ", 
+     "\"\<TableForm\>\"", " ", "to", " ", "tfb2"}], ",", " ", 
+    RowBox[{
+    "this", " ", "is", " ", "what", " ", "we", " ", "see", " ", "in", " ", 
+     "Example", " ", "2", " ", "of", " ", 
+     RowBox[{"Ting", "'"}], "s", " ", "note"}]}], " ", "*)"}]}]], "Input",
+ CellChangeTimes->{{3.720595143269611*^9, 3.720595157046461*^9}, {
+  3.720595532320304*^9, 3.720595532695632*^9}}],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {"0", "0", "0", "0", "0"},
+    {"0", "0", "0", "0", "0"},
+    {"0", "0", "0", "0", "0"},
+    {"0", "0", "0", "0", "0"},
+    {"0", "0", "0", "0", "0"}
+   },
+   GridBoxAlignment->{
+    "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+     "RowsIndexed" -> {}},
+   GridBoxSpacings->{"Columns" -> {
+       Offset[0.27999999999999997`], {
+        Offset[2.0999999999999996`]}, 
+       Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+       Offset[0.2], {
+        Offset[0.4]}, 
+       Offset[0.2]}, "RowsIndexed" -> {}}],
+  Function[BoxForm`e$, 
+   TableForm[BoxForm`e$]]]], "Output",
+ CellChangeTimes->{3.720595146962122*^9, 3.726733427101329*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"frp2", " ", "=", " ", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"0", ",", "1", ",", " ", "0", ",", " ", "0", ",", " ", "0"}], 
+     "}"}], ",", " ", 
+    RowBox[{"{", 
+     RowBox[{"0", ",", "0", ",", "0", ",", "0", ",", "1"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"1", ",", "0", ",", "0", ",", "0", ",", "0"}], "}"}], ",", " ", 
+    RowBox[{"{", 
+     RowBox[{"0", ",", "0", ",", "0", ",", "1", ",", "0"}], "}"}], ",", " ", 
+    RowBox[{"{", 
+     RowBox[{"0", ",", "0", ",", " ", "1", ",", "0", ",", "0"}], "}"}]}], 
+   "}"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{
+    "we", " ", "input", " ", "a", " ", "full", " ", "rook", " ", "placement", 
+     " ", "of", " ", "fb2"}], ",", " ", 
+    RowBox[{
+    "which", " ", "appears", " ", "in", " ", "Example", " ", "2", " ", "of", 
+     " ", 
+     RowBox[{"Ting", "'"}], "s", " ", "note"}]}], " ", "*)"}]}]], "Input",
+ CellChangeTimes->{{3.7205951932490673`*^9, 3.7205952896935873`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"0", ",", "1", ",", "0", ",", "0", ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0", ",", "0", ",", "0", ",", "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "0", ",", "0", ",", "0", ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0", ",", "0", ",", "1", ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0", ",", "1", ",", "0", ",", "0"}], "}"}]}], 
+  "}"}]], "Output",
+ CellChangeTimes->{3.720595290384573*^9, 3.726733427134663*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"tfrp2", " ", "=", " ", 
+  RowBox[{"TableForm", "[", "frp2", "]"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{"for", " ", "visualization"}], ",", " ", 
+    RowBox[{
+    "we", " ", "may", " ", "apply", " ", "the", " ", "command", " ", 
+     "\"\<TableForm\>\"", " ", "to", " ", "frp2"}], ",", " ", 
+    RowBox[{
+    "this", " ", "is", " ", "what", " ", "we", " ", "see", " ", "in", " ", 
+     "Example", " ", "2", " ", "of", " ", 
+     RowBox[{"Ting", "'"}], "s", " ", "note"}]}], " ", "*)"}]}]], "Input",
+ CellChangeTimes->{{3.720595293980135*^9, 3.720595322513691*^9}, {
+  3.7205953673908854`*^9, 3.720595372340938*^9}, {3.720595535948042*^9, 
+  3.720595536322637*^9}}],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {"0", "1", "0", "0", "0"},
+    {"0", "0", "0", "0", "1"},
+    {"1", "0", "0", "0", "0"},
+    {"0", "0", "0", "1", "0"},
+    {"0", "0", "1", "0", "0"}
+   },
+   GridBoxAlignment->{
+    "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+     "RowsIndexed" -> {}},
+   GridBoxSpacings->{"Columns" -> {
+       Offset[0.27999999999999997`], {
+        Offset[2.0999999999999996`]}, 
+       Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+       Offset[0.2], {
+        Offset[0.4]}, 
+       Offset[0.2]}, "RowsIndexed" -> {}}],
+  Function[BoxForm`e$, 
+   TableForm[BoxForm`e$]]]], "Output",
+ CellChangeTimes->{3.720595373059305*^9, 3.7267334271627893`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"sigma2", " ", "=", " ", 
+  RowBox[{"{", 
+   RowBox[{"3", ",", " ", "5", ",", " ", "1", ",", " ", "2", ",", " ", "4"}], 
+   "}"}], " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "sigma2", " ", "is", " ", "a", " ", "permutation", " ", "which", " ", 
+    "corresponds", " ", "to", " ", "frp2"}], " ", "*)"}]}]], "Input",
+ CellChangeTimes->{{3.720595394120398*^9, 3.720595466206938*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"3", ",", "5", ",", "1", ",", "2", ",", "4"}], "}"}]], "Output",
+ CellChangeTimes->{3.720595468505918*^9, 3.7267334271889133`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"m2", " ", "=", " ", 
+  RowBox[{"SigmaMatrix", "[", "sigma2", "]"}], " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{
+    "we", " ", "may", " ", "translate", " ", "sigma2", " ", "into", " ", "a", 
+     " ", "matrix", " ", "form"}], ",", " ", 
+    RowBox[{
+    "which", " ", "appears", " ", "in", " ", "Example", " ", "2", " ", "of", 
+     " ", 
+     RowBox[{"Ting", "'"}], "s", " ", "note"}]}], " ", "*)"}]}]], "Input",
+ CellChangeTimes->{{3.720595482435158*^9, 3.7205955230482273`*^9}, {
+  3.7205955538195467`*^9, 3.7205955558364*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"0", ",", "1", ",", "0", ",", "0", ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0", ",", "0", ",", "0", ",", "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "0", ",", "0", ",", "0", ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0", ",", "0", ",", "1", ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0", ",", "1", ",", "0", ",", "0"}], "}"}]}], 
+  "}"}]], "Output",
+ CellChangeTimes->{3.720595556903228*^9, 3.726733427214828*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"TableForm", "[", "m2", "]"}], " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{"for", " ", "visualization"}], ",", " ", 
+    RowBox[{
+    "we", " ", "may", " ", "apply", " ", "the", " ", "command", " ", 
+     "\"\<TableForm\>\"", " ", "to", " ", "m2"}], ",", " ", 
+    RowBox[{
+    "this", " ", "is", " ", "what", " ", "we", " ", "see", " ", "in", " ", 
+     "Example", " ", "2", " ", "of", " ", 
+     RowBox[{"Ting", "'"}], "s", " ", "note"}]}], " ", "*)"}]}]], "Input",
+ CellChangeTimes->{{3.720595559501006*^9, 3.7205955645545073`*^9}, {
+  3.720595602162128*^9, 3.7205956120833893`*^9}}],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {"0", "1", "0", "0", "0"},
+    {"0", "0", "0", "0", "1"},
+    {"1", "0", "0", "0", "0"},
+    {"0", "0", "0", "1", "0"},
+    {"0", "0", "1", "0", "0"}
+   },
+   GridBoxAlignment->{
+    "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+     "RowsIndexed" -> {}},
+   GridBoxSpacings->{"Columns" -> {
+       Offset[0.27999999999999997`], {
+        Offset[2.0999999999999996`]}, 
+       Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+       Offset[0.2], {
+        Offset[0.4]}, 
+       Offset[0.2]}, "RowsIndexed" -> {}}],
+  Function[BoxForm`e$, 
+   TableForm[BoxForm`e$]]]], "Output",
+ CellChangeTimes->{3.720595564948442*^9, 3.7267334272460213`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"frp2", " ", "\[Equal]", " ", "m2", " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{"frp2", " ", "is", " ", "equal", " ", "to", " ", "m2"}], " ", 
+   "*)"}]}]], "Input",
+ CellChangeTimes->{{3.720595570996677*^9, 3.720595589774927*^9}}],
+
+Cell[BoxData["True"], "Output",
+ CellChangeTimes->{3.720595574534309*^9, 3.726733427274679*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"?", "SigmaMatrix"}]], "Input",
+ CellChangeTimes->{{3.7205956361031303`*^9, 3.720595638869339*^9}}],
+
+Cell[BoxData[
+ StyleBox["\<\"SigmaMatrix[sigma] gives the matrix of a given permutation \
+sigma, where sigma is a list which represents a permutation\"\>", 
+  "MSG"]], "Print", "PrintUsage",
+ CellChangeTimes->{3.72673342735392*^9},
+ CellTags->"Info183726737027-6405207"]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"(*", " ", 
+  RowBox[{
+  "the", " ", "above", " ", "command", " ", "gives", " ", "the", " ", 
+   "functionality", " ", "of", " ", "SigmaMatrix"}], " ", "*)"}]], "Input",
+ CellChangeTimes->{{3.7205956554665613`*^9, 3.7205956597055273`*^9}}],
+
+Cell[BoxData[
+ StyleBox[
+  RowBox[{
+   RowBox[{
+    RowBox[{"3", ")"}], " ", "Given", " ", "a", " ", "Ferrers", " ", 
+    "board"}], ",", " ", 
+   RowBox[{
+   "generate", " ", "all", " ", "its", " ", "full", " ", "rook", " ", 
+    "placements"}]}], "Section"]], "Input",
+ CellChangeTimes->{{3.720595840885638*^9, 3.720595928871333*^9}},
+ EmphasizeSyntaxErrors->True],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"fb1", " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "this", " ", "is", " ", "the", " ", "Ferrers", " ", "board", " ", "in", 
+    " ", "Exmple", " ", "1", " ", "of", " ", 
+    RowBox[{"Ting", "'"}], "s", " ", "note"}], " ", "*)"}]}]], "Input",
+ CellChangeTimes->{{3.7206047679611607`*^9, 3.7206047798451977`*^9}, {
+  3.7206048974559107`*^9, 3.720604925405156*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"5", ",", "5", ",", "5", ",", "3"}], "}"}]], "Output",
+ CellChangeTimes->{3.720604780984695*^9, 3.7267334274482203`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"?", "frpGenerator"}]], "Input",
+ CellChangeTimes->{{3.720604800743655*^9, 3.720604848968205*^9}}],
+
+Cell[BoxData[
+ StyleBox["\<\"frpGenerator[fb] gives a list of tables, which represents all \
+the full rook placements of fb in the table form. \\nHere, fb is a Ferrers \
+board in the reverse sorted list form\"\>", "MSG"]], "Print", "PrintUsage",
+ CellChangeTimes->{3.7267334275738792`*^9},
+ CellTags->"Info213726737027-6405207"]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"(*", " ", 
+  RowBox[{
+  "the", " ", "above", " ", "command", " ", "gives", " ", "the", " ", 
+   "functionality", " ", "of", " ", "frpGenerator"}], " ", "*)"}]], "Input",
+ CellChangeTimes->{{3.720604887341237*^9, 3.720604891226757*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"frps1", " ", "=", " ", 
+    RowBox[{"frpGenerator", "[", "fb1", "]"}]}], ";"}], " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "generate", " ", "all", " ", "the", " ", "full", " ", "rook", " ", 
+    "placements", " ", "of", " ", "fb1"}], " ", "*)"}]}]], "Input",
+ CellChangeTimes->{{3.720604857750762*^9, 3.720604870808988*^9}, {
+  3.720604929323022*^9, 3.720604959390746*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Length", "[", "frps1", "]"}], " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "fb1", " ", "has", " ", "126", " ", "full", " ", "rook", " ", 
+    "placements"}], " ", "*)"}]}]], "Input",
+ CellChangeTimes->{{3.720604962458439*^9, 3.72060498571511*^9}}],
+
+Cell[BoxData["126"], "Output",
+ CellChangeTimes->{3.720604967270143*^9, 3.726733427626122*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"TableForm", "[", "frp1", "]"}], " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "frp1", " ", "is", " ", "the", " ", "Ferrers", " ", "board", " ", "in", 
+    " ", "Exmple", " ", "1", " ", "of", " ", 
+    RowBox[{"Ting", "'"}], "s", " ", "note"}], "*)"}]}]], "Input",
+ CellChangeTimes->{{3.720605008713936*^9, 3.720605035225253*^9}}],
+
+Cell[BoxData[
+ InterpretationBox[GridBox[{
+    {"0", "1", "0", "\<\"\"\>", "\<\"\"\>"},
+    {"1", "0", "0", "0", "1"},
+    {"0", "0", "1", "0", "0"},
+    {"0", "0", "0", "1", "0"}
+   },
+   GridBoxAlignment->{
+    "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+     "RowsIndexed" -> {}},
+   GridBoxSpacings->{"Columns" -> {
+       Offset[0.27999999999999997`], {
+        Offset[2.0999999999999996`]}, 
+       Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+       Offset[0.2], {
+        Offset[0.4]}, 
+       Offset[0.2]}, "RowsIndexed" -> {}}],
+  TableForm[{{0, 1, 0}, {1, 0, 0, 0, 1}, {0, 0, 1, 0, 0}, {0, 0, 0, 1, 
+    0}}]]], "Output",
+ CellChangeTimes->{3.720605014260365*^9, 3.7267334276505547`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"Do", "[", " ", 
+    RowBox[{
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"frps1", "[", 
+         RowBox[{"[", "i", "]"}], "]"}], " ", "\[Equal]", " ", "frp1"}], ",", 
+       " ", 
+       RowBox[{
+        RowBox[{"Print", "[", "i", "]"}], ";", " ", 
+        RowBox[{"Break", "[", "]"}]}]}], "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"i", ",", " ", 
+       RowBox[{"Length", "[", "frps1", "]"}]}], "}"}]}], "]"}], ";"}], " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "check", " ", "whether", " ", "frp1", " ", "is", " ", "among", " ", 
+    "frps1"}], "*)"}]}]], "Input",
+ CellChangeTimes->{{3.720605042430708*^9, 3.720605202279943*^9}, 
+   3.720605491598536*^9}],
+
+Cell[BoxData["55"], "Print",
+ CellChangeTimes->{3.720605174611784*^9, 3.720605536833411*^9, 
+  3.726733427678022*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"TableForm", "[", 
+   RowBox[{"frps1", "[", 
+    RowBox[{"[", "55", "]"}], "]"}], "]"}], " ", 
+  RowBox[{"(*", 
+   RowBox[{" ", 
+    RowBox[{"the", " ", "visualization", " ", "of", " ", 
+     RowBox[{"frps1", "[", 
+      RowBox[{"[", "55", "]"}], "]"}]}], "]"}], "*)"}]}]], "Input",
+ CellChangeTimes->{{3.720605209209787*^9, 3.720605276050788*^9}, 
+   3.720605574799955*^9}],
+
+Cell[BoxData[
+ InterpretationBox[GridBox[{
+    {"0", "1", "0", "\<\"\"\>", "\<\"\"\>"},
+    {"1", "0", "0", "0", "1"},
+    {"0", "0", "1", "0", "0"},
+    {"0", "0", "0", "1", "0"}
+   },
+   GridBoxAlignment->{
+    "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+     "RowsIndexed" -> {}},
+   GridBoxSpacings->{"Columns" -> {
+       Offset[0.27999999999999997`], {
+        Offset[2.0999999999999996`]}, 
+       Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+       Offset[0.2], {
+        Offset[0.4]}, 
+       Offset[0.2]}, "RowsIndexed" -> {}}],
+  TableForm[{{0, 1, 0}, {1, 0, 0, 0, 1}, {0, 0, 1, 0, 0}, {0, 0, 0, 1, 
+    0}}]]], "Output",
+ CellChangeTimes->{3.720605234037738*^9, 3.7206055411650467`*^9, 
+  3.726733427704862*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"frp1", " ", "\[Equal]", " ", 
+  RowBox[{"frps1", "[", 
+   RowBox[{"[", "55", "]"}], "]"}], " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{"check", " ", "frp1", " ", "is", " ", "equal", " ", "to", " ", 
+    RowBox[{"frps1", "[", 
+     RowBox[{"[", "55", "]"}], "]"}], " ", "or", " ", "not"}], " ", 
+   "*)"}]}]], "Input",
+ CellChangeTimes->{{3.720605280858757*^9, 3.72060531848976*^9}}],
+
+Cell[BoxData["True"], "Output",
+ CellChangeTimes->{3.7206053193509827`*^9, 3.726733427751864*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"fb2", " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "this", " ", "is", " ", "the", " ", "Ferrers", " ", "board", " ", "in", 
+    " ", "Exmple", " ", "2", " ", "of", " ", 
+    RowBox[{"Ting", "'"}], "s", " ", "note"}], " ", "*)"}]}]], "Input",
+ CellChangeTimes->{{3.72060536487502*^9, 3.720605379238448*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"5", ",", "5", ",", "5", ",", "5", ",", "5"}], "}"}]], "Output",
+ CellChangeTimes->{{3.720605366860515*^9, 3.720605381310339*^9}, 
+   3.7267334277758293`*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"frps2", " ", "=", " ", 
+    RowBox[{"frpGenerator", "[", "fb2", "]"}]}], ";"}], " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "generate", " ", "all", " ", "the", " ", "full", " ", "rook", " ", 
+    "placements", " ", "of", " ", "fb2"}], " ", "*)"}]}]], "Input",
+ CellChangeTimes->{{3.7206053963150873`*^9, 3.720605404493548*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Length", "[", "frps2", "]"}], " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "fb2", " ", "has", " ", "120", " ", "full", " ", "rook", " ", 
+    "placements"}], " ", "*)"}]}]], "Input",
+ CellChangeTimes->{{3.720605423332182*^9, 3.720605433878428*^9}}],
+
+Cell[BoxData["120"], "Output",
+ CellChangeTimes->{{3.7206054184507513`*^9, 3.720605434596326*^9}, 
+   3.7267334278759193`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"TableForm", "[", "frp2", "]"}], " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "frp2", " ", "is", " ", "the", " ", "Ferrers", " ", "board", " ", "in", 
+    " ", "Exmple", " ", "2", " ", "of", " ", 
+    RowBox[{"Ting", "'"}], "s", " ", "note"}], "*)"}]}]], "Input",
+ CellChangeTimes->{{3.7206054444742537`*^9, 3.720605460307447*^9}}],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {"0", "1", "0", "0", "0"},
+    {"0", "0", "0", "0", "1"},
+    {"1", "0", "0", "0", "0"},
+    {"0", "0", "0", "1", "0"},
+    {"0", "0", "1", "0", "0"}
+   },
+   GridBoxAlignment->{
+    "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+     "RowsIndexed" -> {}},
+   GridBoxSpacings->{"Columns" -> {
+       Offset[0.27999999999999997`], {
+        Offset[2.0999999999999996`]}, 
+       Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+       Offset[0.2], {
+        Offset[0.4]}, 
+       Offset[0.2]}, "RowsIndexed" -> {}}],
+  Function[BoxForm`e$, 
+   TableForm[BoxForm`e$]]]], "Output",
+ CellChangeTimes->{{3.720605445270451*^9, 3.720605467450981*^9}, 
+   3.726733427901882*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"Do", "[", " ", 
+    RowBox[{
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"frps2", "[", 
+         RowBox[{"[", "i", "]"}], "]"}], " ", "\[Equal]", " ", "frp2"}], ",", 
+       " ", 
+       RowBox[{
+        RowBox[{"Print", "[", "i", "]"}], ";", " ", 
+        RowBox[{"Break", "[", "]"}]}]}], "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"i", ",", " ", 
+       RowBox[{"Length", "[", "frps2", "]"}]}], "}"}]}], "]"}], ";"}], " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "check", " ", "whether", " ", "frp2", " ", "is", " ", "among", " ", 
+    "frps2"}], "*)"}]}]], "Input",
+ CellChangeTimes->{{3.720605503533087*^9, 3.720605523568623*^9}}],
+
+Cell[BoxData["54"], "Print",
+ CellChangeTimes->{3.720605524296885*^9, 3.7267334279271603`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"TableForm", "[", 
+   RowBox[{"frps2", "[", 
+    RowBox[{"[", "54", "]"}], "]"}], "]"}], " ", 
+  RowBox[{"(*", 
+   RowBox[{" ", 
+    RowBox[{"the", " ", "visualization", " ", "of", " ", 
+     RowBox[{"frps2", "[", 
+      RowBox[{"[", "54", "]"}], "]"}]}], "]"}], "*)"}]}]], "Input",
+ CellChangeTimes->{{3.720605556940029*^9, 3.720605567818132*^9}}],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {"0", "1", "0", "0", "0"},
+    {"0", "0", "0", "0", "1"},
+    {"1", "0", "0", "0", "0"},
+    {"0", "0", "0", "1", "0"},
+    {"0", "0", "1", "0", "0"}
+   },
+   GridBoxAlignment->{
+    "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+     "RowsIndexed" -> {}},
+   GridBoxSpacings->{"Columns" -> {
+       Offset[0.27999999999999997`], {
+        Offset[2.0999999999999996`]}, 
+       Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+       Offset[0.2], {
+        Offset[0.4]}, 
+       Offset[0.2]}, "RowsIndexed" -> {}}],
+  Function[BoxForm`e$, 
+   TableForm[BoxForm`e$]]]], "Output",
+ CellChangeTimes->{3.720605568539263*^9, 3.726733427953143*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"frp2", " ", "\[Equal]", " ", 
+  RowBox[{"frps2", "[", 
+   RowBox[{"[", "54", "]"}], "]"}], " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{"check", " ", "frp2", " ", "is", " ", "equal", " ", "to", " ", 
+    RowBox[{"frps2", "[", 
+     RowBox[{"[", "54", "]"}], "]"}], " ", "or", " ", "not"}], " ", 
+   "*)"}]}]], "Input",
+ CellChangeTimes->{{3.720605587987726*^9, 3.7206056011538687`*^9}}],
+
+Cell[BoxData["True"], "Output",
+ CellChangeTimes->{{3.720605592660671*^9, 3.7206056017722178`*^9}, 
+   3.726733427978525*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ StyleBox[
+  RowBox[{
+   RowBox[{
+    RowBox[{"4", ")"}], " ", "Given", " ", "a", " ", "Ferrers", " ", "board", 
+    "  ", "fb", " ", "and", " ", "a", " ", "permutation", " ", "sigma"}], ",", 
+   RowBox[{
+    RowBox[{"count", " ", "the", " ", "number", " ", "of", " ", "sigma"}], 
+    "-", 
+    RowBox[{"avoiding", " ", "frps", " ", "of", "  ", "fb"}]}]}], 
+  "Section"]], "Input",
+ CellChangeTimes->{{3.720605639285922*^9, 3.720605729257019*^9}},
+ EmphasizeSyntaxErrors->True],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"fb3", " ", "=", " ", 
+  RowBox[{"{", 
+   RowBox[{"3", ",", " ", "3", ",", " ", "2"}], "}"}], " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "this", " ", "is", " ", "the", " ", "Ferrers", " ", "board", " ", "in", 
+    " ", "Exampe", " ", "3", " ", "of", " ", 
+    RowBox[{"Ting", "'"}], "s", " ", "note"}], " ", "*)"}]}]], "Input",
+ CellChangeTimes->{{3.720608725248816*^9, 3.720608789550831*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"3", ",", "3", ",", "2"}], "}"}]], "Output",
+ CellChangeTimes->{3.720608790380344*^9, 3.726733428067239*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"tfb3", " ", "=", " ", 
+  RowBox[{"fbTableForm", "[", "fb3", "]"}], " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "translate", " ", "fb3", " ", "into", " ", "the", " ", "table", " ", 
+    "form"}], " ", "*)"}]}]], "Input",
+ CellChangeTimes->{{3.720608792889781*^9, 3.7206088163673553`*^9}, {
+  3.720618021045741*^9, 3.7206180389272223`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0", ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0", ",", "0"}], "}"}]}], "}"}]], "Output",
+ CellChangeTimes->{{3.720608799822016*^9, 3.720608817178152*^9}, 
+   3.726733428092546*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"TableForm", "[", "tfb3", "]"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{"visualization", " ", "of", " ", "tfb3"}], " ", "*)"}]}]], "Input",\
+
+ CellChangeTimes->{{3.720608819260479*^9, 3.720608827274131*^9}, {
+  3.720619575646744*^9, 3.720619579783633*^9}}],
+
+Cell[BoxData[
+ InterpretationBox[GridBox[{
+    {"0", "0", "\<\"\"\>"},
+    {"0", "0", "0"},
+    {"0", "0", "0"}
+   },
+   GridBoxAlignment->{
+    "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+     "RowsIndexed" -> {}},
+   GridBoxSpacings->{"Columns" -> {
+       Offset[0.27999999999999997`], {
+        Offset[2.0999999999999996`]}, 
+       Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+       Offset[0.2], {
+        Offset[0.4]}, 
+       Offset[0.2]}, "RowsIndexed" -> {}}],
+  TableForm[{{0, 0}, {0, 0, 0}, {0, 0, 0}}]]], "Output",
+ CellChangeTimes->{3.720608827667904*^9, 3.7267334281180477`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"frp3", " ", "=", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"0", ",", " ", "1"}], "}"}], ",", " ", 
+    RowBox[{"{", 
+     RowBox[{"0", ",", " ", "0", ",", " ", "1"}], "}"}], ",", " ", 
+    RowBox[{"{", 
+     RowBox[{"1", ",", " ", "0", ",", " ", "0"}], "}"}]}], "}"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "this", " ", "is", " ", "the", " ", "full", " ", "rook", " ", "placement", 
+    " ", "in", " ", "Exampe", " ", "3", " ", "of", " ", 
+    RowBox[{"Ting", "'"}], "s", " ", "note"}], " ", "*)"}]}]], "Input",
+ CellChangeTimes->{{3.7206088411504183`*^9, 3.720608926516584*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"0", ",", "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0", ",", "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "0", ",", "0"}], "}"}]}], "}"}]], "Output",
+ CellChangeTimes->{3.7206089279598846`*^9, 3.72673342814851*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"TableForm", "[", "frp3", "]"}], " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{"visualization", " ", "of", " ", "frp3"}], " ", "*)"}]}]], "Input",\
+
+ CellChangeTimes->{{3.720608930125331*^9, 3.720608934022818*^9}, {
+  3.720619567615241*^9, 3.7206195720398197`*^9}}],
+
+Cell[BoxData[
+ InterpretationBox[GridBox[{
+    {"0", "1", "\<\"\"\>"},
+    {"0", "0", "1"},
+    {"1", "0", "0"}
+   },
+   GridBoxAlignment->{
+    "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+     "RowsIndexed" -> {}},
+   GridBoxSpacings->{"Columns" -> {
+       Offset[0.27999999999999997`], {
+        Offset[2.0999999999999996`]}, 
+       Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+       Offset[0.2], {
+        Offset[0.4]}, 
+       Offset[0.2]}, "RowsIndexed" -> {}}],
+  TableForm[{{0, 1}, {0, 0, 1}, {1, 0, 0}}]]], "Output",
+ CellChangeTimes->{3.720608934424734*^9, 3.726733428174335*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"?", "fbSubSquare"}]], "Input",
+ CellChangeTimes->{{3.720609004074643*^9, 3.720609014615335*^9}}],
+
+Cell[BoxData[
+ StyleBox["\<\"fbSubSquare[fb, n] gives a list of lists for indices of sub \
+square matrices of fp of dimension n, where \\nfb is a Ferrers board in the \
+reverse sorted list form\"\>", "MSG"]], "Print", "PrintUsage",
+ CellChangeTimes->{3.7267334282479973`*^9},
+ CellTags->"Info413726737028-6405207"]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"(*", " ", 
+  RowBox[{
+  "the", " ", "above", " ", "command", " ", "gives", " ", "the", " ", 
+   "functionality", " ", "of", " ", "fbSubSquare"}], " ", "*)"}]], "Input",
+ CellChangeTimes->{{3.720609033666543*^9, 3.720609037258531*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"fbsq3", " ", "=", 
+    RowBox[{"fbSubSquare", "[", 
+     RowBox[{"fb3", ",", " ", "2"}], "]"}]}], ";"}], " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "this", " ", "is", " ", "to", " ", "generate", " ", "a", " ", "list", " ", 
+    "of", " ", "lists", " ", "of", " ", "indices", " ", "of", " ", "sub", " ",
+     "square", " ", "matrices", " ", "of", " ", "fb3", " ", "of", " ", 
+    "dimension", " ", "2"}], "*)"}]}]], "Input",
+ CellChangeTimes->{{3.7206090433120413`*^9, 3.7206091235016937`*^9}, {
+  3.720609161106205*^9, 3.720609162488385*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Length", "[", "fbsq3", "]"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "there", " ", "are", " ", "5", " ", "sub", " ", "square", " ", "matrices", 
+    " ", "of", " ", "fb", " ", "of", " ", "dimension", " ", "2"}], " ", 
+   "*)"}]}]], "Input",
+ CellChangeTimes->{{3.720609131237219*^9, 3.7206091933684263`*^9}}],
+
+Cell[BoxData["5"], "Output",
+ CellChangeTimes->{{3.72060914308328*^9, 3.720609194242421*^9}, 
+   3.726733428296425*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"?", "SigmaAvoidingTest"}]], "Input",
+ CellChangeTimes->{{3.7206092070295897`*^9, 3.720609212633162*^9}}],
+
+Cell[BoxData[
+ StyleBox["\<\"SigmaAvoidingTest[frp, sigma, fbsq] gives 1 if frp is \
+sigma-avoiding, otherwise 0. \\nHere, frp is a full rook placement of some \
+Ferrers board fb, the list sigma is a permutation, \\nfbsq is a list of lists \
+for indices of sub square marices of fp of dimension Length[sigma]\"\>", 
+  "MSG"]], "Print", "PrintUsage",
+ CellChangeTimes->{3.726733428378251*^9},
+ CellTags->"Info453726737028-6405207"]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"(*", " ", 
+  RowBox[{
+  "the", " ", "above", " ", "command", " ", "gives", " ", "the", " ", 
+   "functionality", " ", "of", " ", "SigmaAvoidingTest"}], " ", 
+  "*)"}]], "Input",
+ CellChangeTimes->{{3.720609228949071*^9, 3.720609258788258*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"sigma3", " ", "=", 
+  RowBox[{"{", 
+   RowBox[{"1", ",", " ", "2"}], "}"}], " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{"this", " ", "is", " ", "the", " ", "permutation", " ", 
+    RowBox[{"(", "12", ")"}], " ", "in", " ", "Example", " ", "3", " ", "of", 
+    " ", 
+    RowBox[{"Ting", "'"}], "s", " ", "note"}], " ", "*)"}]}]], "Input",
+ CellChangeTimes->{{3.720609264383842*^9, 3.720609313364984*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"1", ",", "2"}], "}"}]], "Output",
+ CellChangeTimes->{3.720609314461693*^9, 3.726733428553952*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"SigmaAvoidingTest", "[", 
+   RowBox[{"frp3", ",", " ", "sigma3", ",", " ", "fbsq3"}], "]"}], " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{
+    "this", " ", "means", " ", "frp3", " ", "is", " ", "not", " ", "12"}], 
+    "-", "avoiding"}], " ", "*)"}]}]], "Input",
+ CellChangeTimes->{{3.720609316783223*^9, 3.720609366993165*^9}}],
+
+Cell[BoxData["0"], "Output",
+ CellChangeTimes->{3.720609341444392*^9, 3.7206183030757923`*^9, 
+  3.726733428586837*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"sigma4", " ", "=", 
+  RowBox[{"{", 
+   RowBox[{"2", ",", " ", "1"}], "}"}], " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{"this", " ", "is", " ", "the", " ", "permutation", " ", 
+    RowBox[{"(", "21", ")"}], " ", "in", " ", "Example", " ", "3", " ", "of", 
+    " ", 
+    RowBox[{"Ting", "'"}], "s", " ", "note"}], " ", "*)"}]}]], "Input",
+ CellChangeTimes->{{3.720609388100933*^9, 3.720609397259995*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"2", ",", "1"}], "}"}]], "Output",
+ CellChangeTimes->{3.720609398050481*^9, 3.726733428618518*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"SigmaAvoidingTest", "[", 
+   RowBox[{"frp3", ",", " ", "sigma4", ",", " ", "fbsq3"}], "]"}], " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{"this", " ", "means", " ", "frp3", " ", "is", " ", "21"}], "-", 
+    "avoiding"}], " ", "*)"}]}]], "Input",
+ CellChangeTimes->{{3.7206094080361853`*^9, 3.720609414873625*^9}}],
+
+Cell[BoxData["1"], "Output",
+ CellChangeTimes->{3.7206094158998547`*^9, 3.726733428650419*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"fb4", " ", "=", " ", 
+  RowBox[{"{", 
+   RowBox[{"6", ",", " ", "6", ",", " ", "6", ",", " ", "4"}], "}"}], " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "this", " ", "is", " ", "the", " ", "Ferrers", " ", "board", " ", "in", 
+    " ", "Exampe", " ", "4", " ", "of", " ", 
+    RowBox[{"Ting", "'"}], "s", " ", "note"}], " ", "*)"}]}]], "Input",
+ CellChangeTimes->{{3.7206179397185173`*^9, 3.7206179998207407`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"6", ",", "6", ",", "6", ",", "4"}], "}"}]], "Output",
+ CellChangeTimes->{{3.720617977079455*^9, 3.7206180011003103`*^9}, 
+   3.720618446065411*^9, 3.726733428681308*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"tfb4", " ", "=", " ", 
+  RowBox[{"fbTableForm", "[", "fb4", "]"}], " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "translate", " ", "fb4", " ", "into", " ", "the", " ", "table", " ", 
+    "form"}], " ", "*)"}]}]], "Input",
+ CellChangeTimes->{{3.720617989518785*^9, 3.72061799290195*^9}, {
+  3.720618047434226*^9, 3.720618055982151*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0", ",", "0", ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0"}], "}"}], 
+   ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0"}], "}"}], 
+   ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0"}], "}"}]}], 
+  "}"}]], "Output",
+ CellChangeTimes->{3.7206180046798553`*^9, 3.720618448725585*^9, 
+  3.726733428713179*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"TableForm", "[", "tfb4", "]"}], " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{"visualization", " ", "of", " ", "tfb4"}], " ", "*)"}]}]], "Input",\
+
+ CellChangeTimes->{{3.720618014786268*^9, 3.720618014968153*^9}, {
+  3.720619554102831*^9, 3.720619559951682*^9}}],
+
+Cell[BoxData[
+ InterpretationBox[GridBox[{
+    {"0", "0", "0", "0", "\<\"\"\>", "\<\"\"\>"},
+    {"0", "0", "0", "0", "0", "0"},
+    {"0", "0", "0", "0", "0", "0"},
+    {"0", "0", "0", "0", "0", "0"}
+   },
+   GridBoxAlignment->{
+    "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+     "RowsIndexed" -> {}},
+   GridBoxSpacings->{"Columns" -> {
+       Offset[0.27999999999999997`], {
+        Offset[2.0999999999999996`]}, 
+       Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+       Offset[0.2], {
+        Offset[0.4]}, 
+       Offset[0.2]}, "RowsIndexed" -> {}}],
+  TableForm[{{0, 0, 0, 0}, {0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0}, {0, 0, 0, 
+    0, 0, 0}}]]], "Output",
+ CellChangeTimes->{3.720618015558032*^9, 3.720618451025337*^9, 
+  3.726733428754623*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"fbsq4", " ", "=", 
+    RowBox[{"fbSubSquare", "[", 
+     RowBox[{"fb4", ",", " ", "3"}], "]"}]}], ";"}], " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "this", " ", "is", " ", "to", " ", "generate", " ", "a", " ", "list", " ", 
+    "of", " ", "lists", " ", "of", " ", "indices", " ", "of", " ", "sub", " ",
+     "square", " ", "matrices", " ", "of", " ", "fb4", " ", "of", " ", 
+    "dimension", " ", "3"}], "*)"}]}]], "Input",
+ CellChangeTimes->{{3.7206180711285753`*^9, 3.7206180885859327`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Length", "[", "fbsq4", "]"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "there", " ", "are", " ", "32", " ", "sub", " ", "square", " ", "matrices",
+     " ", "of", " ", "fb", " ", "of", " ", "dimension", " ", "2"}], " ", 
+   "*)"}]}]], "Input",
+ CellChangeTimes->{{3.7206181076094217`*^9, 3.7206181124527817`*^9}}],
+
+Cell[BoxData["32"], "Output",
+ CellChangeTimes->{{3.72061810846129*^9, 3.7206181137216*^9}, 
+   3.720618456464097*^9, 3.7267334289078417`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"frp4", " ", "=", " ", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"1", ",", " ", "0", ",", " ", "0", ",", " ", "0"}], "}"}], ",", 
+    " ", 
+    RowBox[{"{", 
+     RowBox[{
+     "0", ",", " ", "1", ",", " ", "0", ",", " ", "0", ",", " ", "0", ",", 
+      " ", "0"}], "}"}], ",", " ", 
+    RowBox[{"{", 
+     RowBox[{"0", ",", "0", ",", "1", ",", "0", ",", "1", ",", " ", "1"}], 
+     "}"}], ",", " ", 
+    RowBox[{"{", 
+     RowBox[{"0", ",", "0", ",", "0", ",", "1", ",", "0", ",", "0"}], "}"}]}],
+    "}"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "this", " ", "is", " ", "the", " ", "first", " ", "full", " ", "rook", " ",
+     "placement", " ", "in", " ", "Exampe", " ", "4", " ", "of", " ", 
+    RowBox[{"Ting", "'"}], "s", " ", "note"}], " ", "*)"}]}]], "Input",
+ CellChangeTimes->{{3.7206181526746473`*^9, 3.7206182282258472`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"1", ",", "0", ",", "0", ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "1", ",", "0", ",", "0", ",", "0", ",", "0"}], "}"}], 
+   ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0", ",", "1", ",", "0", ",", "1", ",", "1"}], "}"}], 
+   ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0", ",", "0", ",", "1", ",", "0", ",", "0"}], "}"}]}], 
+  "}"}]], "Output",
+ CellChangeTimes->{3.7206182298919573`*^9, 3.7206184594537487`*^9, 
+  3.726733428934211*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"TableForm", "[", "frp4", "]"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{"visualization", " ", "of", " ", "frp4"}], " ", "*)"}]}]], "Input",\
+
+ CellChangeTimes->{{3.7206182450343103`*^9, 3.720618245227497*^9}, {
+  3.720619539825425*^9, 3.72061954511194*^9}}],
+
+Cell[BoxData[
+ InterpretationBox[GridBox[{
+    {"1", "0", "0", "0", "\<\"\"\>", "\<\"\"\>"},
+    {"0", "1", "0", "0", "0", "0"},
+    {"0", "0", "1", "0", "1", "1"},
+    {"0", "0", "0", "1", "0", "0"}
+   },
+   GridBoxAlignment->{
+    "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+     "RowsIndexed" -> {}},
+   GridBoxSpacings->{"Columns" -> {
+       Offset[0.27999999999999997`], {
+        Offset[2.0999999999999996`]}, 
+       Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+       Offset[0.2], {
+        Offset[0.4]}, 
+       Offset[0.2]}, "RowsIndexed" -> {}}],
+  TableForm[{{1, 0, 0, 0}, {0, 1, 0, 0, 0, 0}, {0, 0, 1, 0, 1, 1}, {0, 0, 0, 
+    1, 0, 0}}]]], "Output",
+ CellChangeTimes->{3.720618245838361*^9, 3.7206184618939657`*^9, 
+  3.720619547727365*^9, 3.726733428962227*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"sigma5", " ", "=", " ", 
+  RowBox[{"{", 
+   RowBox[{"2", ",", " ", "3", ",", " ", "1"}], "}"}]}]], "Input",
+ CellChangeTimes->{{3.720618249195496*^9, 3.720618267341798*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"2", ",", "3", ",", "1"}], "}"}]], "Output",
+ CellChangeTimes->{3.7206182689236403`*^9, 3.720618464200365*^9, 
+  3.720618829458632*^9, 3.726733428987611*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"SigmaAvoidingTest", "[", 
+   RowBox[{"frp4", ",", " ", "sigma5", ",", " ", "fbsq4"}], "]"}], " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{"this", " ", "means", " ", "frp4", " ", "is", " ", "231"}], "-", 
+    "avoiding"}], " ", "*)"}]}]], "Input",
+ CellChangeTimes->{{3.720618489696591*^9, 3.720618515657053*^9}, {
+  3.720618682943219*^9, 3.7206186831146603`*^9}}],
+
+Cell[BoxData["1"], "Output",
+ CellChangeTimes->{{3.720618507196123*^9, 3.7206185169773273`*^9}, 
+   3.726733429015752*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"frp5", " ", "=", " ", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"1", ",", " ", "0", ",", " ", "0", ",", " ", "0"}], "}"}], ",", 
+    " ", 
+    RowBox[{"{", 
+     RowBox[{
+     "0", ",", " ", "1", ",", " ", "1", ",", "0", ",", "1", ",", "0"}], "}"}],
+     ",", " ", 
+    RowBox[{"{", 
+     RowBox[{"0", ",", "0", ",", "0", ",", " ", "1", ",", "0", ",", "0"}], 
+     "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{
+     "0", ",", " ", "0", ",", " ", "0", ",", " ", "0", ",", " ", "0", ",", 
+      " ", "1"}], "}"}]}], "}"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "this", " ", "is", " ", "the", " ", "second", " ", "full", " ", "rook", 
+    " ", "placement", " ", "in", " ", "Exampe", " ", "4", " ", "of", " ", 
+    RowBox[{"Ting", "'"}], "s", " ", "note"}], " ", "*)"}]}]], "Input",
+ CellChangeTimes->{{3.7206185220628023`*^9, 3.720618601794572*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"1", ",", "0", ",", "0", ",", "0"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "1", ",", "1", ",", "0", ",", "1", ",", "0"}], "}"}], 
+   ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0", ",", "0", ",", "1", ",", "0", ",", "0"}], "}"}], 
+   ",", 
+   RowBox[{"{", 
+    RowBox[{"0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "1"}], "}"}]}], 
+  "}"}]], "Output",
+ CellChangeTimes->{3.720618569511939*^9, 3.726733429045972*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"TableForm", "[", "frp5", "]"}], " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{"visualization", " ", "of", " ", "frp5"}], " ", "*)"}]}]], "Input",\
+
+ CellChangeTimes->{{3.720618579720145*^9, 3.720618579934795*^9}, {
+  3.720619501216421*^9, 3.720619532476656*^9}}],
+
+Cell[BoxData[
+ InterpretationBox[GridBox[{
+    {"1", "0", "0", "0", "\<\"\"\>", "\<\"\"\>"},
+    {"0", "1", "1", "0", "1", "0"},
+    {"0", "0", "0", "1", "0", "0"},
+    {"0", "0", "0", "0", "0", "1"}
+   },
+   GridBoxAlignment->{
+    "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+     "RowsIndexed" -> {}},
+   GridBoxSpacings->{"Columns" -> {
+       Offset[0.27999999999999997`], {
+        Offset[2.0999999999999996`]}, 
+       Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+       Offset[0.2], {
+        Offset[0.4]}, 
+       Offset[0.2]}, "RowsIndexed" -> {}}],
+  TableForm[{{1, 0, 0, 0}, {0, 1, 1, 0, 1, 0}, {0, 0, 0, 1, 0, 0}, {0, 0, 0, 
+    0, 0, 1}}]]], "Output",
+ CellChangeTimes->{3.720618580678632*^9, 3.7206195229656973`*^9, 
+  3.726733429071741*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"sigma6", "=", " ", 
+  RowBox[{"{", 
+   RowBox[{"3", ",", " ", "1", ",", "2"}], "}"}], " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{"input", " ", "the", " ", "permutation", " ", 
+    RowBox[{"(", "312", ")"}]}], " ", "*)"}]}]], "Input",
+ CellChangeTimes->{{3.720618614224986*^9, 3.7206186199130487`*^9}, {
+  3.720618654474098*^9, 3.7206186564590178`*^9}, {3.7206194817589417`*^9, 
+  3.72061949756044*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"3", ",", "1", ",", "2"}], "}"}]], "Output",
+ CellChangeTimes->{3.720618620887939*^9, 3.720618658765555*^9, 
+  3.72673342910252*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"SigmaAvoidingTest", "[", 
+   RowBox[{"frp5", ",", " ", "sigma6", ",", " ", "fbsq4"}], "]"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{"this", " ", "means", " ", "frp5", " ", "is", " ", "312"}], "-", 
+    "avoiding"}], " ", "*)"}]}]], "Input",
+ CellChangeTimes->{{3.720618641894412*^9, 3.720618695193363*^9}}],
+
+Cell[BoxData["1"], "Output",
+ CellChangeTimes->{{3.7206186724190474`*^9, 3.720618697757742*^9}, 
+   3.7267334291305933`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"?", "SigmaAvoidingNumber"}]], "Input",
+ CellChangeTimes->{{3.720618728309347*^9, 3.720618760339694*^9}}],
+
+Cell[BoxData[
+ StyleBox["\<\"SigmaAvoidingNumber[fb, sigma] gives the number of frps of fb \
+which are sigma-avoiding. \\nHere, fb is a Ferrers board in the reverse \
+sorted list form, and sigma is a permutation\"\>", "MSG"]], "Print", \
+"PrintUsage",
+ CellChangeTimes->{3.726733429320434*^9},
+ CellTags->"Info643726737029-6405207"]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"(*", " ", 
+  RowBox[{
+  "the", " ", "above", " ", "command", " ", "gives", " ", "the", " ", 
+   "functionality", " ", "of", " ", "SigmaAvoidingTest"}], " ", 
+  "*)"}]], "Input",
+ CellChangeTimes->{{3.7206187643615017`*^9, 3.7206187975450478`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"SigmaAvoidingNumber", "[", 
+   RowBox[{"fb4", ",", " ", "sigma5"}], "]"}], " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{
+    "this", " ", "means", " ", "fb4", " ", "has", " ", "425", " ", "231"}], 
+    "-", 
+    RowBox[{"avoiding", " ", "frps"}]}], " ", "*)"}]}]], "Input",
+ CellChangeTimes->{{3.720618800377413*^9, 3.720618865636239*^9}, {
+  3.720618910038817*^9, 3.720618910231421*^9}}],
+
+Cell[BoxData["425"], "Output",
+ CellChangeTimes->{{3.720618817580143*^9, 3.7206188330971127`*^9}, 
+   3.7267334297789288`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"SigmaAvoidingNumber", "[", 
+   RowBox[{"fb4", ",", " ", "sigma6"}], "]"}], " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{
+    "this", " ", "means", " ", "fb4", " ", "has", " ", "429", " ", "312"}], 
+    "-", 
+    RowBox[{"avoiding", " ", "frps"}]}], " ", "*)"}]}]], "Input",
+ CellChangeTimes->{{3.720618879197914*^9, 3.720618930246911*^9}}],
+
+Cell[BoxData["429"], "Output",
+ CellChangeTimes->{3.7206189314409637`*^9, 3.7267334302191057`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"?", "SigmaAvoidingfrp"}]], "Input",
+ CellChangeTimes->{{3.720618934616559*^9, 3.72061893969417*^9}}],
+
+Cell[BoxData[
+ StyleBox["\<\"SigmaAvoidingfrp[fb, sigma] gives a list of frps of fb which \
+are sigma-avoiding. \\nHere, fb is a Ferrers board in the reverse sorted list \
+form, and sigma is a permutation\"\>", "MSG"]], "Print", "PrintUsage",
+ CellChangeTimes->{3.72673343030591*^9},
+ CellTags->"Info683726737030-6405207"]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"(*", " ", 
+  RowBox[{
+  "the", " ", "above", " ", "command", " ", "gives", " ", "the", " ", 
+   "functionality", " ", "of", " ", "SigmaAvoidingTest"}], " ", 
+  "*)"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"frps3", " ", "=", " ", 
+    RowBox[{"SigmaAvoidingfrp", "[", 
+     RowBox[{"fb4", ",", " ", "sigma5"}], "]"}]}], ";"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{
+    "this", " ", "gives", " ", "a", " ", "list", " ", "of", " ", "frps", " ", 
+     "of", " ", "fb4", " ", "which", " ", "are", " ", "231"}], "-", 
+    RowBox[{"avoiding", " ", "frps"}]}], " ", "*)"}]}]], "Input",
+ CellChangeTimes->{{3.7206189582343597`*^9, 3.720619040141571*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Length", "[", "frps3", "]"}], " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{"there", " ", "are", " ", "425", " ", "231"}], "-", 
+    RowBox[{"avoiding", " ", "frps", " ", "of", " ", "fb4"}]}], " ", 
+   "*)"}]}]], "Input",
+ CellChangeTimes->{{3.7206191904673986`*^9, 3.720619196058663*^9}, {
+  3.720619643341762*^9, 3.7206196708884773`*^9}}],
+
+Cell[BoxData["425"], "Output",
+ CellChangeTimes->{3.72061919648711*^9, 3.7267334308165083`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"Do", "[", " ", 
+    RowBox[{
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"frps3", "[", 
+         RowBox[{"[", "i", "]"}], "]"}], " ", "\[Equal]", " ", "frp4"}], ",", 
+       " ", 
+       RowBox[{
+        RowBox[{"Print", "[", "i", "]"}], ";", " ", 
+        RowBox[{"Break", "[", "]"}]}]}], "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"i", ",", " ", 
+       RowBox[{"Length", "[", "frps3", "]"}]}], "}"}]}], "]"}], ";"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "check", " ", "whether", " ", "frp4", " ", "is", " ", "among", " ", 
+    "frps3"}], "*)"}]}]], "Input",
+ CellChangeTimes->{{3.720619069727868*^9, 3.720619156857883*^9}}],
+
+Cell[BoxData["66"], "Print",
+ CellChangeTimes->{3.72061911712313*^9, 3.720619157397046*^9, 
+  3.7267334308427877`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"TableForm", "[", 
+   RowBox[{"frps3", "[", 
+    RowBox[{"[", "66", "]"}], "]"}], "]"}], " ", 
+  RowBox[{"(*", 
+   RowBox[{" ", 
+    RowBox[{"the", " ", "visualization", " ", "of", " ", 
+     RowBox[{"frps3", "[", 
+      RowBox[{"[", "66", "]"}], "]"}]}], "]"}], "*)"}]}]], "Input",
+ CellChangeTimes->{{3.720619175554535*^9, 3.720619222604321*^9}}],
+
+Cell[BoxData[
+ InterpretationBox[GridBox[{
+    {"1", "0", "0", "0", "\<\"\"\>", "\<\"\"\>"},
+    {"0", "1", "0", "0", "0", "0"},
+    {"0", "0", "1", "0", "1", "1"},
+    {"0", "0", "0", "1", "0", "0"}
+   },
+   GridBoxAlignment->{
+    "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+     "RowsIndexed" -> {}},
+   GridBoxSpacings->{"Columns" -> {
+       Offset[0.27999999999999997`], {
+        Offset[2.0999999999999996`]}, 
+       Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+       Offset[0.2], {
+        Offset[0.4]}, 
+       Offset[0.2]}, "RowsIndexed" -> {}}],
+  TableForm[{{1, 0, 0, 0}, {0, 1, 0, 0, 0, 0}, {0, 0, 1, 0, 1, 1}, {0, 0, 0, 
+    1, 0, 0}}]]], "Output",
+ CellChangeTimes->{3.720619223445916*^9, 3.726733430868185*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"frp4", " ", "\[Equal]", " ", 
+  RowBox[{"frps3", "[", 
+   RowBox[{"[", "66", "]"}], "]"}], " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{"check", " ", "frp4", " ", "is", " ", "equal", " ", "to", " ", 
+    RowBox[{"frps3", "[", 
+     RowBox[{"[", "66", "]"}], "]"}], " ", "or", " ", "not"}], " ", 
+   "*)"}]}]], "Input",
+ CellChangeTimes->{{3.72061922769707*^9, 3.720619269366907*^9}}],
+
+Cell[BoxData["True"], "Output",
+ CellChangeTimes->{3.720619270175292*^9, 3.726733430894947*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"frps4", " ", "=", " ", 
+    RowBox[{"SigmaAvoidingfrp", "[", 
+     RowBox[{"fb4", ",", " ", "sigma6"}], "]"}]}], ";"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{
+    "this", " ", "gives", " ", "a", " ", "list", " ", "of", " ", "frps", " ", 
+     "of", " ", "fb4", " ", "which", " ", "are", " ", "312"}], "-", 
+    RowBox[{"avoiding", " ", "frps"}]}], " ", "*)"}]}]], "Input",
+ CellChangeTimes->{{3.720619281901225*^9, 3.7206192946142893`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Length", "[", "frps4", "]"}], " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{"there", " ", "are", " ", "429", " ", "312"}], "-", 
+    RowBox[{"avoiding", " ", "frps", " ", "of", " ", "fb4"}]}], " ", 
+   "*)"}]}]], "Input",
+ CellChangeTimes->{{3.720619303395239*^9, 3.720619303577529*^9}, {
+  3.720619610534778*^9, 3.720619640325746*^9}}],
+
+Cell[BoxData["429"], "Output",
+ CellChangeTimes->{3.720619304087598*^9, 3.726733431551221*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"Do", "[", " ", 
+    RowBox[{
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"frps4", "[", 
+         RowBox[{"[", "i", "]"}], "]"}], " ", "\[Equal]", " ", "frp5"}], ",", 
+       " ", 
+       RowBox[{
+        RowBox[{"Print", "[", "i", "]"}], ";", " ", 
+        RowBox[{"Break", "[", "]"}]}]}], "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"i", ",", " ", 
+       RowBox[{"Length", "[", "frps4", "]"}]}], "}"}]}], "]"}], ";"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "check", " ", "whether", " ", "frp5", " ", "is", " ", "among", " ", 
+    "frps3"}], "*)"}]}]], "Input",
+ CellChangeTimes->{{3.7206193121272697`*^9, 3.720619324440654*^9}}],
+
+Cell[BoxData["33"], "Print",
+ CellChangeTimes->{3.7206193249693117`*^9, 3.726733431661838*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"TableForm", "[", 
+   RowBox[{"frps4", "[", 
+    RowBox[{"[", "33", "]"}], "]"}], "]"}], " ", 
+  RowBox[{"(*", 
+   RowBox[{" ", 
+    RowBox[{"the", " ", "visualization", " ", "of", " ", 
+     RowBox[{"frps4", "[", 
+      RowBox[{"[", "33", "]"}], "]"}]}], "]"}], "*)"}]}]], "Input",
+ CellChangeTimes->{{3.72061933411736*^9, 3.720619342533821*^9}}],
+
+Cell[BoxData[
+ InterpretationBox[GridBox[{
+    {"1", "0", "0", "0", "\<\"\"\>", "\<\"\"\>"},
+    {"0", "1", "1", "0", "1", "0"},
+    {"0", "0", "0", "1", "0", "0"},
+    {"0", "0", "0", "0", "0", "1"}
+   },
+   GridBoxAlignment->{
+    "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+     "RowsIndexed" -> {}},
+   GridBoxSpacings->{"Columns" -> {
+       Offset[0.27999999999999997`], {
+        Offset[2.0999999999999996`]}, 
+       Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+       Offset[0.2], {
+        Offset[0.4]}, 
+       Offset[0.2]}, "RowsIndexed" -> {}}],
+  TableForm[{{1, 0, 0, 0}, {0, 1, 1, 0, 1, 0}, {0, 0, 0, 1, 0, 0}, {0, 0, 0, 
+    0, 0, 1}}]]], "Output",
+ CellChangeTimes->{3.720619343079905*^9, 3.726733431770369*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"frp5", " ", "\[Equal]", " ", 
+  RowBox[{"frps4", "[", 
+   RowBox[{"[", "33", "]"}], "]"}], " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{"check", " ", "frp5", " ", "is", " ", "equal", " ", "to", " ", 
+    RowBox[{"frps4", "[", 
+     RowBox[{"[", "33", "]"}], "]"}], " ", "or", " ", "not"}], " ", 
+   "*)"}]}]], "Input",
+ CellChangeTimes->{{3.72061935083346*^9, 3.7206193736013947`*^9}}],
+
+Cell[BoxData["True"], "Output",
+ CellChangeTimes->{{3.720619365043619*^9, 3.720619374122966*^9}, 
+   3.7267334318560753`*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ StyleBox[
+  RowBox[{
+   RowBox[{
+    RowBox[{"5", ")"}], " ", "Given", " ", "a", " ", "Ferrers", " ", "board", 
+    "  ", "fb", " ", "and", " ", "weight", " ", "n"}], ",", " ", 
+   RowBox[{
+    RowBox[{"generate", " ", "all", " ", "the", " ", "0"}], "-", "1", "-", 
+    RowBox[{
+    "fillings", " ", "of", " ", "fb", " ", "with", " ", "weight", " ", 
+     "n"}]}]}], "Section"]], "Input",
+ CellChangeTimes->{{3.726733451545825*^9, 3.7267335122969313`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"fb5", " ", "=", " ", 
+  RowBox[{"{", 
+   RowBox[{
+   "7", ",", " ", "7", ",", " ", "7", ",", " ", "4", ",", " ", "3", ",", " ", 
+    "3"}], "}"}], " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "this", " ", "is", " ", "the", " ", "Ferrers", " ", "board", " ", "in", 
+    " ", "Figure", " ", "1", " ", "of", " ", 
+    RowBox[{"Ting", "'"}], "s", " ", "note"}], " ", "*)"}]}]], "Input",
+ CellChangeTimes->{{3.7267335277027082`*^9, 3.726733570375668*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"7", ",", "7", ",", "7", ",", "4", ",", "3", ",", "3"}], 
+  "}"}]], "Output",
+ CellChangeTimes->{3.726733572005303*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"n", " ", "=", " ", "7", " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{"weight", ",", " ", 
+    RowBox[{
+     RowBox[{"which", " ", "is", " ", "the", " ", "sum", " ", "of", " ", 
+      RowBox[{"1", "'"}], "s", " ", "in", " ", "a", " ", "0"}], "-", "1", "-", 
+     RowBox[{"fillings", " ", "of", " ", "fb5"}]}]}], " ", "*)"}]}]], "Input",\
+
+ CellChangeTimes->{{3.726733576652328*^9, 3.7267336041032257`*^9}}],
+
+Cell[BoxData["7"], "Output",
+ CellChangeTimes->{3.72673360491641*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"?", "ZeroOneFilling"}]], "Input",
+ CellChangeTimes->{{3.726733607635607*^9, 3.7267336134620533`*^9}}],
+
+Cell[BoxData[
+ StyleBox["\<\"ZeroOneFilling[fb, n] gives a list of 0-1-fillings of fb with \
+weight n. \\nHere, fb is a Ferrers board in the reverse sorted list form, and \
+n is a positive integer\"\>", "MSG"]], "Print", "PrintUsage",
+ CellChangeTimes->{3.726733613986004*^9},
+ CellTags->"Info823726737213-6405207"]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"zof", " ", "=", " ", 
+   RowBox[{"ZeroOneFilling", "[", 
+    RowBox[{"fb5", ",", " ", "n"}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.726733616536468*^9, 3.7267336381903954`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Length", "[", "zof", "]"}]], "Input",
+ CellChangeTimes->{{3.726733662254374*^9, 3.726733665581498*^9}}],
+
+Cell[BoxData["504"], "Output",
+ CellChangeTimes->{3.7267336660106497`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"TableForm", "[", 
+  RowBox[{"zof", "[", 
+   RowBox[{"[", "1", "]"}], "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.726733667624243*^9, 3.7267336723974543`*^9}}],
+
+Cell[BoxData[
+ InterpretationBox[GridBox[{
+    {"1", "0", "0", "\<\"\"\>", "\<\"\"\>", "\<\"\"\>", "\<\"\"\>"},
+    {"0", "1", "0", "\<\"\"\>", "\<\"\"\>", "\<\"\"\>", "\<\"\"\>"},
+    {"0", "0", "1", "0", "\<\"\"\>", "\<\"\"\>", "\<\"\"\>"},
+    {"0", "0", "0", "1", "0", "0", "0"},
+    {"0", "0", "0", "0", "1", "0", "0"},
+    {"0", "0", "0", "0", "0", "1", "1"}
+   },
+   GridBoxAlignment->{
+    "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+     "RowsIndexed" -> {}},
+   GridBoxSpacings->{"Columns" -> {
+       Offset[0.27999999999999997`], {
+        Offset[2.0999999999999996`]}, 
+       Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+       Offset[0.2], {
+        Offset[0.4]}, 
+       Offset[0.2]}, "RowsIndexed" -> {}}],
+  TableForm[{{1, 0, 0}, {0, 1, 0}, {0, 0, 1, 0}, {0, 0, 0, 1, 0, 0, 0}, {0, 0,
+     0, 0, 1, 0, 0}, {0, 0, 0, 0, 0, 1, 1}}]]], "Output",
+ CellChangeTimes->{3.726733672836692*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ StyleBox[
+  RowBox[{
+   RowBox[{
+    RowBox[{"6", ")"}], " ", "Given", " ", "a", " ", "Ferrers", " ", "board", 
+    "  ", "fb", " ", "and", " ", "weight", " ", "n"}], ",", " ", 
+   RowBox[{
+    RowBox[{"count", " ", "the", " ", "number", " ", "of", " ", "0"}], "-", 
+    "1", "-", 
+    RowBox[{
+    "fillings", " ", "of", " ", "fb", " ", "with", " ", "weight", " ", "n", 
+     " ", "such", " ", "that", " ", "the", " ", "longest", " ", "ne"}], "-", 
+    RowBox[{
+    "chain", " ", "has", " ", "length", " ", "u", " ", "and", " ", "the", " ",
+      "longest", " ", "se"}], "-", 
+    RowBox[{"chain", " ", "has", " ", "length", " ", "v"}]}]}], 
+  "Section"]], "Input",
+ CellChangeTimes->{{3.7267336849176817`*^9, 3.7267337393805656`*^9}, {
+  3.726733775667898*^9, 3.726733776179977*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"fb4", " ", "=", " ", 
+  RowBox[{"{", 
+   RowBox[{"6", ",", " ", "6", ",", " ", "6", ",", " ", "4"}], "}"}], " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "this", " ", "is", " ", "the", " ", "Ferrers", " ", "board", " ", "in", 
+    " ", "Exampe", " ", "4", " ", "of", " ", 
+    RowBox[{"Ting", "'"}], "s", " ", "note"}], " ", "*)"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"6", ",", "6", ",", "6", ",", "4"}], "}"}]], "Output",
+ CellChangeTimes->{3.726733787274197*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"?", "NumberNESE"}]], "Input",
+ CellChangeTimes->{{3.7267337997257833`*^9, 3.726733807526623*^9}}],
+
+Cell[BoxData[
+ StyleBox["\<\"NumberNESE[fb, n, u, v] gives the number of 0-1-fillings of fb \
+with weight n such that the longest \\nne-chain has length u and the longest \
+se-chian has length v. Here, fb is a Ferrers board in the reverse sorted list \
+form, \\nn, u and v are positive integers\"\>", "MSG"]], "Print", "PrintUsage",
+ CellChangeTimes->{3.7267338080229187`*^9},
+ CellTags->"Info873726737407-6405207"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Do", "[", 
+  RowBox[{
+   RowBox[{"Print", "[", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"NumberNESE", "[", 
+       RowBox[{"fb4", ",", " ", "i", ",", " ", "3", ",", " ", "4"}], "]"}], 
+      ",", " ", 
+      RowBox[{"NumberNESE", "[", 
+       RowBox[{"fb4", ",", " ", "i", ",", " ", "4", ",", " ", "3"}], "]"}]}], 
+     "}"}], "]"}], ",", " ", 
+   RowBox[{"{", 
+    RowBox[{"i", ",", " ", "6", ",", " ", "22"}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.7267338106804237`*^9, 3.7267338569383802`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"1", ",", "1"}], "}"}]], "Print",
+ CellChangeTimes->{3.726733924874351*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"24", ",", "24"}], "}"}]], "Print",
+ CellChangeTimes->{3.726733940575553*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"264", ",", "268"}], "}"}]], "Print",
+ CellChangeTimes->{3.7267339883841143`*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"1576", ",", "1618"}], "}"}]], "Print",
+ CellChangeTimes->{3.726734095512479*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"5815", ",", "5976"}], "}"}]], "Print",
+ CellChangeTimes->{3.726734278233996*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"14200", ",", "14542"}], "}"}]], "Print",
+ CellChangeTimes->{3.7267345123430033`*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"24066", ",", "24501"}], "}"}]], "Print",
+ CellChangeTimes->{3.726734741771817*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"30013", ",", "30318"}], "}"}]], "Print",
+ CellChangeTimes->{3.7267349131137047`*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"27728", ",", "27847"}], "}"}]], "Print",
+ CellChangeTimes->{3.726735012029751*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"19091", ",", "19110"}], "}"}]], "Print",
+ CellChangeTimes->{3.726735055103402*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"10478", ",", "10479"}], "}"}]], "Print",
+ CellChangeTimes->{3.726735071568906*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"4137", ",", "4137"}], "}"}]], "Print",
+ CellChangeTimes->{3.726735076579969*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"1139", ",", "1139"}], "}"}]], "Print",
+ CellChangeTimes->{3.7267350777163897`*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"210", ",", "210"}], "}"}]], "Print",
+ CellChangeTimes->{3.7267350779164057`*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"26", ",", "26"}], "}"}]], "Print",
+ CellChangeTimes->{3.726735077948048*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"2", ",", "2"}], "}"}]], "Print",
+ CellChangeTimes->{3.726735077967597*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"0", ",", "0"}], "}"}]], "Print",
+ CellChangeTimes->{3.7267350779690857`*^9}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[BoxData[
+ StyleBox[
+  RowBox[{
+   RowBox[{
+    RowBox[{"7", ")"}], " ", "Given", " ", "a", " ", "Ferrers", " ", "board", 
+    "  ", "fb"}], " ", ",", " ", 
+   RowBox[{
+    RowBox[{
+    "count", " ", "the", " ", "number", " ", "of", " ", "full", " ", "rook", 
+     " ", "placements", " ", "of", " ", "fb", " ", "such", " ", "that", " ", 
+     "the", " ", "longest", " ", "ne"}], "-", 
+    RowBox[{
+    "chain", " ", "has", " ", "length", " ", "u", " ", "and", " ", "the", " ",
+      "longest", " ", "se"}], "-", 
+    RowBox[{"chain", " ", "has", " ", "length", " ", "v"}]}]}], 
+  "Section"]], "Input",
+ CellChangeTimes->{{3.726738029450786*^9, 3.726738038779346*^9}, {
+  3.726738075617736*^9, 3.726738078961688*^9}, {3.7267381907515383`*^9, 
+  3.726738191207519*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"fb4", " ", "=", " ", 
+  RowBox[{"{", 
+   RowBox[{"6", ",", " ", "6", ",", " ", "6", ",", " ", "4"}], "}"}], " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "this", " ", "is", " ", "the", " ", "Ferrers", " ", "board", " ", "in", 
+    " ", "Exampe", " ", "4", " ", "of", " ", 
+    RowBox[{"Ting", "'"}], "s", " ", "note"}], " ", "*)"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"6", ",", "6", ",", "6", ",", "4"}], "}"}]], "Output",
+ CellChangeTimes->{3.726738087512048*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"?", "frpNESE"}]], "Input",
+ CellChangeTimes->{{3.726738092434643*^9, 3.7267380961258183`*^9}}],
+
+Cell[BoxData[
+ StyleBox["\<\"frpNESE[fb, u, v] gives the number of full rook placements of \
+fb such that the longest \\nne-chain has length u and the longest se-chian \
+has length v. Here, fb is a Ferrers board in the reverse sorted list form, \
+\\nu and v are positive integers\"\>", "MSG"]], "Print", "PrintUsage",
+ CellChangeTimes->{3.726738096649446*^9},
+ CellTags->"Info903726741696-6405207"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Do", "[", 
+  RowBox[{
+   RowBox[{"Do", "[", 
+    RowBox[{
+     RowBox[{"Print", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"frpNESE", "[", 
+         RowBox[{"fb4", ",", " ", "u", ",", " ", "v"}], "]"}], ",", " ", 
+        RowBox[{"frpNESE", "[", 
+         RowBox[{"fb4", ",", " ", "v", ",", " ", "u"}], "]"}]}], "}"}], "]"}],
+      ",", " ", 
+     RowBox[{"{", 
+      RowBox[{"u", ",", " ", "v"}], "}"}]}], "]"}], ",", " ", 
+   RowBox[{"{", 
+    RowBox[{"v", ",", " ", "4"}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.726738113752756*^9, 3.726738173527717*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"0", ",", "0"}], "}"}]], "Print",
+ CellChangeTimes->{3.726738175002131*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"0", ",", "0"}], "}"}]], "Print",
+ CellChangeTimes->{3.72673817564305*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"190", ",", "190"}], "}"}]], "Print",
+ CellChangeTimes->{3.72673817649137*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"9", ",", "9"}], "}"}]], "Print",
+ CellChangeTimes->{3.726738177057432*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"254", ",", "254"}], "}"}]], "Print",
+ CellChangeTimes->{3.726738177828638*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"106", ",", "106"}], "}"}]], "Print",
+ CellChangeTimes->{3.726738178516341*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"1", ",", "1"}], "}"}]], "Print",
+ CellChangeTimes->{3.7267381788412247`*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"7", ",", "7"}], "}"}]], "Print",
+ CellChangeTimes->{3.7267381793732986`*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"1", ",", "1"}], "}"}]], "Print",
+ CellChangeTimes->{3.726738179826041*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"0", ",", "0"}], "}"}]], "Print",
+ CellChangeTimes->{3.726738180042891*^9}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[BoxData[
+ StyleBox[
+  RowBox[{
+   RowBox[{
+    RowBox[{"8", ")"}], " ", "Given", " ", "a", " ", "Ferrers", " ", "board", 
+    "  ", "fb", " ", "and", " ", "a", " ", "partition", " ", "par"}], ",", 
+   " ", 
+   RowBox[{
+   "count", " ", "the", " ", "number", " ", "of", " ", "full", " ", "rook", 
+    " ", "placements", " ", "of", " ", "fb", "  ", "which", " ", "fit", " ", 
+    "par"}], " ", ",", 
+   RowBox[{
+    RowBox[{"the", " ", "longest", " ", "ne"}], "-", 
+    RowBox[{
+    "chain", " ", "has", " ", "length", " ", "u", " ", "and", " ", "the", " ",
+      "longest", " ", "se"}], "-", 
+    RowBox[{"chain", " ", "has", " ", "length", " ", "v"}]}]}], 
+  "Section"]], "Input",
+ CellChangeTimes->{{3.726738197863391*^9, 3.726738234438422*^9}, 
+   3.726738376708206*^9}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"fb6", " ", "=", " ", 
+  RowBox[{"{", 
+   RowBox[{"7", ",", " ", "7", ",", " ", "6", ",", " ", "4"}], "}"}], " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{"a", " ", "Ferrers", " ", "board"}], "*)"}]}]], "Input",
+ CellChangeTimes->{{3.726738237023162*^9, 3.726738291717465*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"7", ",", "7", ",", "6", ",", "4"}], "}"}]], "Output",
+ CellChangeTimes->{3.726738292195464*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"?", "ParGenerator"}]], "Input",
+ CellChangeTimes->{{3.72673829383886*^9, 3.7267382964976377`*^9}}],
+
+Cell[BoxData[
+ StyleBox["\<\"ParGenerator[fb] gives a list of partitions of fb[[1]] into \
+Length[fb] parts with par[[i]] <= fb[[i]], \\nwhere fb is a Ferrers board in \
+the reverse sorted list form\"\>", "MSG"]], "Print", "PrintUsage",
+ CellChangeTimes->{3.726738296890932*^9},
+ CellTags->"Info933726741896-6405207"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"par", " ", "=", " ", 
+  RowBox[{"ParGenerator", "[", "fb6", "]"}]}]], "Input",
+ CellChangeTimes->{{3.726738298414702*^9, 3.726738305661089*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"4", ",", "1", ",", "1", ",", "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "4", ",", "1", ",", "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "1", ",", "4", ",", "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "1", ",", "1", ",", "4"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"3", ",", "2", ",", "1", ",", "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"3", ",", "1", ",", "2", ",", "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"3", ",", "1", ",", "1", ",", "2"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"2", ",", "3", ",", "1", ",", "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"2", ",", "1", ",", "3", ",", "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"2", ",", "1", ",", "1", ",", "3"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "3", ",", "2", ",", "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "3", ",", "1", ",", "2"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "2", ",", "3", ",", "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "2", ",", "1", ",", "3"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "1", ",", "3", ",", "2"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "1", ",", "2", ",", "3"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"2", ",", "2", ",", "2", ",", "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"2", ",", "2", ",", "1", ",", "2"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"2", ",", "1", ",", "2", ",", "2"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "2", ",", "2", ",", "2"}], "}"}]}], "}"}]], "Output",
+ CellChangeTimes->{3.7267383061804447`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"?", "frpParNESE"}]], "Input",
+ CellChangeTimes->{{3.726738310073447*^9, 3.726738313089634*^9}}],
+
+Cell[BoxData[
+ StyleBox["\<\"frpParNESE[fb, par, u, v] gives the number of full rook \
+placements of fb, whose sum of  the i-th row is par[[Length[fb] + 1 - i]]  \
+\\nand the longest ne-chain has length u and the longest se-chian has length \
+v. \\nHere, fb is a Ferrers board in the reverse sorted list form, par is a \
+partition of fb[[1]] into Length[fb] \\nwith par[[i]] <= fb[[i]], u and v are \
+two positive integers\"\>", "MSG"]], "Print", "PrintUsage",
+ CellChangeTimes->{3.7267383135136137`*^9},
+ CellTags->"Info953726741913-6405207"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Do", "[", 
+  RowBox[{
+   RowBox[{"Do", "[", 
+    RowBox[{
+     RowBox[{"Print", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"frpParNESE", "[", 
+         RowBox[{"fb6", ",", 
+          RowBox[{"par", "[", 
+           RowBox[{"[", "1", "]"}], "]"}], ",", " ", "u", ",", " ", "v"}], 
+         "]"}], ",", " ", 
+        RowBox[{"frpParNESE", "[", 
+         RowBox[{"fb6", ",", 
+          RowBox[{"par", "[", 
+           RowBox[{"[", "1", "]"}], "]"}], ",", " ", "v", ",", " ", "u"}], 
+         "]"}]}], "}"}], "]"}], ",", " ", 
+     RowBox[{"{", 
+      RowBox[{"u", ",", " ", "v"}], "}"}]}], "]"}], ",", " ", 
+   RowBox[{"{", 
+    RowBox[{"v", ",", " ", "4"}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.726738329406959*^9, 3.726738363572275*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"0", ",", "0"}], "}"}]], "Print",
+ CellChangeTimes->{{3.726738341135968*^9, 3.7267383648595037`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"0", ",", "1"}], "}"}]], "Print",
+ CellChangeTimes->{{3.726738341135968*^9, 3.726738365365839*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"31", ",", "31"}], "}"}]], "Print",
+ CellChangeTimes->{{3.726738341135968*^9, 3.726738365901431*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"0", ",", "0"}], "}"}]], "Print",
+ CellChangeTimes->{{3.726738341135968*^9, 3.7267383663937607`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"28", ",", "28"}], "}"}]], "Print",
+ CellChangeTimes->{{3.726738341135968*^9, 3.7267383669145*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"10", ",", "10"}], "}"}]], "Print",
+ CellChangeTimes->{{3.726738341135968*^9, 3.7267383674227667`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"1", ",", "0"}], "}"}]], "Print",
+ CellChangeTimes->{{3.726738341135968*^9, 3.7267383678889933`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"0", ",", "1"}], "}"}]], "Print",
+ CellChangeTimes->{{3.726738341135968*^9, 3.726738368381213*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"0", ",", "0"}], "}"}]], "Print",
+ CellChangeTimes->{{3.726738341135968*^9, 3.7267383688595*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"0", ",", "0"}], "}"}]], "Print",
+ CellChangeTimes->{{3.726738341135968*^9, 3.7267383693067207`*^9}}]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1920, 1007},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"10.4 for Linux x86 (64-bit) (April 11, 2016)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "Info53726737026-6405207"->{
+  Cell[5614, 162, 281, 5, 61, "Print",
+   CellTags->"Info53726737026-6405207"]},
+ "Info183726737027-6405207"->{
+  Cell[19306, 564, 270, 5, 43, "Print",
+   CellTags->"Info183726737027-6405207"]},
+ "Info213726737027-6405207"->{
+  Cell[20954, 615, 328, 5, 61, "Print",
+   CellTags->"Info213726737027-6405207"]},
+ "Info413726737028-6405207"->{
+  Cell[36195, 1099, 314, 5, 61, "Print",
+   CellTags->"Info413726737028-6405207"]},
+ "Info453726737028-6405207"->{
+  Cell[38031, 1152, 430, 7, 81, "Print",
+   CellTags->"Info453726737028-6405207"]},
+ "Info643726737029-6405207"->{
+  Cell[52243, 1589, 332, 6, 62, "Print",
+   CellTags->"Info643726737029-6405207"]},
+ "Info683726737030-6405207"->{
+  Cell[54128, 1650, 322, 5, 62, "Print",
+   CellTags->"Info683726737030-6405207"]},
+ "Info823726737213-6405207"->{
+  Cell[63727, 1951, 315, 5, 62, "Print",
+   CellTags->"Info823726737213-6405207"]},
+ "Info873726737407-6405207"->{
+  Cell[67187, 2052, 415, 6, 81, "Print",
+   CellTags->"Info873726737407-6405207"]},
+ "Info903726741696-6405207"->{
+  Cell[71767, 2212, 398, 6, 81, "Print",
+   CellTags->"Info903726741696-6405207"]},
+ "Info933726741896-6405207"->{
+  Cell[75436, 2339, 317, 5, 61, "Print",
+   CellTags->"Info933726741896-6405207"]},
+ "Info953726741913-6405207"->{
+  Cell[77797, 2406, 543, 8, 100, "Print",
+   CellTags->"Info953726741913-6405207"]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"Info53726737026-6405207", 80935, 2507},
+ {"Info183726737027-6405207", 81047, 2510},
+ {"Info213726737027-6405207", 81161, 2513},
+ {"Info413726737028-6405207", 81275, 2516},
+ {"Info453726737028-6405207", 81390, 2519},
+ {"Info643726737029-6405207", 81505, 2522},
+ {"Info683726737030-6405207", 81620, 2525},
+ {"Info823726737213-6405207", 81735, 2528},
+ {"Info873726737407-6405207", 81850, 2531},
+ {"Info903726741696-6405207", 81965, 2534},
+ {"Info933726741896-6405207", 82080, 2537},
+ {"Info953726741913-6405207", 82195, 2540}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 425, 9, 52, "Input"],
+Cell[986, 31, 562, 14, 32, "Input"],
+Cell[1551, 47, 439, 9, 52, "Input"],
+Cell[CellGroupData[{
+Cell[2015, 60, 653, 15, 32, "Input"],
+Cell[2671, 77, 157, 3, 32, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2865, 85, 496, 10, 32, "Input"],
+Cell[3364, 97, 481, 13, 32, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[3882, 115, 748, 15, 32, "Input"],
+Cell[4633, 132, 771, 20, 92, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[5441, 157, 170, 3, 32, "Input"],
+Cell[5614, 162, 281, 5, 61, "Print",
+ CellTags->"Info53726737026-6405207"]
+}, Open  ]],
+Cell[5910, 170, 258, 5, 32, "Input"],
+Cell[CellGroupData[{
+Cell[6193, 179, 1019, 27, 32, "Input"],
+Cell[7215, 208, 483, 13, 32, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[7735, 226, 671, 14, 32, "Input"],
+Cell[8409, 242, 771, 20, 92, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[9217, 267, 624, 15, 32, "Input"],
+Cell[9844, 284, 195, 4, 32, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[10076, 293, 449, 9, 32, "Input"],
+Cell[10528, 304, 595, 15, 32, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[11160, 324, 647, 14, 32, "Input"],
+Cell[11810, 340, 721, 20, 108, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[12568, 365, 992, 25, 32, "Input"],
+Cell[13563, 392, 565, 14, 32, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[14165, 411, 698, 15, 32, "Input"],
+Cell[14866, 428, 723, 20, 108, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[15626, 453, 403, 9, 32, "Input"],
+Cell[16032, 464, 169, 3, 32, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[16238, 472, 563, 13, 32, "Input"],
+Cell[16804, 487, 565, 14, 32, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[17406, 506, 628, 14, 32, "Input"],
+Cell[18037, 522, 723, 20, 108, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[18797, 547, 249, 5, 32, "Input"],
+Cell[19049, 554, 95, 1, 32, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[19181, 560, 122, 2, 32, "Input"],
+Cell[19306, 564, 270, 5, 43, "Print",
+ CellTags->"Info183726737027-6405207"]
+}, Open  ]],
+Cell[19591, 572, 262, 5, 32, "Input"],
+Cell[19856, 579, 366, 10, 52, "Input"],
+Cell[CellGroupData[{
+Cell[20247, 593, 384, 8, 32, "Input"],
+Cell[20634, 603, 159, 3, 32, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[20830, 611, 121, 2, 32, "Input"],
+Cell[20954, 615, 328, 5, 61, "Print",
+ CellTags->"Info213726737027-6405207"]
+}, Open  ]],
+Cell[21297, 623, 259, 5, 32, "Input"],
+Cell[21559, 630, 420, 10, 32, "Input"],
+Cell[CellGroupData[{
+Cell[22004, 644, 280, 7, 32, "Input"],
+Cell[22287, 653, 94, 1, 32, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[22418, 659, 361, 8, 32, "Input"],
+Cell[22782, 669, 748, 19, 92, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[23567, 693, 736, 22, 32, "Input"],
+Cell[24306, 717, 117, 2, 23, "Print"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[24460, 724, 408, 11, 32, "Input"],
+Cell[24871, 737, 773, 20, 92, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[25681, 762, 401, 9, 32, "Input"],
+Cell[26085, 773, 97, 1, 32, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[26219, 779, 328, 7, 32, "Input"],
+Cell[26550, 788, 197, 4, 32, "Output"]
+}, Open  ]],
+Cell[26762, 795, 373, 9, 32, "Input"],
+Cell[CellGroupData[{
+Cell[27160, 808, 281, 7, 32, "Input"],
+Cell[27444, 817, 126, 2, 32, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[27607, 824, 363, 8, 32, "Input"],
+Cell[27973, 834, 749, 21, 108, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[28759, 860, 710, 21, 32, "Input"],
+Cell[29472, 883, 94, 1, 23, "Print"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[29603, 889, 382, 10, 32, "Input"],
+Cell[29988, 901, 721, 20, 108, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[30746, 926, 404, 9, 32, "Input"],
+Cell[31153, 937, 125, 2, 32, "Output"]
+}, Open  ]],
+Cell[31293, 942, 491, 12, 52, "Input"],
+Cell[CellGroupData[{
+Cell[31809, 958, 416, 9, 32, "Input"],
+Cell[32228, 969, 147, 3, 32, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[32412, 977, 361, 8, 32, "Input"],
+Cell[32776, 987, 342, 10, 32, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[33155, 1002, 285, 7, 32, "Input"],
+Cell[33443, 1011, 643, 17, 76, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[34123, 1033, 621, 15, 32, "Input"],
+Cell[34747, 1050, 315, 9, 32, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[35099, 1064, 292, 7, 32, "Input"],
+Cell[35394, 1073, 641, 17, 76, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[36072, 1095, 120, 2, 32, "Input"],
+Cell[36195, 1099, 314, 5, 61, "Print",
+ CellTags->"Info413726737028-6405207"]
+}, Open  ]],
+Cell[36524, 1107, 258, 5, 32, "Input"],
+Cell[36785, 1114, 589, 13, 32, "Input"],
+Cell[CellGroupData[{
+Cell[37399, 1131, 342, 8, 32, "Input"],
+Cell[37744, 1141, 119, 2, 32, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[37900, 1148, 128, 2, 32, "Input"],
+Cell[38031, 1152, 430, 7, 81, "Print",
+ CellTags->"Info453726737028-6405207"]
+}, Open  ]],
+Cell[38476, 1162, 267, 6, 32, "Input"],
+Cell[CellGroupData[{
+Cell[38768, 1172, 422, 9, 32, "Input"],
+Cell[39193, 1183, 137, 3, 32, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[39367, 1191, 370, 9, 32, "Input"],
+Cell[39740, 1202, 119, 2, 32, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[39896, 1209, 422, 9, 32, "Input"],
+Cell[40321, 1220, 137, 3, 32, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[40495, 1228, 355, 8, 32, "Input"],
+Cell[40853, 1238, 94, 1, 32, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[40984, 1244, 435, 9, 32, "Input"],
+Cell[41422, 1255, 209, 4, 32, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[41668, 1264, 356, 8, 32, "Input"],
+Cell[42027, 1274, 531, 15, 32, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[42595, 1294, 290, 7, 32, "Input"],
+Cell[42888, 1303, 803, 20, 92, "Output"]
+}, Open  ]],
+Cell[43706, 1326, 540, 12, 32, "Input"],
+Cell[CellGroupData[{
+Cell[44271, 1342, 345, 8, 32, "Input"],
+Cell[44619, 1352, 142, 2, 32, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[44798, 1359, 876, 22, 32, "Input"],
+Cell[45677, 1383, 533, 15, 32, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[46247, 1403, 286, 7, 32, "Input"],
+Cell[46536, 1412, 827, 20, 92, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[47400, 1437, 197, 4, 32, "Input"],
+Cell[47600, 1443, 196, 4, 32, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[47833, 1452, 405, 9, 32, "Input"],
+Cell[48241, 1463, 122, 2, 32, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[48400, 1470, 887, 23, 32, "Input"],
+Cell[49290, 1495, 504, 14, 32, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[49831, 1514, 290, 7, 32, "Input"],
+Cell[50124, 1523, 805, 20, 92, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[50966, 1548, 422, 9, 32, "Input"],
+Cell[51391, 1559, 171, 4, 32, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[51599, 1568, 349, 8, 32, "Input"],
+Cell[51951, 1578, 124, 2, 32, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[52112, 1585, 128, 2, 32, "Input"],
+Cell[52243, 1589, 332, 6, 62, "Print",
+ CellTags->"Info643726737029-6405207"]
+}, Open  ]],
+Cell[52590, 1598, 271, 6, 32, "Input"],
+Cell[CellGroupData[{
+Cell[52886, 1608, 430, 11, 32, "Input"],
+Cell[53319, 1621, 126, 2, 32, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[53482, 1628, 381, 10, 32, "Input"],
+Cell[53866, 1640, 98, 1, 32, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[54001, 1646, 124, 2, 32, "Input"],
+Cell[54128, 1650, 322, 5, 62, "Print",
+ CellTags->"Info683726737030-6405207"]
+}, Open  ]],
+Cell[54465, 1658, 201, 5, 32, "Input"],
+Cell[54669, 1665, 496, 12, 32, "Input"],
+Cell[CellGroupData[{
+Cell[55190, 1681, 381, 9, 32, "Input"],
+Cell[55574, 1692, 95, 1, 32, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[55706, 1698, 705, 21, 32, "Input"],
+Cell[56414, 1721, 118, 2, 23, "Print"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[56569, 1728, 382, 10, 32, "Input"],
+Cell[56954, 1740, 778, 19, 92, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[57769, 1764, 401, 9, 32, "Input"],
+Cell[58173, 1775, 95, 1, 32, "Output"]
+}, Open  ]],
+Cell[58283, 1779, 496, 12, 32, "Input"],
+Cell[CellGroupData[{
+Cell[58804, 1795, 377, 9, 32, "Input"],
+Cell[59184, 1806, 94, 1, 32, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[59315, 1812, 707, 21, 32, "Input"],
+Cell[60025, 1835, 94, 1, 23, "Print"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[60156, 1841, 381, 10, 32, "Input"],
+Cell[60540, 1853, 778, 19, 92, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[61355, 1877, 403, 9, 32, "Input"],
+Cell[61761, 1888, 125, 2, 32, "Output"]
+}, Open  ]],
+Cell[61901, 1893, 471, 11, 52, "Input"],
+Cell[CellGroupData[{
+Cell[62397, 1908, 472, 11, 32, "Input"],
+Cell[62872, 1921, 158, 4, 32, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[63067, 1930, 423, 9, 32, "Input"],
+Cell[63493, 1941, 69, 1, 32, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[63599, 1947, 125, 2, 32, "Input"],
+Cell[63727, 1951, 315, 5, 62, "Print",
+ CellTags->"Info823726737213-6405207"]
+}, Open  ]],
+Cell[64057, 1959, 221, 5, 32, "Input"],
+Cell[CellGroupData[{
+Cell[64303, 1968, 127, 2, 32, "Input"],
+Cell[64433, 1972, 74, 1, 32, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[64544, 1978, 184, 4, 32, "Input"],
+Cell[64731, 1984, 952, 21, 124, "Output"]
+}, Open  ]],
+Cell[65698, 2008, 800, 18, 126, "Input"],
+Cell[CellGroupData[{
+Cell[66523, 2030, 365, 8, 32, "Input"],
+Cell[66891, 2040, 135, 3, 32, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[67063, 2048, 121, 2, 32, "Input"],
+Cell[67187, 2052, 415, 6, 81, "Print",
+ CellTags->"Info873726737407-6405207"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[67639, 2063, 537, 14, 32, "Input"],
+Cell[CellGroupData[{
+Cell[68201, 2081, 114, 3, 23, "Print"],
+Cell[68318, 2086, 116, 3, 23, "Print"],
+Cell[68437, 2091, 120, 3, 23, "Print"],
+Cell[68560, 2096, 120, 3, 23, "Print"],
+Cell[68683, 2101, 120, 3, 23, "Print"],
+Cell[68806, 2106, 124, 3, 23, "Print"],
+Cell[68933, 2111, 122, 3, 23, "Print"],
+Cell[69058, 2116, 124, 3, 23, "Print"],
+Cell[69185, 2121, 122, 3, 23, "Print"],
+Cell[69310, 2126, 122, 3, 23, "Print"],
+Cell[69435, 2131, 122, 3, 23, "Print"],
+Cell[69560, 2136, 120, 3, 23, "Print"],
+Cell[69683, 2141, 122, 3, 23, "Print"],
+Cell[69808, 2146, 120, 3, 23, "Print"],
+Cell[69931, 2151, 116, 3, 23, "Print"],
+Cell[70050, 2156, 114, 3, 23, "Print"],
+Cell[70167, 2161, 116, 3, 23, "Print"]
+}, Open  ]]
+}, Open  ]],
+Cell[70310, 2168, 771, 18, 89, "Input"],
+Cell[CellGroupData[{
+Cell[71106, 2190, 365, 8, 32, "Input"],
+Cell[71474, 2200, 135, 3, 32, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[71646, 2208, 118, 2, 32, "Input"],
+Cell[71767, 2212, 398, 6, 81, "Print",
+ CellTags->"Info903726741696-6405207"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[72202, 2223, 606, 17, 32, "Input"],
+Cell[CellGroupData[{
+Cell[72833, 2244, 114, 3, 23, "Print"],
+Cell[72950, 2249, 113, 3, 23, "Print"],
+Cell[73066, 2254, 117, 3, 23, "Print"],
+Cell[73186, 2259, 114, 3, 23, "Print"],
+Cell[73303, 2264, 118, 3, 23, "Print"],
+Cell[73424, 2269, 118, 3, 23, "Print"],
+Cell[73545, 2274, 116, 3, 23, "Print"],
+Cell[73664, 2279, 116, 3, 23, "Print"],
+Cell[73783, 2284, 114, 3, 23, "Print"],
+Cell[73900, 2289, 114, 3, 23, "Print"]
+}, Open  ]]
+}, Open  ]],
+Cell[74041, 2296, 777, 19, 89, "Input"],
+Cell[CellGroupData[{
+Cell[74843, 2319, 293, 6, 32, "Input"],
+Cell[75139, 2327, 135, 3, 32, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[75311, 2335, 122, 2, 32, "Input"],
+Cell[75436, 2339, 317, 5, 61, "Print",
+ CellTags->"Info933726741896-6405207"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[75790, 2349, 168, 3, 32, "Input"],
+Cell[75961, 2354, 1677, 43, 55, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[77675, 2402, 119, 2, 32, "Input"],
+Cell[77797, 2406, 543, 8, 100, "Print",
+ CellTags->"Info953726741913-6405207"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[78377, 2419, 786, 22, 32, "Input"],
+Cell[CellGroupData[{
+Cell[79188, 2445, 140, 3, 23, "Print"],
+Cell[79331, 2450, 138, 3, 23, "Print"],
+Cell[79472, 2455, 140, 3, 23, "Print"],
+Cell[79615, 2460, 140, 3, 23, "Print"],
+Cell[79758, 2465, 138, 3, 23, "Print"],
+Cell[79899, 2470, 142, 3, 23, "Print"],
+Cell[80044, 2475, 140, 3, 23, "Print"],
+Cell[80187, 2480, 138, 3, 23, "Print"],
+Cell[80328, 2485, 136, 3, 23, "Print"],
+Cell[80467, 2490, 140, 3, 23, "Print"]
+}, Open  ]]
+}, Open  ]]
+}
+]
 *)
 
-BeginPackage["frp`"] 
-
-`ConjugatePartition::usage = "ConjugatePartition[fb] gives the conjugate partition of fb in the list form, where fb is an integer partition in 
-the reverse sorted list form";
-
-`fbTableForm::usage = "fbTableForm[fb] gives the Ferrers board of fb in the table form, where fb is a Ferrers board 
-in the reverse sorted list form";
-
-`rpGenerator::usage = "rpGenerator[fb] gives a list of matrices, which reprents all the rook placements of fb, where fb 
-is a Ferrers board in the reverse sorted list form";
-
-`frpTest::usage = "frpTest[fb, rp] gives 1 if rp is a full rook placement of fb, otherwise 0. 
-Here, fb is a Ferrrers board in the reverse sorted list form and rp is a rook placement of fb in the matrix form";
-
-`frpTableForm::usage = "frpTableForm[fb, frp] gives the table form of frp, where frp is a full rook placement of fb in the matrix form, 
-and fb is a Ferrers board in the reverse sorted list form";
-
-`frpGenerator::usage = "frpGenerator[fb] gives a list of tables, which represents all the full rook placements of fb in the table form. 
-Here, fb is a Ferrers board in the reverse sorted list form";
-
-`SigmaMatrix::usage = "SigmaMatrix[sigma] gives the matrix of a given permutation sigma, where sigma is a list which represents a permutation";
-
-`fbSubSquare::usage = "fbSubSquare[fb, n] gives a list of lists for indices of sub square matrices of fp of dimension n, where 
-fb is a Ferrers board in the reverse sorted list form";
-
-`SigmaAvoidingTest::usage = "SigmaAvoidingTest[frp, sigma, fbsq] gives 1 if frp is sigma-avoiding, otherwise 0. 
-Here, frp is a full rook placement of some Ferrers board fb, the list sigma is a permutation, 
-fbsq is a list of lists for indices of sub square marices of fp of dimension Length[sigma]";
-
-`SigmaAvoidingNumber::usage = "SigmaAvoidingNumber[fb, sigma] gives the number of frps of fb which are sigma-avoiding. 
-Here, fb is a Ferrers board in the reverse sorted list form, and sigma is a permutation";
-
-`SigmaAvoidingfrp::usage = "SigmaAvoidingfrp[fb, sigma] gives a list of frps of fb which are sigma-avoiding. 
-Here, fb is a Ferrers board in the reverse sorted list form, and sigma is a permutation";
-
-`ZeroOneFilling::usage = "ZeroOneFilling[fb, n] gives a list of 0-1-fillings of fb with weight n. 
-Here, fb is a Ferrers board in the reverse sorted list form, and n is a positive integer";
-
-`zofGenerator::usage = "zofGenerator[fb, per] gives a list of 0-1-fillings of fb which fits per. 
-Here, fb is a Ferrers board in the reverse sorted list form, and per is a list of positive integers such that per <= fb";
-
-`TestNE::usage = "TestNE[zof, u, subuu, subu] gives 1 if the longest ne-chain of zof has length u, otherwise 0. 
-Here, zof is a 0-1-filling of some Ferrrers board, u is a positive integer, subuu is a list of indices of submatrices of 
-zof of dimension (u + 1), subu is a list of indices of submatrices of zof of dimension u";
-
-`TestSE::usage = "TestNE[zof, v, subvv, subv] gives 1 if the longest se-chain of zof has length v, otherwise 0. 
-Here, zof is a 0-1-filling of some Ferrrers board, v is a positive integer, subvv is a list of indices of submatrices of 
-zof of dimension (v + 1), subv is a list of indices of submatrices of zof of dimension v";
-
-`NumberNESE::usage = "NumberNESE[fb, n, u, v] gives the number of 0-1-fillings of fb with weight n such that the longest 
-ne-chain has length u and the longest se-chian has length v. Here, fb is a Ferrers board in the reverse sorted list form, 
-n, u and v are positive integers";
-
-`frpNESE::usage = "frpNESE[fb, u, v] gives the number of full rook placements of fb such that the longest 
-ne-chain has length u and the longest se-chian has length v. Here, fb is a Ferrers board in the reverse sorted list form, 
-u and v are positive integers"; 
-
-`frpNESElight::usage = "frpNESElight[fb, frp, u, v] gives the number of full rook placements frp of fb such that the longest 
-ne-chain has length u and the longest se-chian has length v. Here, fb is a Ferrers board in the reverse sorted list form, 
-u and v are positive integers";
-
-`ParGenerator::usage = "ParGenerator[fb] gives a list of partitions of fb[[1]] into Length[fb] parts with par[[i]] <= fb[[i]], 
-where fb is a Ferrers board in the reverse sorted list form";
-
-`frpParTest::usage = "frpParTest[fb, frp, par] gives 1 if for each 1 <= i <= Length[fb], the sum of i-th row of frp is equal to par[[n + 1 - i]]. 
-Here, fb is a Ferrers board in the reverse sorted list form, frp is a full rook placement of fb and par is a partition of fb[[1]] into Length[fb] 
-with par[[i]] <= fb[[i]]. Otherwise, it returns 0";
-
-`frpParNESE::usage = "frpParNESE[fb, par, u, v] gives the number of full rook placements of fb, whose sum of  the i-th row is par[[Length[fb] + 1 - i]]  
-and the longest ne-chain has length u and the longest se-chian has length v. 
-Here, fb is a Ferrers board in the reverse sorted list form, par is a partition of fb[[1]] into Length[fb] 
-with par[[i]] <= fb[[i]], u and v are two positive integers";
-
-Begin["Private`"]
-
-(* Name:    ConjugatePartition
-   Input:   l - a list of positive integers, which represents a Ferrers board
-   Output:  c - a list of positive integers, which represents the conjugate partition of l 
-   This code is borrowed from http://mathworld.wolfram.com/ConjugatePartition.html
- *)
-
-ConjugatePartition[l_List] := 
-  Module[{i, r = Reverse[l], n = Length[l]},
-         Table[n + 1 - Position[r, _?(# >= i&), Infinity, 1][[1, 1]], {i, l[[1]]}]
-	 ];
-
-(* Name: fbTableForm
-   Input: fb - a list of positive integers, which represents a Ferrers board
-   Output: tfb - a Ferrers board in table form  
- *)
-
-fbTableForm[fb_] :=
-  Module[{n = Length[fb], tfb = {}},
-         Do[tfb = Append[tfb, Table[0, {j, fb[[n - i + 1]]}]], {i, n}]; (* translate fb into table form as that in Ting note *)
-         Return[tfb];
-         ];
-
-(* Name:   rpGenerator
-   Input:  fb - a list of positive integers, which represents a Ferrers board
-   Output: rp - a list of matrices, which are matrices whose each column 
-           contains precisely one unit (rook) and dimension are compatible with fb 
-           We may call rp a rook placement of fb
- *)
-
-rpGenerator[fb_] := 
-  Module[{cfb = ConjugatePartition[fb], l = {}}, 
-	 Do[l = Append[l, Join[Table[0, {j, cfb[[1]] - cfb[[i]]}], #]& /@ IdentityMatrix[cfb[[i]]]]; , {i, fb[[1]]}]; 
-	 (*this is to compute the set of unit vectors for each column  *)              
-       Return[Transpose /@ Tuples[l]]; (* construct a list of matrices which represents rook placements of fb and return the results *)
-      ];
-
-(* Name:  frpTest
-   Input: fb - a list of positive integers, which represents a Ferrers board
-          rp - a matrix, which represents a rook placement of fb 
-   Output: 1 - rp is a full rook placement of fb
-           0 - rp is not a full rook placement of fb
- *)
-
- frpTest[fb_, rp_] := 
-  Module[{i, n = Length[fb]},
-	 For[i = 1, i <= n, i++, 
-             If[Sum[rp[[i, j]], {j, fb[[1]]}] == 0 , Return[0]]; (* check whether the sum of each row is equal to 0 or not. 
-if it is, then rp is not a full rook placement *)
-	     ];
-         Return[1];
-	 ];
-
-(* Name: frpTableForm 
-   Input: fb - a list of positive integers, which represents a Ferrers board
-          frp - a matrix, which reprensts a full rook placement of fb
-   Output: tfrp - a table form of frp
- *)
-
-frpTableForm[fb_, frp_] := 
-  Module[{n = Length[fb], tfrp = {}},
-         Do[tfrp = Append[tfrp, Table[frp[[i, j]], {j, fb[[n - i + 1]]}] ], {i, n}];
-         Return[tfrp];
-        ] 
-
-(* Name:   frpGenerator
-   Input:  fb - a list of positive integers, which represents a Ferrers board
-   Output: frp - a list of tables, which represent full rook placements of fb
- *)
-
-frpGenerator[fb_] := 
-  Module[{rp = rpGenerator[fb], frp = {}, test},
-         test = frpTest[fb, #]& /@ rp; (*do frpTest for each element of rp *)
-         Do[If[test[[i]] == 1, frp = Append[frp, frpTableForm[fb, rp[[i]]]]], {i, Length[rp]}]; 
-         (* if rp[[i]] is a full rook placement, then put it into frp with Table form *)
-	 Return[frp];      
-	];
-
-(* Name: SigmaMatrix
-   Input: sigma - a given permuation
-   Output: m - a matrix which is corresponding to sigma
- *)
-
-SigmaMatrix[sigma_] := 
-  Module[{n = Length[sigma], i},
-         m = Table[0, {k, n}, {j, n}]; (* construct a square zero matrix with dimension n *)
-         Do[m[[n - sigma[[i]] + 1 ,i]] = 1, {i, n}];  (* evaluate m arrording to sigma *)
-         Return[m];
-	 ];
-
-(* Name: fbSubSquare
-   Input: fb - a list of positive integers, which represents a Ferrers board
-          n - the dimension of the sub square matrix of frp
-   Output: fbsq - a set of indices for sub square matrices of fp of dimension n
- *)
-
-fbSubSquare[fb_, n_] := 
-  Module[{tfb = fbTableForm[fb], tup},
-	tup = Tuples[{Subsets[Range[Length[fb]], {n}], Subsets[Range[fb[[1]]], {n}]}];
-        (* generate all the set of indices of sub square matrices of  a Length[fb] times fb[[1]] of dimension n *)
-	 Return[Cases[Quiet[Check[tfb[[##]]; {##}, "error"]]& @@@ tup, _List]];
-        (* pick all the the set of indices of sub square matrices of fb of dimension n *)
-       ];
-
-(* Name:  SigmaAvoidingTest
-   Input: frp -  a given table, which represents a full rook placements of fb
-          sigma - a given permutation
-          fbsq - a set of indices for sub square matrices of frp of dimension Length[sigma]
-   Output: 1 - frp is sigma-avoiding
-           0 - frp is not sigma-avoiding
-*)
-
- SigmaAvoidingTest[frp_, sigma_, fbsq_] :=
-  Module[{n = Length[sigma], m, zero, l, i}, 
-         m = SigmaMatrix[sigma]; (* generate the matrix for sigma *)
-	 zero = Table[0, {i, n}, {j, n}]; (* generate the zero matrix of dimension n*)
-         l = Length[fbsq];
-         For[i = 1, i <= l, i++,
-             If[Expand[frp[[fbsq[[i, 1]], fbsq[[i, 2]]]] - m] == zero, Return[0]]; 
-             ];
-         (* for each submatrix of frp, check whether it is equal to m or not *)
-         Return[1];
-	 ];
-
-(* Name: SigmaAvoidingNumber
-   Input: fb - a list of positive integers, which represents a Ferrers board 
-          sigma - a given permutation
-   Output: n - the number of sigma-avoiding matrices among frps of fb
- *)
-
-SigmaAvoidingNumber[fb_, sigma_] := 
-  Module[{n = Length[sigma], frp, fbsq}, 
-	 frp = frpGenerator[fb]; (* generate frps of fb in table form *)
-	 fbsq = fbSubSquare[fb, n]; (* generate sub square matrices of fb of dimension n *) 
-	 Return[Sum[SigmaAvoidingTest[frp[[i]], sigma, fbsq] , {i, Length[frp]}]]; (*count the number of sigma-avoiding frps of fb *)
-	  ];
-
-(* Name: SigmaAvoidingfrp
-   Input: fb - a list of positive integers, which represents a Ferrers board 
-          sigma - a given permutation
-   Output: frp - a list of frps of fb which are sigma-avoiding
-*)
-
-SigmaAvoidingfrp[fb_, sigma_] :=
-  Module[{n = Length[sigma], frp, fbsq, sfrp = {}}, 
-	 frp = frpGenerator[fb]; (* generate frps of fb in table form *)
-	 fbsq = fbSubSquare[fb, n]; (* generate sub square matrices of fb of dimension n *)
-         Do[If[SigmaAvoidingTest[frp[[i]], sigma, fbsq] == 1, sfrp = Append[sfrp, frp[[i]]]] , {i, Length[frp]}]; 
-	 Return[sfrp]; 
-	 ];
-
-(* Name: zofGenerator
-   Input: fb - a list of positive integers, which represents a Ferrers board 
-          per - a list of positive integers, which has the same length as fb, 
-                and each element of per is smaller than or equal to that of fb    
-   Output:zof - a list of 0-1-fillings of fb, where the sum of 1 in each row of 
-                each element zof is equal to that of per
-*)
-
-zofGenerator[fb_, per_] :=
-  Module[{n = Length[fb], tup, cfb, m, tfb, flag, zof = {}},
-	 tup = Tuples[Table[Subsets[Range[fb[[n + 1 - i]]], {per[[n + 1 - i]]}], {i, n}]]; (* generate all the indices for which we fill it with 1 *)
-         cfb = ConjugatePartition[fb];
-         m = Length[cfb];
-         Do[tfb = fbTableForm[fb]; 
-            Do[Do[tfb[[j, tup[[i, j, k]]]] = 1 , {k, per[[n + 1 - j]]}], {j, n}]; (*generate a filling of tfb with 1 *)
-               flag = 1;
-	       Do[If[Sum[tfb[[n + 1 - k, j]], {k, cfb[[j]]}] == 0, flag = 0; Break[]], {j, m}]; 
-               (* check the sum of each column is equal to zero or not *)
-               If[flag == 1, zof = Append[zof, tfb]]; (* if tfb is a 0-1-filling, then we add it to zof *)
-           , {i, Length[tup]}];
-	 Return[zof];
-        ];
-
-(* 
-   Name: ZeroOneFilling
-   Input: fb - a list of positive integers, which represents a Ferrers board 
-          n  - a positive integer
-   Output: zof - a list of 0-1-fillings of fb with weight n   
-*)
-
-ZeroOneFilling[fb_, n_] :=
-  Module[{l = Length[fb], par, per, flag, zof = {}},
-         par = IntegerPartitions[n, {l}]; (* generate all the partitions of n into l parts *)
-         Do[per = Permutations[par[[i]]]; (* generate all the permutations of par[[i]] *) 
-            Do[flag = 1; 
-	       Do[If[per[[j, k]] > fb[[k]], flag = 0; Break[]], {k, l}];
-               If[flag == 0, Break[]]; (* if flag == 0, then per[[j]] does not fit the size of fb *)
-               zof = Join[zof, zofGenerator[fb, per[[j]]]]; (* select zof which fits fb and per[[j]] *)     
-            , {j, Length[per]}];
-	  , {i, Length[par]}];
-	  Return[zof];
-	 ];
-
-(* 
-   Name: TestNE
-   Input: zof - a 0-1-filling of some Ferrers board
-          u - a positive integer
-          subuu - a list of indices of submatrices of zof of size u + 1
-          subu - a list of indices of submatrices of zoef of size u
-   Output: 1 - the longest ne-chain of zof has length u
-           0 - otherwise 
- *)
-
-TestNE[zof_, u_, subuu_, subu_] :=
-  Module[{n = Length[subuu], m = Length[subu], i, mat},
-         If[m == 0, Return[0]];
-         If[n > 0, 
-            For[i = 1, i <= n, i++, 
-	        mat = zof[[subuu[[i]][[1]], subuu[[i]][[2]]]]; (* take the submatrix of zof with indices subuu[[i]] *)
-	        If[Sum[mat[[j, u + 2 - j]], {j, u + 1}] == u + 1, Return[0]];
-	       ];
-           ];
-	 For[i = 1, i<= m, i++,
-             mat = zof[[subu[[i]][[1]], subu[[i]][[2]]]]; (* take the submatrix of zof with indices subu[[i]] *)
-             If[Sum[mat[[j, u + 1 - j]], {j, u}] == u, Return[1]]; 
-	     ];
-         Return[0];
-	 ];
-
-(* Warning: In the Do[ .. ], if we use If[ Return[ .. ] ], then the command Return[ .. ] does not work. 
- In this case, we need to use For[ .. ] rather than Do[ .. ] *)
-
-(* Name: TestSE
-   Input: zof - a 0-1-filling
-          v - a positive integer
-          subvv - a list of indices of submatrices of zof of size v + 1
-          subv - a list of indices of submatrices of zoef of size v
-   Output: 1 - the longest se-chain of zof has length v
-           0 - otherwise 
- *)
-
-TestSE[zof_, v_, subvv_, subv_] :=
-  Module[{n = Length[subvv], m = Length[subv], i, mat},
-         If[m == 0, Return[0]];
-         If[n > 0,
-            For[i = 1, i <= n, i++,  
-	        mat = zof[[subvv[[i]][[1]], subvv[[i]][[2]]]]; (* take the submatrix of zof with indices subvv[[i]] *)
-	        If[Sum[mat[[j, j]], {j, v + 1}] == v + 1, Return[0]];
-	       ];
-           ];
-	 For[i = 1, i <= m, i++,
-             mat = zof[[subv[[i]][[1]], subv[[i]][[2]]]]; (* take the submatrix of zof with indices subv[[i]] *)
-             If[Sum[mat[[j, j]], {j, v}] == v, Return[1]]; 
-	    ];
-         Return[0];
-	 ];
-
-(* 
-   Name: NumberNESE
-   Input: fb - a list of positive integers, which represents a Ferrers board 
-          n  - a positive integer
-          u  - a positive integer
-          v - a positive integer
-   Output: N - the number of 0-1-fillings of fb with weight n such that the longest 
-               ne-chain has length u and the longest se-chian has length v   
- *)
-
-
-NumberNESE[fb_, n_, u_, v_] := 
-  Module[{zof, subuu, subu, subvv, subv, N = 0},
-         zof = ZeroOneFilling[fb, n]; (* generate 0-1-fillings of fb with weight n *)
-         subuu = fbSubSquare[fb, u + 1]; (* generate the indices of submatrices of fb of dimension u + 1 *)
-         subu = fbSubSquare[fb, u];
-         subvv = fbSubSquare[fb, v + 1];
-         subv = fbSubSquare[fb, v];
-         Do[N = N + If[TestNE[zof[[i]], u, subuu, subu] + TestSE[zof[[i]], v, subvv, subv] == 2, 1, 0], {i, Length[zof]}]; 
-         (* count 0-1-fillings which satisfy the conditions in the specification *)
-	 Return[N];
-	 ];
-
-(* 
-   Name: frpNESE
-   Input: fb - a list of positive integers, which represents a Ferrers board 
-          u  - a positive integer 
-          v - a positive integer
-   Output: N  - the number of full rook placements of fb such that the longest 
-               ne-chain has length u and the longest se-chian has length v  
-*)
-
-frpNESE[fb_, u_, v_] := 
-  Module[{frp, subuu, subu, subvv, subv, N = 0}, 
-         frp = frpGenerator[fb]; (* generate full rook placements of fb *)
-         subuu = fbSubSquare[fb, u + 1]; (* generate the indices of submatrices of fb of dimension u + 1 *)
-         subu = fbSubSquare[fb, u];
-         subvv = fbSubSquare[fb, v + 1];
-         subv = fbSubSquare[fb, v];
-         Do[N = N + If[TestNE[frp[[i]], u, subuu, subu] + TestSE[frp[[i]], v, subvv, subv] == 2, 1, 0], {i, Length[frp]}]; 
-         (* count full rook placements which satisfy the conditions in the specification *)
-	 Return[N];
-	 ];
-
-(* 
-   Name: frpNESElight
-   Input: fb - a list of positive integers, which represents a Ferrers board
-          frp - a list of full rook placements of fb 
-          u  - a positive integer 
-          v - a positive integer
-   Output: N  - the number of full rook placements frp of fb such that the longest 
-               ne-chain has length u and the longest se-chian has length v  
-*)
-
-frpNESElight[fb_, frp_, u_, v_] := 
-  Module[{subuu, subu, subvv, subv, N = 0}, 
-         subuu = fbSubSquare[fb, u + 1]; (* generate the indices of submatrices of fb of dimension u + 1 *)
-         subu = fbSubSquare[fb, u];
-         subvv = fbSubSquare[fb, v + 1];
-         subv = fbSubSquare[fb, v];
-         Do[N = N + If[TestNE[frp[[i]], u, subuu, subu] + TestSE[frp[[i]], v, subvv, subv] == 2, 1, 0], {i, Length[frp]}]; 
-         (* count full rook placements which satisfy the conditions in the specification *)
-	 Return[N];
-	 ];
-
-(*
-  Name: ParGenerator
-  Input: fb - a list of positive integers, which represents a Ferrers board
-  Output: par - a list of partitions of fb[[1]] into Length[fb] parts with par[[i]] <= fb[[i]]
-*)
-
-ParGenerator[fb_] := 
-  Module[{n = Length[fb], p, per, flag, par = {}},
-         p = IntegerPartitions[fb[[1]], {n}]; (*compute all the integer partitions of fb[[1]] into Length[fb] parts *)
-         Do[per = Permutations[p[[i]]]; 
-            Do[flag = 1;
-               Do[If[per[[j, k]] > fb[[k]], flag = 0; Break[]], {k, n}]; (* check whether per[[j, k]] > fb[[k]] or not *)
-               If[flag == 1,  par = Append[par, per[[j]]]];
-              , {j, Length[per]}];  
-           , {i, Length[p]}];
-         Return[par];
-	 ];
-
-(* 
-   Name: frpParTest
-   Input: fb - a list of positive integers, which represents a Ferrers board 
-          frp - a full rook placement of fb
-          par - a list of partitions of fb[[1]] into Length[fb] parts with par[[i]] <= fb[[i]]
-   Output:  1 - for each 1 <= i <= Length[fb], the sum of i-th row of frp is equal to par[[n + 1 - i]]
-            0 - Otherwise
- *)
-
-frpParTest[fb_, frp_, par_] := 
-  Module[{n = Length[fb], i},
-         For[i = 1, i <= n, i++,
-             If[Sum[frp[[i, j]], {j, fb[[n + 1 - i]]}] != par[[n + 1 - i]], Return[0]]; 
-	     ];
-         Return[1];
-	];
-
-(*
-   Name: frpParNESE
-   Input: fb - a list of positive integers, which represents a Ferrers board 
-          par - a partition of fb[[1]] into Length[fb] parts with par[[i]] <= fb[[i]]
-          u  - a positive integer 
-          v - a positive integer
- Output: N - the number of full rook placements of fb, whose sum of  the i-th row is par[[Length[fb] + 1 - i]]  and  the longest 
-               ne-chain has length u and the longest se-chian has length v  
-*)
-
-frpParNESE[fb_, par_, u_, v_] := 
-  Module[{frp, fp = {}, subuu, subu, subvv, subv, N = 0},
-         frp = frpGenerator[fb]; (* generate full rook placements of fb *)
-         Do[If[frpParTest[fb, frp[[i]], par] == 1, fp = Append[fp, frp[[i]]]]; 
-           , {i, Length[frp]}]; (* pick full rook placements of fb which fit par *)
-         subuu = fbSubSquare[fb, u + 1]; (* generate the indices of submatrices of fb of dimension u + 1 *)
-         subu = fbSubSquare[fb, u];
-         subvv = fbSubSquare[fb, v + 1];
-         subv = fbSubSquare[fb, v];
-         Do[N = N + If[TestNE[fp[[i]], u, subuu, subu] + TestSE[fp[[i]], v, subvv, subv] == 2, 1, 0], {i, Length[fp]}]; 
-         (* count full rook placements which satisfy the conditions in the specification *)
-	 Return[N];
-	 ];
-
-End[]
-
-EndPackage[]
-
-(*
-(* NonFerrersBoard
-   Input: fb - a list of positive integers, which represents a Ferrers board
-   Output: nfb - a list of tuples which are in the rectangular matrix of fb, but not in the Ferrers board of fb
- *)
-
-NonFerrersBoard[fb_] :=
-  Module[{n = Length[fb], nfb = {}, i, j},
-         If[n == 1, Return[nfb]];
-         For[i = n - 1, i >= 1, i--, 
-             For[j = 1, j <= fb[[1]], j++,
-                 If[j > fb[[n - i + 1]], nfb = Join[nfb, Table[{i, k}, {k, j, fb[[1]]}]]; Break[]]; 
-(* determine the tuples that are not in the Ferrers board of fb *)
-                 ]; 
-	     ];
-	 Return[nfb];
-	 ];
-
-(* Name: SubSquare
-   Input: l - a list of dimension 2 which represents the dimensions of l[[1]] times l[[2]] matrices
-          n - a positive integer which is smaller than or equal to min{l[[1]], l[[2]]}
-   Output: ssq - a set of indices in sorted order for sub square matrices of dimension n of a l[[1]] times l[[2]] matrix
-*)
-
-SubSquare[l_, n_] := 
-  Module[{s1, t1, s2, t2, ssq = {}, i, j},
-         s1 = Subsets[Range[l[[1]]], {n}]; (* construct the subsets of {1, ..., l[[1]]} with n elements*)
-         t1 = Length[s1];
-         s2 = Subsets[Range[l[[2]]], {n}]; (* construct the subsets of {1, ..., l[[2]]} with n elements *)
-	 t2 = Length[s2];
-	 For[i = 1, i <= t1, i++,
-             For[j = 1, j <= t2, j++,
-		 ssq = Append[ssq, Tuples[{s1[[i]], s2[[j]]}]]; (* construct indices for a sub square matrix of dimension n *)
-		 ]; 
-	     ];
-         Return[ssq];
-	 ];
-
-(* Name: IndicesToMatrix
-   Input: m - a matrix
-          n - a positive integer
-          ind - a set of indices in sorted order of a square submatrix of m of dimension n 
- *)
-
-IndicesToMatrix[m_, n_, ind_] := 
-  Module[{sm = Table[0, {i, n}, {j, n}]},
-         Do[Do[sm[[i, j]] = m[[ind[[(i - 1) n + j, 1]] , ind[[(i - 1) n + j, 2]]]] , {j, n}],{i, n}];
-         Return[sm];
-	 ];
-
-(* Name: MemberTest
-   Input: l - a list
-          t - another list
-   Output: 1 - there exists an element a in t such that a belongs to l
-           0 - otherwise
- *)
-
-MemberTest[l_, t_] :=
-  Module[{i, n = Length[t]},
-         For[i = 1, i <= n, i++, 
-	     If[MemberQ[l, t[[i]]], Return[1]];
-             ];
-         Return[0];
-	 ];
- *)
