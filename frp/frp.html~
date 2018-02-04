@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="author" content="Yi Zhang">
+    <title>Pattern Avoidance in 0-1-fillings of Ferrers Shapes</title>
+  </head>
+
+  <body>
+    <div id="content">
+      <h2>Pattern Avoidance in 0-1-fillings of Ferrers Shapes</h2>
+      The material on this webpage accompanies the article
+      <a href = "https://yzhang1616.github.io/frp.pdf">
+      Pattern Avoidance in 0-1-fillings of Ferrers Shapes</a>
+      by Ting Guo, Christian Krattenthler and Yi Zhang.
+     
+     <p>
+    <a href = "frp.m">frp.m</a>, a Mathematica package for generating full
+    rook placements of a Ferrers board (shape), checking the number of
+    sigma-avoiding full rook placements of a Ferrers board, 
+     generating 0-1-fillings of a Ferrers board, 
+     and checking the number of 0-1-fillings of a Ferrers board with weight n
+    such that the longest ne-chain has length u 
+    and the longest se-chain has length v. It is based on joint work with Ting
+    Guo and Christian Krattenthaler. For a demonstration of the package,
+    see the <a href = "frp.nb">frp.nb</a> notebook.
+     </p> 
+
+
+
+
+
+    </div>
+  </body>
+
+</html>
