@@ -14,7 +14,7 @@ BeginPackage["qDesingularization`", {"Singular`"}]
 
 `qDispersion::usage = "qDispersion[u, v, q, x] gives the dispersion of u and v using irreducible factorization over QQ[q][x], where u(x) and v(x) are two polynomials in QQ[q][x], and u(0) is not equal to 0";
 
-`qDispersionRes::usage = "qDispersion[u, v, q, x] gives the dispersion of u and v using resultant-based algorithm, where u(x) and v(x) are two polynomials in QQ[q][x], and u(0) is not equal to 0";
+`qDispersionRes::usage = "qDispersionRes[u, v, q, x] gives the dispersion of u and v using resultant-based algorithm, where u(x) and v(x) are two polynomials in QQ[q][x], and u(0) is not equal to 0";
 
 `OrderBound::usage = "OrderBound[P, q, x, S] gives an order bound for a desingularized operator of P, which is a q-difference operator in QQ[q][x][S], but regarded as an operator in QQ(q)[x][S]";
 
