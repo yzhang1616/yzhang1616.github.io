@@ -25,7 +25,7 @@ Here, fb is a Ferrers board in the reverse sorted list form";
 
 `SigmaMatrix::usage = "SigmaMatrix[sigma] gives the matrix of a given permutation sigma, where sigma is a list which represents a permutation";
 
-`fbSubSquare::usage = "fbSubSquare[fb, n] gives a list of lists for indices of sub square matrices of fp of dimension n, where 
+`fbSubSquare::usage = "fbSubSquare[fb, n] gives a list of lists for indices of sub square matrices of fb of dimension n, where 
 fb is a Ferrers board in the reverse sorted list form";
 
 `SigmaAvoidingTest::usage = "SigmaAvoidingTest[zof, sigma, fbsq] gives 1 if zof is sigma-avoiding, otherwise 0. 
@@ -35,11 +35,43 @@ fbsq is a list of lists for indices of sub square marices of fp of dimension Len
 `SigmaAvoidingNumber::usage = "SigmaAvoidingNumber[fb, sigma] gives the number of zofs of fb which are sigma-avoiding. 
 Here, fb is a Ferrers board in the reverse sorted list form, and sigma is a permutation";
 
+`SigmaAvoidingNumberlight::usage = "SigmaAvoidingNumberlight[zof, sigma, fbsq] gives the number of zofs of fb which are sigma-avoiding. 
+Here, zof is a list of zofs of some Ferrers board fb, sigma is a permutation and fbsq is a list of indices of sub square matrices of fb 
+of size Length[sigma]"
+
 `SigmaAvoidingzof::usage = "SigmaAvoidingzof[fb, sigma] gives a list of zofs of fb which are sigma-avoiding. 
 Here, fb is a Ferrers board in the reverse sorted list form, and sigma is a permutation";
 
+`rzofGenerator::usage = "rzofGenerator[rfb] gives a list of 0-1-fillings of rfb, where each column has exactly 1. 
+Here, rfb is a rectangle Ferrers board in the reverse sorted list form";
+
+`rfbSubSquare::usage = "rfbSubSquare[rfb, n] gives a list of lists for indices of sub square matrices of rfb of dimension n, where 
+rfb is a rectangular Ferrers board in the reverse sorted list form";
+
+`rSigmaAvoidingNumber::usage = "rSigmaAvoidingNumber[rfb, sigma] gives the number of rzofs of rfb which are sigma-avoiding. 
+Here, fb is a rectangular Ferrers board in the reverse sorted list form, and sigma is a permutation";
+
+`rSigmaAvoidingNumberlight::usage = "rSigmaAvoidingNumberlight[rzof, sigma, fbsq] gives the number of rzofs of rfb which are sigma-avoiding. 
+Here, rzof is a list of rzofs of some rectangular Ferrers board rfb, sigma is a permutation and fbsq is a list of indices of sub square matrices 
+of rfb of size Length[sigma]"
+
+`rSigmaAvoidingzof::usage = "rSigmaAvoidingzof[rfb, sigma] gives a list of rzofs of rfb which are sigma-avoiding. 
+Here, rfb is a rectangular Ferrers board in the reverse sorted list form, and sigma is a permutation";
+
+`SigmaAvoidingParNumber::usage = "SigmaAvoidingParNumber[fb, sigma, par] gives the number of sigma-avoiding 0-1-fillings of fb, 
+whose sum of  the i-th row is par[[i]]. 
+Here, fb is a Ferrers board in the reverse sorted list form, sigma is a permutation, and 
+par is a partition of fb[[1]] into Length[fb] with par[[i]] <= fb[[i]]";
+
+`SigmaAvoidingParNumberlight::usage = "SigmaAvoidingParNumberlight[fb, zof, par] gives the number of sigma-avoiding 0-1-fillings of fb, 
+whose sum of  the i-th row is par[[i]]. 
+Here, fb is a Ferrers board in the reverse sorted list form, zof is a list of 0-1-fillings of fb which are sigma-avoiding 
+for some permutation sigma, and 
+par is a partition of fb[[1]] into Length[fb] with par[[i]] <= fb[[i]]";
+
 `GenZeroOneFilling::usage = "GenZeroOneFilling[fb, n] gives a list of generalized generalized 0-1-fillings of fb with weight n. 
 Here, fb is a Ferrers board in the reverse sorted list form, and n is a positive integer";
+
 
 `gzofGenerator::usage = "gzofGenerator[fb, per] gives a list of generalized 0-1-fillings of fb which fits per. 
 Here, fb is a Ferrers board in the reverse sorted list form, and per is a list of positive integers such that per <= fb";
@@ -67,11 +99,11 @@ u and v are positive integers";
 `ParGenerator::usage = "ParGenerator[fb] gives a list of partitions of fb[[1]] into Length[fb] parts with par[[i]] <= fb[[i]], 
 where fb is a Ferrers board in the reverse sorted list form";
 
-`zofParTest::usage = "zofParTest[fb, zof, par] gives 1 if for each 1 <= i <= Length[fb], the sum of i-th row of zof is equal to par[[n + 1 - i]]. 
+`zofParTest::usage = "zofParTest[fb, zof, par] gives 1 if for each 1 <= i <= Length[fb], the sum of i-th row of zof is equal to par[[i]]. 
 Here, fb is a Ferrers board in the reverse sorted list form, zof is a 0-1-filling of fb and par is a partition of fb[[1]] into Length[fb] 
 with par[[i]] <= fb[[i]]. Otherwise, it returns 0";
 
-`zofParNESE::usage = "zofParNESE[fb, par, u, v] gives the number of 0-1-fillings of fb, whose sum of  the i-th row is par[[Length[fb] + 1 - i]]  
+`zofParNESE::usage = "zofParNESE[fb, par, u, v] gives the number of 0-1-fillings of fb, whose sum of  the i-th row is par[[i]]  
 and the longest ne-chain has length u and the longest se-chian has length v. 
 Here, fb is a Ferrers board in the reverse sorted list form, par is a partition of fb[[1]] into Length[fb] 
 with par[[i]] <= fb[[i]], u and v are two positive integers";
@@ -182,7 +214,7 @@ fbSubSquare[fb_, n_] :=
        ];
 
 (* Name:  SigmaAvoidingTest
-   Input: zof -  a given table, which represents a 0-1-fillings of fb
+   Input: zof -  a given table, which represents a 0-1-fillings of fb (or rfb)
           sigma - a given permutation
           fbsq - a set of indices for sub square matrices of zof of dimension Length[sigma]
    Output: 1 - zof is sigma-avoiding
@@ -204,15 +236,49 @@ fbSubSquare[fb_, n_] :=
 (* Name: SigmaAvoidingNumber
    Input: fb - a list of positive integers, which represents a Ferrers board 
           sigma - a given permutation
-   Output: n - the number of sigma-avoiding matrices among zofs of fb
+   Output: n - the number of sigma-avoiding 0-1-fillings among zofs of fb
  *)
 
 SigmaAvoidingNumber[fb_, sigma_] := 
   Module[{n = Length[sigma], zof, fbsq}, 
+         If[n > Min[fb[[1]], Length[fb]], Return[0]]; (*if n > Min[fb[[1]], Length[fb]], then there is no sigma-avoiding zof at all *)
 	 zof = zofGenerator[fb]; (* generate zofs of fb in table form *)
 	 fbsq = fbSubSquare[fb, n]; (* generate sub square matrices of fb of dimension n *) 
 	 Return[Sum[SigmaAvoidingTest[zof[[i]], sigma, fbsq] , {i, Length[zof]}]]; (*count the number of sigma-avoiding zofs of fb *)
 	  ];
+
+(* Name: SigmaAvoidingNumberlight
+   Input: zof - a list of zofs of some Ferrers board fb 
+          sigma - a given permutation
+          fbsq - a list of indices of sub square matrices of fb of size Length[sigma]
+   Output: n - the number of sigma-avoiding 0-1-fillings among zofs of fb
+ *)
+
+SigmaAvoidingNumberlight[zof_, sigma_, fbsq_] := Sum[SigmaAvoidingTest[zof[[i]], sigma, fbsq] , {i, Length[zof]}];
+
+(* Below is an example for the usage of SigmaAvoidingNumberlight *)
+
+(*
+In[16]:= fb = {6, 6, 6, 4}                                                                               
+
+Out[16]= {6, 6, 6, 4}
+
+In[17]:= sigma1 = {2, 3, 1}                                                                              
+
+Out[17]= {2, 3, 1}
+
+In[18]:= n = Length[sigma1]                                                                              
+
+Out[18]= 3
+
+In[19]:= zof = zofGenerator[fb];                                                                         
+
+In[20]:= fbsq = fbSubSquare[fb, n];                                                                      
+
+In[21]:= SigmaAvoidingNumberlight[zof, sigma1, fbsq]                                                     
+
+Out[21]= 425
+ *)
 
 (* Name: SigmaAvoidingzof
    Input: fb - a list of positive integers, which represents a Ferrers board 
@@ -222,10 +288,104 @@ SigmaAvoidingNumber[fb_, sigma_] :=
 
 SigmaAvoidingzof[fb_, sigma_] :=
   Module[{n = Length[sigma], zof, fbsq, szof = {}}, 
+         If[n > Min[fb[[1]], Length[fb]], Return[{}]]; (*if n > Min[fb[[1]], Length[fb]], then there is no sigma-avoiding zof at all *)
 	 zof = zofGenerator[fb]; (* generate zofs of fb in table form *)
 	 fbsq = fbSubSquare[fb, n]; (* generate sub square matrices of fb of dimension n *)
          Do[If[SigmaAvoidingTest[zof[[i]], sigma, fbsq] == 1, szof = Append[szof, zof[[i]]]] , {i, Length[zof]}]; 
 	 Return[szof]; 
+	 ];
+
+(* Name: rzofGenerator
+   Input: rfb - a list of positive integers, which represents a rectangle Ferrers board
+   Output: rzof - a list of 0-1-fillings of rfb, where each column has exactly 1
+*)
+
+rzofGenerator[rfb_] := 
+  Module[{l = Length[rfb], rzof},
+	 id = IdentityMatrix[Length[rfb]];
+         rzof = Transpose /@ Tuples[Table[id, {i, rfb[[1]]}]];
+         Return[rzof];
+	 ];
+
+(* Name: rfbSubSquare
+   Input: rfb - a list of positive integers, which represents a rectangular Ferrers board
+          n - the dimension of the sub square matrix of zof
+   Output: rfbsq - a set of indices for sub square matrices of rfp of dimension n
+ *)
+
+rfbSubSquare[rfb_, n_] := Tuples[{Subsets[Range[Length[rfb]], {n}], Subsets[Range[rfb[[1]]], {n}]}];
+
+(* Name: rSigmaAvoidingNumber
+   Input: rfb - a list of positive integers, which represents a rectangle Ferrers board 
+          sigma - a given permutation
+   Output: n - the number of sigma-avoiding 0-1-fillings among rzofs of rfb
+ *)
+
+rSigmaAvoidingNumber[rfb_, sigma_] := 
+  Module[{n = Length[sigma], rzof, rfbsq}, 
+         If[n > Min[rfb[[1]], Length[rfb]], Return[0]]; (*if n > Min[rfb[[1]], Length[rfb]], then there is no sigma-avoiding zof at all *)
+	 rzof = rzofGenerator[rfb]; (* generate rzofs of rfb in table form *)
+	 rfbsq = rfbSubSquare[rfb, n]; (* generate sub square matrices of rfb of dimension n *) 
+	 Return[Sum[SigmaAvoidingTest[rzof[[i]], sigma, rfbsq] , {i, Length[rzof]}]]; (*count the number of sigma-avoiding rzofs of rfb *)
+	  ];
+
+(* Name: rSigmaAvoidingNumberlight
+   Input: rzof - a list of rzofs of some rectangular Ferrers board rfb 
+          sigma - a given permutation
+          rfbsq - a list of indices of sub square matrices of rfb of size Length[sigma]
+   Output: n - the number of sigma-avoiding 0-1-fillings among rzofs of rfb
+ *)
+
+rSigmaAvoidingNumberlight[rzof_, sigma_, rfbsq_] := Sum[SigmaAvoidingTest[rzof[[i]], sigma, rfbsq] , {i, Length[rzof]}];
+
+(* Name: rSigmaAvoidingzof
+   Input: rfb - a list of positive integers, which represents a rectangular Ferrers board 
+          sigma - a given permutation
+   Output: srzof - a list of rzofs of rfb which are sigma-avoiding
+*)
+
+rSigmaAvoidingzof[rfb_, sigma_] :=
+  Module[{n = Length[sigma], rzof, rfbsq, srzof = {}}, 
+         If[n > Min[rfb[[1]], Length[rfb]], Return[{}]]; (*if n > Min[rfb[[1]], Length[rfb]], then there is no sigma-avoiding rzof at all *)
+	 rzof = rzofGenerator[rfb]; (* generate rzofs of rfb in table form *)
+	 rfbsq = rfbSubSquare[rfb, n]; (* generate indices of sub square matrices of rfb of dimension n *)
+         Do[If[SigmaAvoidingTest[rzof[[i]], sigma, rfbsq] == 1, srzof = Append[srzof, rzof[[i]]]] , {i, Length[rzof]}]; 
+	 Return[srzof]; 
+	 ];
+
+(* Name: SigmaAvoidingParNumber
+   Input: fb - a list of positive integers, which represents a Ferrers board 
+          sigma - a given permutation
+          par - a list of partitions of fb[[1]] into Length[fb] parts with par[[i]] <= fb[[i]]
+   Output:  n - the number of sigma-avoiding 0-1-fillings of fb, whose sum of  the i-th row is par[[i]]
+*)
+
+SigmaAvoidingParNumber[fb_, sigma_, par_] :=
+  Module[{zof, l = Length[fb], flag, n = 0},
+	 zof = SigmaAvoidingzof[fb, sigma]; (* generate zofs of fb which are sigma-avoiding *)
+         Do[flag = 1; 
+            Do[If[Sum[zof[[i, l + 1 - j, k]], {k, fb[[j]]}] != par[[j]], flag = 0; Break[]], {j, l}];
+            (* test whether the sum of the j-th row of zof[[i]] is equal to par[[j]] or not *)
+            If[flag == 1, n = n + 1];  
+           , {i, Length[zof]}];
+         Return[n];
+	 ];
+
+(* Name: SigmaAvoidingParNumberlight
+   Input: fb - a list of positive integers, which represents a Ferrers board 
+          zof - a list of 0-1-fillings of fb which are sigma-avoiding for some permutation sigma
+          par - a list of partitions of fb[[1]] into Length[fb] parts with par[[i]] <= fb[[i]]
+   Output:  n - the number of sigma-avoiding 0-1-fillings of fb, whose sum of  the i-th row is par[[i]]
+*)
+
+SigmaAvoidingParNumberlight[fb_, zof_, par_] :=
+  Module[{l = Length[fb], flag, n = 0},
+         Do[flag = 1; 
+            Do[If[Sum[zof[[i, l + 1 - j, k]], {k, fb[[j]]}] != par[[j]], flag = 0; Break[]], {j, l}];
+            (* test whether the sum of the j-th row of zof[[i]] is equal to par[[j]] or not *)
+            If[flag == 1, n = n + 1];  
+           , {i, Length[zof]}];
+         Return[n];
 	 ];
 
 (* Name: gzofGenerator
@@ -413,7 +573,7 @@ ParGenerator[fb_] :=
    Input: fb - a list of positive integers, which represents a Ferrers board 
           zof - a 0-1-filling of fb
           par - a list of partitions of fb[[1]] into Length[fb] parts with par[[i]] <= fb[[i]]
-   Output:  1 - for each 1 <= i <= Length[fb], the sum of i-th row of zof is equal to par[[n + 1 - i]]
+   Output:  1 - for each 1 <= i <= Length[fb], the sum of i-th row of zof is equal to par[[i]]
             0 - Otherwise
  *)
 
@@ -431,7 +591,7 @@ zofParTest[fb_, zof_, par_] :=
           par - a partition of fb[[1]] into Length[fb] parts with par[[i]] <= fb[[i]]
           u  - a positive integer 
           v - a positive integer
- Output: N - the number of 0-1-fillings of fb, whose sum of  the i-th row is par[[Length[fb] + 1 - i]]  and  the longest 
+ Output: N - the number of 0-1-fillings of fb, whose sum of  the i-th row is par[[i]]  and  the longest 
                ne-chain has length u and the longest se-chian has length v  
 *)
 
