@@ -1,0 +1,181 @@
+%\documentclass{article}[12pt]
+%\usepackage{amssymb,amsmath}
+\documentclass[10pt,a4paper]{article}
+%\usepackage[T1]{fontenc}
+%\usepackage[utf8]{inputenc}
+\usepackage[utf8]{inputenc}
+\usepackage{enumitem}
+\usepackage{authblk}
+%\usepackage{fullpage}
+\usepackage[colorlinks = true,
+            linkcolor = blue,
+            urlcolor  = blue,
+            citecolor = blue,
+            anchorcolor = blue]{hyperref}
+
+\usepackage{bbm}
+\usepackage{amsmath,amsthm}
+\usepackage{alltt, amssymb}
+\usepackage[]{algorithm2e}
+\usepackage{url}
+\usepackage{graphicx}
+
+\newcommand{\bigO}{{\mathcal{O}}}
+\newcommand{\bigOsoft}{\tilde{\mathcal{O}}}
+\newcommand{\bA}{ {\mathbb A}}
+\newcommand{\bN}{ {\mathbb  N}}
+\newcommand{\bZ} { {\mathbb Z}}
+\newcommand{\bQ}{ {\mathbb  Q}}
+\newcommand{\bC}{ {\mathbb  C}}
+\newcommand{\bK}{ {\mathbb  K}}
+\newcommand{\bD}{ {\mathbb D}}
+\newcommand{\bE}{ {\mathbb E}}
+\newcommand{\bR}{ {\mathbf R}}
+\newcommand{\bx}{ {\mathbf x}}
+\newcommand{\by}{ {\mathbf y}}
+\newcommand{\bz}{ {\mathbf z}}
+\newcommand{\bs}{ {\mathbf s}}
+\newcommand{\bt}{ {\mathbf t}}
+\newcommand{\bff}{ {\mathbf f}}
+\newcommand{\bpa}{ {\boldsymbol \partial}}
+\newcommand{\balpha}{ {\boldsymbol \alpha}}
+\newcommand{\bbeta}{ {\boldsymbol \beta}}
+\newcommand{\bdelta}{ {\boldsymbol \delta}}
+\newcommand{\bgamma}{ {\boldsymbol \gamma}}
+\newcommand{\bu}{ {\mathbf u}}
+\newcommand{\bw}{ {\mathbf w}}
+\newcommand{\cP}{ {\mathcal P}}
+\newcommand{\cG}{ {\mathcal G}}
+\newcommand{\bv}{ {\mathbf v}}
+\newcommand{\bU}{ {\mathbf U}}
+\newcommand{\bm}{ {\mathbf m}}
+\newcommand{\bn}{ {\mathbf n}}
+\newcommand{\bB}{ {\mathbf B}}
+\newcommand{\ie}{{\it i.e.}}
+\newcommand{\si} { {\sigma}}
+\newcommand{\dd}{ {\rm d}}
+\newcommand{\tor}{ {\rm tor}}
+\newcommand{\den}{ {\rm den}}
+\newcommand{\lc}{ \operatorname{lc}}
+\newcommand{\lm}{ \operatorname{lm}}
+\newcommand{\mm}{ \operatorname{M}}
+\newcommand{\TT}{ \operatorname{T}}
+\newcommand{\lt}{ \operatorname{lt}}
+\newcommand{\HM}{{\operatorname{HM}}}
+\newcommand{\HT}{{\operatorname{HT}}}
+\newcommand{\PT}{{\operatorname{PT}}}
+\newcommand{\PE}{{\operatorname{PE}}}
+\newcommand{\HC}{{\operatorname{HC}}}
+\newcommand{\lcm}{ \operatorname{lcm}}
+\newcommand{\qlcm}{ \operatorname{qlcm}}
+\newcommand{\spol}{ \operatorname{spol}}
+\newcommand{\gpol}{ \operatorname{gpol}}
+\newcommand{\rank}{ \operatorname{rank}}
+\newcommand{\pa}{ {\partial}}
+\newcommand{\lder}{ \operatorname{lder}}
+\newcommand{\pder}{ \operatorname{pder}}
+\newcommand{\ind}{ \operatorname{ind}}
+\newcommand{\In}{ \operatorname{in}}
+\newcommand{\sol}{ \operatorname{sol}}
+\newcommand{\ann}{ \operatorname{ann}}
+\newcommand{\dis}{ \operatorname{dis}}
+\newcommand{\Drat}{ {\bK(\bx)[\bpa]}}
+\newcommand{\Dpol}{ {\bK[\bx][\bpa]}}
+\newcommand{\qpol}{ {\bK(q)[x][\pa]}}
+\newcommand{\qrat}{ {\bK(q, x)[\pa]}}
+\newcommand{\pf} {{\rm {\bf Proof.} } }
+\newcommand{\cont}{\operatorname{Cont}}
+
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{lemma}[thm]{Lemma}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{ex}[thm]{Example}
+\newtheorem{algo}[thm]{Algorithm}
+\newtheorem{remark}[thm]{Remark}
+\newtheorem{conj}[thm]{Conjecture}
+
+\renewcommand{\labelenumi}{(\arabic{enumi})}
+
+\begin{document}
+
+\title{\bf{\Huge{Teaching Philosophy}}}
+
+\author{Yi Zhang}
+
+
+\date{}
+\maketitle
+
+As Socrates said, “Education is not the filling of a vessel, but the kinding of a flame”. 
+A good teacher not only teach students key ideas and techniques of a course, but also motivate their interests so that they will learn and 
+study by themselves in the future. 
+Meanwhile, a teacher shall also show the general methodology for learning a course so that they know how to learn it by themselves. 
+There are general goals I want to achieve for my teaching. 
+Under this philosophy, I teach my courses with the following schemes: 
+
+\begin{itemize}
+\item Design lecture notes for audience. 
+Before my lectures, I investigate mathematical backgrounds of my students by checking their previous course lists online. 
+On the other hand, I also ask some of my senior colleagues about their experience in teaching the same course. 
+This is very helpful in preparing my lecture notes because with those information 
+I know how to organize the material so that it is not so hard for my students. 
+When I design my lecture notes, I first recall some key results in the previous lecture so that students 
+can have a  retrospect about what they learned before at the very beginning. 
+In the final part of my notes, I give a summary about all the ingredients of the current lecture. 
+After my lectures, I scan and submit my notes online so that students can download and read them for the convenience of their study.
+
+\item General guides in the first lecture. In my first lecture, I give an outline of the content of the course, such as: 
+what are objects we are going to study;
+some historical backgrounds of the topic; main problems and results in this area; possible applications in related areas. 
+Besides, I also give some general suggestions for studying: 1.\ read the textbook and attend my lectures regularly; 
+2.\ discuss with classmates and me (after lectures and during my office hours); 
+3.\ use library properly; 4.\ finish homework independently as much as possible (discussion is encouraged, 
+but plagiarism is definitely prohibited).  
+
+\item Balance between time and material. Each lecture has fixed time and is scheduled to teach one section 
+(sometimes a half one) from the designated textbook. 
+This requires the instructor or lecturer to prepare lecture notes with balance between time and material. 
+For instance, sometimes one section contains five subsections (or even more). 
+It would be very time-consuming to go through every detail of each subsection. In that case, 
+I always try to 
+summarize key ideas of each subsection and show students how to apply them to do concrete examples. 
+%If the time is still very tight, I simply give some remarks in the lecture 
+%and suggest students to learn that part by self-reading.  
+On the other hand, if the time is quite abundant, 
+I would give more concrete examples, details and some historical backgrounds of the topic during the class.  
+%After my lectures, I will scan and submit my lecture notes online so that some students can download and read them for the convenience of their study.  
+
+\item Teaching with concrete examples. 
+Mathematics is abstract because it contains a lot of definitions, lemmas, propositions and theorems. 
+I find that it is an excellent idea to teach with concrete examples, especially for those students who are not from 
+the mathematical department. Actually, classical examples not only illustrate abstract concepts and important ideas in mathematics, 
+but also show students how to apply them to solve practical problems. 
+Last but not least, examples help students understand, review and memorize 
+key points of materials in lectures.  
+
+\item Communicating with students. Roughly speaking, teaching a course is all about communicating with students, 
+exchanges ideas and thoughts with them. During my lectures, I always speak loudly, clearly and slowly so that my students 
+can hear what I am talking about. Besides, I also write in the backboard with large enough handwriting and 
+try to have suitable eye contact with students. Sometimes, they ask me some questions during the class. 
+I always try to answer their questions concisely and clearly. On the other hand, their questions, comments and suggestions also help me 
+improve the quality of my lectures and learn how to explain certain materials of the course in a more proper way. 
+Moreover, I help them as possible as I can through office hours and emails.     
+\end{itemize}
+
+\section*{\Large{Teaching Experience}}
+\begin{tabular}{@{}p{1.4in}p{4in}} 
+Spring 2019           & Instructor. (\href{https://yzhang1616.github.io/algebra19spring/algebra.html}{Linear Algebra}) \\
+                      & The University of Texas at Dallas, USA. \\
+Fall 2010             & Teaching internship. (High School Mathematics) \\
+                      & Suzhou High School Affiliated to Xi'an Jiaotong \\
+                      & University, China.   
+                  
+\end{tabular}
+
+
+
+
+
+\end{document}
