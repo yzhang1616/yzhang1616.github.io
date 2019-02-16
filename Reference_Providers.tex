@@ -1,0 +1,126 @@
+%\documentclass{article}[12pt]
+%\usepackage{amssymb,amsmath}
+\documentclass[10pt,a4paper]{article}
+%\usepackage[T1]{fontenc}
+%\usepackage[utf8]{inputenc}
+\usepackage[utf8]{inputenc}
+\usepackage{enumitem}
+\usepackage{authblk}
+%\usepackage{fullpage}
+\usepackage[colorlinks = true,
+            linkcolor = blue,
+            urlcolor  = blue,
+            citecolor = blue,
+            anchorcolor = blue]{hyperref}
+
+\usepackage{bbm}
+\usepackage{amsmath,amsthm}
+\usepackage{alltt, amssymb}
+\usepackage[]{algorithm2e}
+\usepackage{url}
+\usepackage{graphicx}
+
+\newcommand{\bigO}{{\mathcal{O}}}
+\newcommand{\bigOsoft}{\tilde{\mathcal{O}}}
+\newcommand{\bA}{ {\mathbb A}}
+\newcommand{\bN}{ {\mathbb  N}}
+\newcommand{\bZ} { {\mathbb Z}}
+\newcommand{\bQ}{ {\mathbb  Q}}
+\newcommand{\bC}{ {\mathbb  C}}
+\newcommand{\bK}{ {\mathbb  K}}
+\newcommand{\bD}{ {\mathbb D}}
+\newcommand{\bE}{ {\mathbb E}}
+\newcommand{\bR}{ {\mathbf R}}
+\newcommand{\bx}{ {\mathbf x}}
+\newcommand{\by}{ {\mathbf y}}
+\newcommand{\bz}{ {\mathbf z}}
+\newcommand{\bs}{ {\mathbf s}}
+\newcommand{\bt}{ {\mathbf t}}
+\newcommand{\bff}{ {\mathbf f}}
+\newcommand{\bpa}{ {\boldsymbol \partial}}
+\newcommand{\balpha}{ {\boldsymbol \alpha}}
+\newcommand{\bbeta}{ {\boldsymbol \beta}}
+\newcommand{\bdelta}{ {\boldsymbol \delta}}
+\newcommand{\bgamma}{ {\boldsymbol \gamma}}
+\newcommand{\bu}{ {\mathbf u}}
+\newcommand{\bw}{ {\mathbf w}}
+\newcommand{\cP}{ {\mathcal P}}
+\newcommand{\cG}{ {\mathcal G}}
+\newcommand{\bv}{ {\mathbf v}}
+\newcommand{\bU}{ {\mathbf U}}
+\newcommand{\bm}{ {\mathbf m}}
+\newcommand{\bn}{ {\mathbf n}}
+\newcommand{\bB}{ {\mathbf B}}
+\newcommand{\ie}{{\it i.e.}}
+\newcommand{\si} { {\sigma}}
+\newcommand{\dd}{ {\rm d}}
+\newcommand{\tor}{ {\rm tor}}
+\newcommand{\den}{ {\rm den}}
+\newcommand{\lc}{ \operatorname{lc}}
+\newcommand{\lm}{ \operatorname{lm}}
+\newcommand{\mm}{ \operatorname{M}}
+\newcommand{\TT}{ \operatorname{T}}
+\newcommand{\lt}{ \operatorname{lt}}
+\newcommand{\HM}{{\operatorname{HM}}}
+\newcommand{\HT}{{\operatorname{HT}}}
+\newcommand{\PT}{{\operatorname{PT}}}
+\newcommand{\PE}{{\operatorname{PE}}}
+\newcommand{\HC}{{\operatorname{HC}}}
+\newcommand{\lcm}{ \operatorname{lcm}}
+\newcommand{\qlcm}{ \operatorname{qlcm}}
+\newcommand{\spol}{ \operatorname{spol}}
+\newcommand{\gpol}{ \operatorname{gpol}}
+\newcommand{\rank}{ \operatorname{rank}}
+\newcommand{\pa}{ {\partial}}
+\newcommand{\lder}{ \operatorname{lder}}
+\newcommand{\pder}{ \operatorname{pder}}
+\newcommand{\ind}{ \operatorname{ind}}
+\newcommand{\In}{ \operatorname{in}}
+\newcommand{\sol}{ \operatorname{sol}}
+\newcommand{\ann}{ \operatorname{ann}}
+\newcommand{\dis}{ \operatorname{dis}}
+\newcommand{\Drat}{ {\bK(\bx)[\bpa]}}
+\newcommand{\Dpol}{ {\bK[\bx][\bpa]}}
+\newcommand{\qpol}{ {\bK(q)[x][\pa]}}
+\newcommand{\qrat}{ {\bK(q, x)[\pa]}}
+\newcommand{\pf} {{\rm {\bf Proof.} } }
+\newcommand{\cont}{\operatorname{Cont}}
+
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{lemma}[thm]{Lemma}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{ex}[thm]{Example}
+\newtheorem{algo}[thm]{Algorithm}
+\newtheorem{remark}[thm]{Remark}
+\newtheorem{conj}[thm]{Conjecture}
+
+\renewcommand{\labelenumi}{(\arabic{enumi})}
+
+\begin{document}
+
+\title{\bf{\Huge{Reference Providers}}}
+
+\author{Yi Zhang}
+
+
+\date{}
+\maketitle
+
+\begin{itemize}
+\item Prof. \href{http://www.kauers.de/}{Manuel Kauers}, \href{http://www.jku.at/algebra/content}{Institute for Algebra},  
+         \href{http://www.jku.at/content}{Johannes Kepler University Linz}, Austria. Phone: +43 (0)732 2468 6850 (secretary), +43 (0)732 2468 9958 (direct). Email: \href{mailto:manuel@kauers.de}{manuel@kauers.de}
+
+\item Prof. \href{http://www.koutschan.de/}{Christoph Koutschan}, \href{https://www.ricam.oeaw.ac.at/}{Johann Radon Institute for Computational and Applied Mathematics} (RICAM),
+                        \href{http://www.oeaw.ac.at/en/austrian-academy-of-sciences/}{Austrian Academy of Sciences}, Austria. Phone: +43 732 2468 5254. 
+                        Email: \href{mailto:christoph@koutschan.de}{christoph@koutschan.de}
+
+\item Prof. \href{https://www.utdallas.edu/~arreche/}{Carlos E. Arreche}, \href{https://www.utdallas.edu/math/}{Department of Mathematical Sciences}, 
+                        \href{https://www.utdallas.edu/}{The University of Texas at Dallas}, USA. Phone:  +1 (972) 883 6594. 
+                        Email: \href{mailto:arreche@utdallas.edu}{arreche@utdallas.edu}
+\end{itemize}
+
+Prof. Carlos E. Arreche can comment on my teaching at UT Dallas. 
+
+\end{document}
