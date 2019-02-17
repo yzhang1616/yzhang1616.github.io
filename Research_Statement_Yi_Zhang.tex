@@ -95,12 +95,13 @@
 \newtheorem{algo}[thm]{Algorithm}
 \newtheorem{remark}[thm]{Remark}
 \newtheorem{conj}[thm]{Conjecture}
+\newcommand{\AODE}{{AO{$\Delta$}E}}
 
 \renewcommand{\labelenumi}{(\arabic{enumi})}
 
 \begin{document}
 
-\title{\bf{\Huge{Curriculum Vitae}}}
+\title{\bf{\Huge{Research Plan}}}
 
 \author{Yi Zhang}
 % \thanks{Supported by the Austrian Science Fund (FWF): P29467-N32.\\
@@ -144,6 +145,22 @@ and the applications of all that in the algebraic theory of differential equatio
 The following sections describe my research plans in the future. 
 
 \section*{The algebraic-geometric method for solving algebraic difference equations} \label{SECT:AODE}
+
+An algebraic ordinary difference equation (\AODE) is a difference equation of the form
+\begin{equation} \label{EQ:AODE}
+F(x, y(x), y(x + 1), \cdots, y(x + m))=0,
+\end{equation}
+where $F$ is a nonzero polynomial in $y(x), y(x + 1), \cdots, y(x + m)$ with coefficients in the field $\bK(x)$ of rational functions over an algebraically closed field $\bK$ 
+of characteristic zero, and~$m \in \bN$. We call $m$ the \emph{order} of~\eqref{EQ:AODE}. 
+We are interested in computing symbolic solutions (for instance, polynomials solutions, rational solutions) of {\AODE}s.
+In particular, for a first-order {\AODE}, the corresponding algebraic equation $F(x, y, z) = 0$ defines an algebraic curve in the two dimensional affine plane 
+over the field $\overline{\mathbb{K}(x)}$. A solution in a certain class of
+functions, such a rational or algebraic functions, determines a parametrization of this algebraic curve. 
+Thus, we may apply algebraic tools from parametrization theory of algebraic curves to study solutions of first-order {\AODE}s.  
+
+
+
+
 
 \section*{Fast computation of intersections of zero-dimensional ideals of linear partial differential operators} \label{SECT:lclm}
 
