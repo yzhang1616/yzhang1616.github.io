@@ -85,6 +85,7 @@
 \newcommand{\qrat}{ {\bK(q, x)[\pa]}}
 \newcommand{\pf} {{\rm {\bf Proof.} } }
 \newcommand{\cont}{\operatorname{Cont}}
+\newcommand{\red}{\color{red}}
 
 \newtheorem{thm}{Theorem}[section]
 \newtheorem{cor}[thm]{Corollary}
@@ -152,11 +153,24 @@ F(x, y(x), y(x + 1), \cdots, y(x + m))=0,
 \end{equation}
 where $F$ is a nonzero polynomial in $y(x), y(x + 1), \cdots, y(x + m)$ with coefficients in the field $\bK(x)$ of rational functions over an algebraically closed field $\bK$ 
 of characteristic zero, and~$m \in \bN$. We call $m$ the \emph{order} of~\eqref{EQ:AODE}. 
+{\red add some motivations for studying {\AODE}s}.
 We are interested in computing symbolic solutions (for instance, polynomials solutions, rational solutions) of {\AODE}s.
 In particular, for a first-order {\AODE}, the corresponding algebraic equation $F(x, y, z) = 0$ defines an algebraic curve in the two dimensional affine plane 
 over the field $\overline{\mathbb{K}(x)}$. A solution in a certain class of
 functions, such a rational or algebraic functions, determines a parametrization of this algebraic curve. 
-Thus, we may apply algebraic tools from parametrization theory of algebraic curves to study solutions of first-order {\AODE}s.  
+Thus, we may apply algebraic tools from parametrization theory of algebraic curves to study solutions of first-order {\AODE}s. 
+Based on this observation, we propose an algebraic-geometric approach to solve first-order {\AODE}s: 
+\begin{itemize}
+ \item [1] Decide whether a given first-order {\AODE} can be parametrized with functions form a given class, 
+such as rational parametrization;
+ \item [2] Solve the corresponding reduced {\AODE} by using techniques from computer algebra 
+and differential algebra.
+\end{itemize}
+This idea is inherited from the differential case and turns out to be successful for solving algebraic 
+differential equations. For details, see~\cite{Winkler2019}. 
+Using this method, we give an complete algorithm~\cite{VoZhang2019} to compute rational solutions of first-order autonomous {\AODE}s. 
+Next, we will study how to use this algebraic-geometric approach to compute other types of solutions 
+(such as algebraic solutions, polynomial solutions, series solutions) of first-order and higher-order {\AODE}s. 
 
 
 
@@ -803,6 +817,16 @@ N.~T. Vo and F.~Winkler.
 N.T.~Vo and Y.~Zhang.
 \newblock {Laurent Series Solutions of Algebraic Ordinary Differential Equations}.
 \newblock {\em arXiv: 1709.04174}, pages 1--21,  2017.
+
+\bibitem{VoZhang2019}
+N.T.~Vo and Y.~Zhang.
+\newblock {Rational Solutions of First-Order Algebraic Ordinary Difference Equations}.
+\newblock {\em arXiv: 1901.11048}, pages 1--25,  2019.
+
+\bibitem{Winkler2019}
+F.~Winkler.
+\newblock {The Algebraic-Geometric Method for Solving Algebraic Differential Equations}.
+\newblock {to appear in Journal of System Sciences and Complexity}, 2019. 
 
 \bibitem{Zhang2016}
 Y.~Zhang.
