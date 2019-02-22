@@ -153,7 +153,10 @@ F(x, y(x), y(x + 1), \cdots, y(x + m))=0,
 \end{equation}
 where $F$ is a nonzero polynomial in $y(x), y(x + 1), \cdots, y(x + m)$ with coefficients in the field $\bK(x)$ of rational functions over an algebraically closed field $\bK$ 
 of characteristic zero, and~$m \in \bN$. We call $m$ the \emph{order} of~\eqref{EQ:AODE}. 
-{\red add some motivations for studying {\AODE}s}.
+%{\red add some motivations for studying {\AODE}s}. 
+{\AODE}s naturally appear from various problems, such as symbolic summation~\cite{PWZbook1996, KoutschanThesis}, 
+factorization of linear difference operators~\cite{BronsteinPetkovsek1996}, 
+analysis of time or space complexity of computer programs with recursive calls~\cite{Eekelen2018}. 
 We are interested in computing symbolic solutions (for instance, polynomials solutions, rational solutions) of {\AODE}s.
 In particular, for a first-order {\AODE}, the corresponding algebraic equation $F(x, y, z) = 0$ defines an algebraic curve in the two dimensional affine plane 
 over the field $\overline{\mathbb{K}(x)}$. A solution in a certain class of
@@ -533,6 +536,11 @@ S.~A. Abramov, M.~Barkatou, and M.~van Hoeij.
 % \newblock Desingularization explains order-degree curves for {O}re operators.
 % \newblock In {\em Proc.\ of ISSAC'13}, 157--164, New York, NY,
 %   USA, 2013, ACM.
+
+\bibitem{BronsteinPetkovsek1996}
+M.~Bronstein and M.~Petkov{\v{s}}ek.
+\newblock An introduction to pseudo-linear algebra.
+\newblock {\em Theoretical Computer Science}, 157:3--33, 1996.
   
 \bibitem{Yi2017}
 S.~Chen, M.~Kauers, Z.~Li, and Y.~Zhang.
@@ -694,6 +702,11 @@ M.~Kauers.
 % \newblock {\em Advanced applications of the holonomic systems approach}.
 % \newblock PhD thesis, RISC-Linz, Johannes Kepler Univ., 2009.
 % 
+\bibitem{KoutschanThesis}
+C.~Koutschan.
+\newblock {\em Advanced applications of the holonomic systems approach}.
+\newblock PhD thesis, Johannes Kepler University Linz, 2009.
+
 \bibitem{Christoph2010}
 C.~Koutschan.
 \newblock {\em HolonomicFunctions user's guide}.
@@ -754,6 +767,12 @@ L.~X.~C. {Ng\^o} and F.~Winkler.
 % \newblock {\em Removable singularities of {O}re operators}.
 % \newblock PhD thesis, RISC-Linz, Johannes Kepler Univ., 2013.
 
+\bibitem{PWZbook1996}
+M.~Petkov{\v{s}}ek, H.~S.~Wilf, and D.~Zeilberger.
+\newblock {\em {$A=B$}}.
+\newblock A K Peters Ltd., Wellesley, MA, 1996.
+\newblock With a foreword by Donald E. Knuth.
+
 \bibitem{Riese03}
 A.~Riese.
 \newblock qMultiSum---A Package for Proving $q$-Hypergeometric Multiple Summation Identities.
@@ -773,6 +792,11 @@ A.~Riese.
 % D.~Robertz.
 % \newblock {\em Formal algorithmic elimination for PDEs}.
 % \newblock Springer, 2014.
+\bibitem{Eekelen2018}
+O.~Shkaravska and M.~van Eekelen.
+\newblock Polynomial solutions of algebraic difference equations and
+  homogeneous symmetric polynomials.
+\newblock 2018.
 
 \bibitem{SingerFormalSolutions}
 M.~F. Singer.
