@@ -85,6 +85,7 @@
 \newcommand{\qrat}{ {\bK(q, x)[\pa]}}
 \newcommand{\pf} {{\rm {\bf Proof.} } }
 \newcommand{\cont}{\operatorname{Cont}}
+\newcommand{\red}{\color{red}}
 
 \newtheorem{thm}{Theorem}[section]
 \newtheorem{cor}[thm]{Corollary}
@@ -95,12 +96,13 @@
 \newtheorem{algo}[thm]{Algorithm}
 \newtheorem{remark}[thm]{Remark}
 \newtheorem{conj}[thm]{Conjecture}
+\newcommand{\AODE}{{AO{$\Delta$}E}}
 
 \renewcommand{\labelenumi}{(\arabic{enumi})}
 
 \begin{document}
 
-\title{Research Statement}
+\title{\bf{\Huge{Research Plan}}}
 
 \author{Yi Zhang}
 % \thanks{Supported by the Austrian Science Fund (FWF): P29467-N32.\\
@@ -139,9 +141,48 @@
 \date{}
 \maketitle
 
-My research interests are computer algebra, computational algebraic geometry, algorithmic combinatorics, 
-and the applications of all that in the algebraic theory of differential equations, difference equations and knot theory. 
-The following sections describe my current topics in details. 
+My research interests are computer algebra, symbolic computation, computational algebraic geometry, algorithmic combinatorics, 
+and the applications of all that in the algebraic theory of differential equations, difference equations, knot theory and cryptography. 
+The following sections describe my research plans in the future. 
+
+\section*{The algebraic-geometric method for solving algebraic difference equations} \label{SECT:AODE}
+
+An algebraic ordinary difference equation (\AODE) is a difference equation of the form
+\begin{equation} \label{EQ:AODE}
+F(x, y(x), y(x + 1), \cdots, y(x + m))=0,
+\end{equation}
+where $F$ is a nonzero polynomial in $y(x), y(x + 1), \cdots, y(x + m)$ with coefficients in the field $\bK(x)$ of rational functions over an algebraically closed field $\bK$ 
+of characteristic zero, and~$m \in \bN$. We call $m$ the \emph{order} of~\eqref{EQ:AODE}. 
+%{\red add some motivations for studying {\AODE}s}. 
+{\AODE}s naturally appear from various problems, such as symbolic summation~\cite{PWZbook1996, KoutschanThesis}, 
+factorization of linear difference operators~\cite{BronsteinPetkovsek1996}, 
+analysis of time or space complexity of computer programs with recursive calls~\cite{Eekelen2018}. 
+We are interested in computing symbolic solutions (for instance, polynomials solutions, rational solutions) of {\AODE}s.
+In particular, for a first-order {\AODE}, the corresponding algebraic equation $F(x, y, z) = 0$ defines an algebraic curve in the two dimensional affine plane 
+over the field $\overline{\mathbb{K}(x)}$. A solution in a certain class of
+functions, such a rational or algebraic functions, determines a parametrization of this algebraic curve. 
+Thus, we may apply algebraic tools from parametrization theory of algebraic curves to study solutions of first-order {\AODE}s. 
+Based on this observation, we propose an algebraic-geometric approach to solve first-order {\AODE}s: 
+\begin{itemize}
+ \item [1] Decide whether a given first-order {\AODE} can be parametrized with functions form a given class, 
+such as rational parametrization;
+ \item [2] Solve the corresponding reduced {\AODE} by using techniques from computer algebra 
+and differential algebra.
+\end{itemize}
+This idea is inherited from the differential case and turns out to be successful for solving algebraic 
+differential equations. For details, see~\cite{Winkler2019}. 
+Using this method, we give an complete algorithm~\cite{VoZhang2019} to compute rational solutions of first-order autonomous {\AODE}s. 
+Next, we will study how to use this algebraic-geometric approach to compute other types of solutions 
+(such as algebraic solutions, polynomial solutions, series solutions) of first-order and higher-order {\AODE}s. 
+
+
+
+
+
+\section*{Fast computation of intersections of zero-dimensional ideals of linear partial differential operators} \label{SECT:lclm}
+
+\section*{The improved holonomic gradient method via gauge transformation} \label{SECT:hgm}
+
 
 \section{Contraction of Ore ideals with applications} \label{SECT:contraction}
 
@@ -495,6 +536,11 @@ S.~A. Abramov, M.~Barkatou, and M.~van Hoeij.
 % \newblock Desingularization explains order-degree curves for {O}re operators.
 % \newblock In {\em Proc.\ of ISSAC'13}, 157--164, New York, NY,
 %   USA, 2013, ACM.
+
+\bibitem{BronsteinPetkovsek1996}
+M.~Bronstein and M.~Petkov{\v{s}}ek.
+\newblock An introduction to pseudo-linear algebra.
+\newblock {\em Theoretical Computer Science}, 157:3--33, 1996.
   
 \bibitem{Yi2017}
 S.~Chen, M.~Kauers, Z.~Li, and Y.~Zhang.
@@ -656,6 +702,11 @@ M.~Kauers.
 % \newblock {\em Advanced applications of the holonomic systems approach}.
 % \newblock PhD thesis, RISC-Linz, Johannes Kepler Univ., 2009.
 % 
+\bibitem{KoutschanThesis}
+C.~Koutschan.
+\newblock {\em Advanced applications of the holonomic systems approach}.
+\newblock PhD thesis, Johannes Kepler University Linz, 2009.
+
 \bibitem{Christoph2010}
 C.~Koutschan.
 \newblock {\em HolonomicFunctions user's guide}.
@@ -716,6 +767,12 @@ L.~X.~C. {Ng\^o} and F.~Winkler.
 % \newblock {\em Removable singularities of {O}re operators}.
 % \newblock PhD thesis, RISC-Linz, Johannes Kepler Univ., 2013.
 
+\bibitem{PWZbook1996}
+M.~Petkov{\v{s}}ek, H.~S.~Wilf, and D.~Zeilberger.
+\newblock {\em {$A=B$}}.
+\newblock A K Peters Ltd., Wellesley, MA, 1996.
+\newblock With a foreword by Donald E. Knuth.
+
 \bibitem{Riese03}
 A.~Riese.
 \newblock qMultiSum---A Package for Proving $q$-Hypergeometric Multiple Summation Identities.
@@ -735,6 +792,11 @@ A.~Riese.
 % D.~Robertz.
 % \newblock {\em Formal algorithmic elimination for PDEs}.
 % \newblock Springer, 2014.
+\bibitem{Eekelen2018}
+O.~Shkaravska and M.~van Eekelen.
+\newblock Polynomial solutions of algebraic difference equations and
+  homogeneous symmetric polynomials.
+\newblock 2018.
 
 \bibitem{SingerFormalSolutions}
 M.~F. Singer.
@@ -779,6 +841,16 @@ N.~T. Vo and F.~Winkler.
 N.T.~Vo and Y.~Zhang.
 \newblock {Laurent Series Solutions of Algebraic Ordinary Differential Equations}.
 \newblock {\em arXiv: 1709.04174}, pages 1--21,  2017.
+
+\bibitem{VoZhang2019}
+N.T.~Vo and Y.~Zhang.
+\newblock {Rational Solutions of First-Order Algebraic Ordinary Difference Equations}.
+\newblock {\em arXiv: 1901.11048}, pages 1--25,  2019.
+
+\bibitem{Winkler2019}
+F.~Winkler.
+\newblock {The Algebraic-Geometric Method for Solving Algebraic Differential Equations}.
+\newblock {to appear in Journal of System Sciences and Complexity}, 2019. 
 
 \bibitem{Zhang2016}
 Y.~Zhang.
