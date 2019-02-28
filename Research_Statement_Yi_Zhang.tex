@@ -85,6 +85,9 @@
 \newcommand{\qrat}{ {\bK(q, x)[\pa]}}
 \newcommand{\pf} {{\rm {\bf Proof.} } }
 \newcommand{\cont}{\operatorname{Cont}}
+\newcommand{\AODE}{{AO{$\Delta$}E}}
+\newcommand{\AODEs}{{AO{$\Delta$}Es}}
+
 
 \newtheorem{thm}{Theorem}[section]
 \newtheorem{cor}[thm]{Corollary}
@@ -286,68 +289,7 @@ This work is available in~\cite{Yi2017}.
  \item Study the desingularization problem for the multivariate linear difference equations with polynomial coefficients. 
 \end{enumerate}
 
-\section{Laurent series solutions of algebraic ordinary differential equations} \label{SECT:Laurentsols}
 
-\subsection{Introduction}
-
-An algebraic ordinary differential equation (AODE) is of the form 
-$$F(x,y,y',\ldots,y^{(n)})=0,$$ 
-where $F$ is a polynomial in $y,y',\ldots,y^{(n)}$ with coefficients in $\mathbb{K}(x)$, the field $\bK$ is 
-algebraically closed field of characteristic zero, and $n \in \bN$. 
-Many problems from applications (such as physics, combinatorics and statistics) 
-can be characterized in terms of AODEs.  
-% The laws of natural world are usually modelled in the form of differential equations. 
-% In many cases, these equations are AODEs. 
-% Or the problem of solving these equations can be reduced to that of solving AODEs. 
-Therefore, determining (closed form) solutions of an AODE is one of the central problems in mathematics and computer science.
- 
-Although linear ODEs~\cite{Ince1926} have been intensively studied, there are still many challenging problems for solving
-(nonlinear) AODEs. As far as we know, approaches for solving AODEs are only available for very specific subclasses. 
-For example, Riccati equations, 
-which have the form $y'=f_0(x)+f_1(x)y+f_2(x)y^2$ for some $f_0,f_1,f_2 \in \mathbb{K}(x)$, %(like: $y' = 1 + y^2$) 
-can be considered as the simplest form of nonlinear AODEs. 
-In \cite{Kovacic}, Kovacic gives a complete algorithm for determining Liouvillian solutions of 
-a Riccati equation with rational function coefficients. 
-% The study of general solutions without movable singularities 
-% can be found in \cite{Fuchs, Malmquist, Poincare} for first-order, and in \cite{Eremenko2, Ince1926} for higher-order AODEs. 
-
-Since the problem of solving an arbitrary AODE is very difficult, 
-it is natural to ask whether a given AODE admits some special kinds of solutions, 
-such as polynomials, rational functions, or formal power series. 
-During the last two decades, an algebraic-geometric approach for finding symbolic solutions of AODEs has been developed. 
-The work by Feng and Gao in \cite{FengGao, FengGao06} for computing rational general solutions of first-order autonomous AODEs 
-can be considered as the starting point. 
-% In \cite{NgoWinkler11b, GraseggerThesis, VoWinkler2015, VoGraseggerWinkler2017}, 
-The authors of~\cite{NgoWinkler11b, GraseggerThesis, VoWinkler2015, VoGraseggerWinkler2017} 
-developed methods for finding different kinds of solutions of non-autonomous, higher-order AODEs. 
-For formal power series solutions, we refer to \cite{DenefLipshitz,SingerFormalSolutions}.
-As far as we know, there is few results concerning Laurent series solutions of AODEs. 
-Our main purpose is to give a method for determining such solutions.
-
-\subsection{Main results}
-
-\begin{enumerate}
- \item We present several approaches to compute formal power series solutions of a given AODE.
- \item Given an AODE, we determine a bound for the order of its Laurent series solutions. 
- Using the order bound, one can transform a given AODE into a new one whose Laurent series solutions are only formal power series.
- \item As applications, new algorithms are presented for determining all particular polynomial and rational solutions of certain classes of AODEs.
-\end{enumerate}
-
-% In this paper, we consider Laurent series solutions of algebraic ordinary differential equations (AODEs). 
-% We first present several approaches to compute formal power series solutions of a given AODE. 
-% Then we determine a bound for the order of its Laurent series solutions. 
-% Using the order bound, one can transform a given AODE into a new one whose Laurent series solutions are only formal power series.
-% The idea is basically inherited from the Frobenius method for linear ordinary differential equations. 
-% As applications, new algorithms are presented for determining all particular polynomial and rational solutions of certain classes of AODEs.
-
-This work is available in~\cite{VoZhang2017}.
-
-\subsection{Future work}
-
-\begin{enumerate}
- \item Design algorithms for computing formal power series solutions of AODEs, which extends the classic Implicit Function Theorem of AODEs.
- \item Compute rational solutions of first-order algebraic difference equations by using the parametrization of algebraic curves.  
-\end{enumerate}
 
 
 \section{Desingularization in the \texorpdfstring{$q$}{q}-Weyl algebra} \label{SECT:qdesing}
@@ -434,6 +376,114 @@ This work is available in~\cite{KZ2018}.
  \item Develop the desingularization technique for linear Mahler equations. 
 \end{enumerate}
 
+\section{Rational solutions of high-order algebraic ordinary differential equations} \label{SECT:Laurentsols}
+
+\subsection{Introduction}
+
+An algebraic ordinary differential equation (AODE) is of the form 
+$$F(x,y,y',\ldots,y^{(n)})=0,$$ 
+where $F$ is a polynomial in $y,y',\ldots,y^{(n)}$ with coefficients in $\mathbb{K}(x)$, the field $\bK$ is 
+algebraically closed field of characteristic zero, and $n \in \bN$. 
+Many problems from applications (such as physics, combinatorics and statistics) 
+can be characterized in terms of AODEs.  
+% The laws of natural world are usually modelled in the form of differential equations. 
+% In many cases, these equations are AODEs. 
+% Or the problem of solving these equations can be reduced to that of solving AODEs. 
+Therefore, determining (closed form) solutions of an AODE is one of the central problems in mathematics and computer science.
+ 
+Although linear ODEs~\cite{Ince1926} have been intensively studied, there are still many challenging problems for solving
+(nonlinear) AODEs. As far as we know, approaches for solving AODEs are only available for very specific subclasses. 
+For example, Riccati equations, 
+which have the form $y'=f_0(x)+f_1(x)y+f_2(x)y^2$ for some $f_0,f_1,f_2 \in \mathbb{K}(x)$, %(like: $y' = 1 + y^2$) 
+can be considered as the simplest form of nonlinear AODEs. 
+In \cite{Kovacic}, Kovacic gives a complete algorithm for determining Liouvillian solutions of 
+a Riccati equation with rational function coefficients. 
+% The study of general solutions without movable singularities 
+% can be found in \cite{Fuchs, Malmquist, Poincare} for first-order, and in \cite{Eremenko2, Ince1926} for higher-order AODEs. 
+
+Since the problem of solving an arbitrary AODE is very difficult, 
+it is natural to ask whether a given AODE admits some special kinds of solutions, 
+such as polynomials, rational functions, or formal power series. 
+During the last two decades, an algebraic-geometric approach for finding symbolic solutions of AODEs has been developed. 
+The work by Feng and Gao in \cite{FengGao, FengGao06} for computing rational general solutions of first-order autonomous AODEs 
+can be considered as the starting point. 
+% In \cite{NgoWinkler11b, GraseggerThesis, VoWinkler2015, VoGraseggerWinkler2017}, 
+The authors of~\cite{NgoWinkler11b, GraseggerThesis, VoWinkler2015, VoGraseggerWinkler2017} 
+developed methods for finding different kinds of solutions of non-autonomous, higher-order AODEs. 
+For formal power series solutions, we refer to \cite{DenefLipshitz,SingerFormalSolutions}.
+
+AODEs having no rational general solution can still have several particular rational solutions.
+The algorithms developed in \cite{HuangNgoWinkler2013} are not able to detect these solutions.
+Therefore, it is necessary to develop new  algorithms for determining all rational solutions, including both general and particular solutions.
+Our main purpose is to give a method for determining such solutions for high-order AODEs.
+
+\subsection{Main results}
+
+\begin{enumerate}
+ \item We first prove a sufficient condition for the existence of a bound on the degree of the possible polynomial solutions to an AODE. 
+ An AODE satisfying this condition is called \emph{noncritical}. Then we prove that some common classes of low-order AODEs are noncritical.
+ \item  For rational solutions, we determine a class of AODEs, which are called \emph{maximally comparable}, 
+such that the possible poles of any rational solutions are recognizable from their coefficients.
+ This generalizes the well-known fact that any rational solutions to a linear ODE are contained in the set of zeros of the leading coefficient.
+ \item We develop an algorithm to compute all rational solutions of certain maximally comparable AODEs, 
+which is applicable to $78.54\%$ of the AODEs in Kamke's collection of standard differential equations.
+\end{enumerate}
+
+% In this paper, we consider Laurent series solutions of algebraic ordinary differential equations (AODEs). 
+% We first present several approaches to compute formal power series solutions of a given AODE. 
+% Then we determine a bound for the order of its Laurent series solutions. 
+% Using the order bound, one can transform a given AODE into a new one whose Laurent series solutions are only formal power series.
+% The idea is basically inherited from the Frobenius method for linear ordinary differential equations. 
+% As applications, new algorithms are presented for determining all particular polynomial and rational solutions of certain classes of AODEs.
+
+This work is available in~\cite{VoZhang2019}.
+
+\subsection{Future work}
+
+\begin{enumerate}
+ \item Design algorithms for computing rational solutions of systems of AODEs. 
+\end{enumerate}
+
+\section{Rational Solutions of First-Order Algebraic Ordinary Difference Equations} 
+
+An algebraic ordinary difference equation ({\AODE}) is a difference equation of the form
+\[
+F(x, y(x), y(x + 1), \cdots, y(x + m))=0,
+\]
+where $F$ is a nonzero polynomial in $y(x), y(x + 1), \cdots, y(x + m)$ with coefficients in the field $\bK(x)$ of rational functions over an algebraically closed field $\bK$ of characteristic zero, and~$m \in \bN$.
+%We say that an AO{$\Delta$}E is \emph{autonomous}  if the independent variable $x$ does not appear in it explicitly.
+%For computational purpose, we may choose $\bK=\bar{\mathbb{Q}}$, the field of algebraic numbers.
+{\AODE}s naturally appear from various problems, such as symbolic summation, 
+factorization of linear difference operators, 
+analysis of time or space complexity of computer programs with recursive calls. 
+Thus, to determine (closed form) solutions of a given {\AODE}  is a fundamental problem in difference algebra and is of general interest. 
+We can define algebraic ordinary differential equations (AODEs) analogously.  Our contributions are as follows: 
+
+\subsection{Main results}
+
+\begin{enumerate}
+ \item We propose an algebraic geometric approach for studying rational solutions of first-order \AODEs. 
+ We prove that if an {\AODE} admits a strong rational general solution then its corresponding algebraic curve is of genus zero. 
+Thus, we can take use of parametric representations of rational curves to transform the original difference equation into an associated difference equation which is of simpler form. 
+The latter difference equation has a special form and it  is called a \emph{separable difference equation}. 
+We prove that there is a one-to-one corresponding between the strong rational general solutions of the given {\AODE} and those of the associated separable difference equation.
+
+ \item  For an autonomous first-order \AODE, we give an upper bound for the degrees of its rational solutions, and thus derive a complete algorithm for 
+computing corresponding rational solutions.
+% This generalizes the well-known fact that any rational solutions to a linear ODE are contained in the set of zeros of the leading coefficient.
+% \item We develop an algorithm to compute all rational solutions of certain maximally comparable AODEs, 
+%which is applicable to $78.54\%$ of the AODEs in Kamke's collection of standard differential equations.
+\end{enumerate}
+
+\subsection{Future work}
+
+\begin{itemize}
+\item  Design algorithms to compute polynomial and rational solutions of high-order \AODEs.
+\item Compute rational solutions of non-autonomous first-order \AODEs. 
+\end{itemize}
+
+This work is available in~\cite{VZ2019}.
+	
 
 % In this paper, we determine a generating set of the $q$-Weyl closure of a
 % given univariate $q$-difference operator, and compute a desingularized
@@ -499,7 +549,7 @@ S.~A. Abramov, M.~Barkatou, and M.~van Hoeij.
 \bibitem{Yi2017}
 S.~Chen, M.~Kauers, Z.~Li, and Y.~Zhang.
 \newblock Apparent singularities of {D}-finite systems.
-\newblock {\em arXiv 1705.00838}, pages 1--26, 2017.
+\newblock {\em Journal of Symbolic Computation}, in press, 2019.
   
 % \bibitem{Chen2016}
 % S.~Chen, M.~Kauers, and M.~F. Singer.
@@ -572,7 +622,10 @@ G.~Grasegger.
   equations}}.
 \newblock PhD thesis, Johannes Kepler University Linz, 06 2015.
 
-
+\bibitem{HuangNgoWinkler2013}
+Y.~Huang, L.~X.~C.~Ngo and F.~Winkler, 
+\newblock {\em {Rational general solutions of higher order algebraic ODEs}}.  
+\newblock {\em Journal of Systems Science and Complexity}, 26(2): 261-280, 2013.
 
 \bibitem{Ince1926}
 E.~Ince.
@@ -775,10 +828,15 @@ N.~T. Vo and F.~Winkler.
   
   
 
-\bibitem{VoZhang2017}
+\bibitem{VoZhang2019}
 N.T.~Vo and Y.~Zhang.
-\newblock {Laurent Series Solutions of Algebraic Ordinary Differential Equations}.
-\newblock {\em arXiv: 1709.04174}, pages 1--21,  2017.
+\newblock {Rational Solutions of High-Order Algebraic Ordinary Differential Equations}.
+\newblock {\em accepted by Journal of Systems Sciences and Complexity}, 2019.
+
+\bibitem{VZ2019}
+N.T.~Vo and Y.~Zhang.
+\newblock {Rational Solutions of First-Order Algebraic Ordinary Difference Equations}.
+\newblock {\em arXiv 1901.11048}, 1--25, 2019.
 
 \bibitem{Zhang2016}
 Y.~Zhang.
