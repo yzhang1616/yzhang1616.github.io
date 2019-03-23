@@ -3,6 +3,7 @@
 \documentclass[10pt,a4paper]{article}
 %\usepackage[T1]{fontenc}
 %\usepackage[utf8]{inputenc}
+\usepackage[margin=1.6in]{geometry}
 \usepackage[utf8]{inputenc}
 \usepackage{enumitem}
 \usepackage{authblk}
@@ -142,25 +143,25 @@
 \date{}
 \maketitle
 
-My main research interests are symbolic computation (computer algebra) and its applications in combinatorics, knot theory, statistics 
-and cryptography.  It aims to give algorithmic and constructive answers 
+My main research interests are symbolic computation and its applications in combinatorics, knot theory, statistics, 
+and cryptography.  Symbolic computation aims to give algorithmic and constructive answers 
 to various problems in mathematics and computer science, such as polynomial factorization, computing solutions of systems of polynomial equations, 
-and quantifier elimination. Systems of algebraic differential equations and difference equations are principal research objects of mathematics, physics and related areas. 
-Algebraic study of those systems gives essential answers to their applications in physics, statistics and so on. 
+and quantifier elimination. Systems of algebraic differential equations and difference equations are important research subjects in mathematics, physics, and related areas. 
+The algebraic study of such systems gives useful information about their applications in physics, statistics, and other areas. 
 %Computing solutions and illustrating algebraic structures of those systems give essential answers to their applications in physics, statistics and so on.  
 %%Functions defined by systems of differential equations and difference equations are a principal focus of study in many areas of math and physics. Understanding the algebraic properties %of these functions is essential in many of their physical and mathematical applications. 
 %Much of my work is devoted to developing algorithms that can discover these properties automatically.
-Much of my work is devoted to developing algorithms in  computing solutions and illustrating algebraic structures of differential equations and difference equations
-by using constructive tools (such as Gr\"obner bases, resultant theory) in computer algebra and differential algebra. 
-It has interesting applications such as certifying integer sequences, checking special cases of a conjecture of Krattenthaler and verifying 
+Much of my work is devoted to developing algorithms for  computing solutions and illustrating algebraic structures of differential equations and difference equations
+by using constructive tools (such as Gr\"obner bases and resultant theory) in computer algebra and differential algebra. 
+My work has found interesting applications in the certification of integer sequences, checking special cases of a conjecture of Krattenthaler, and verifying 
 several instrances of the colored Jones polynomial are Laurent polynomial sequences.  
 
 \nopagebreak 
 \section*{Desingularization of linear differential and difference operators}
 
 A D-finite function is specified by a linear ordinary differential equation with polynomial 
-coefficients and finitely many initial values. Every singularity of a D-finite function 
-will be a root of the coefficient of the highest order derivative appearing 
+coefficients and finitely many initial values. Each singularity of a D-finite function 
+must be a root of the coefficient of the highest order derivative appearing 
 in the corresponding differential equation. 
 For instance, $x^{-1}$ is a solution of the equation $x f'(x) + f(x) = 0$, 
 and the singularity at the origin is also the root of the polynomial $x$. 
@@ -170,30 +171,30 @@ but none of those functions has singularity at the origin.
 
 More specifically, for an ordinary equation $p_0(x)f(x) + \cdots + p_r(x)f^{(r)}(x) = 0$ with
 polynomial coefficients $p_1,\dots,p_r$ and $p_r\neq0$, the roots of $p_r$ are called the
-singularities of the equation. A root $\alpha$ of $p_r$ is call \emph{apparent} if the
+singularities of the equation. A root $\alpha$ of $p_r$ is called \emph{an apparent singularity} if the
 differential equation admits $r$ linearly independent formal power series solutions in 
 $x - \alpha$. Deciding whether a singularity is apparent is therefore the same as
 checking whether the equation admits a fundamental system of formal power series
 solutions at this point. This can be done by inspecting the so-called
 \emph{indicial polynomial} of the equation at~$\alpha$ and solving a system of finitely many linear equations. 
 If a singularity $\alpha$ of an ordinary differential is apparent, then we can always 
-construct a second ordinary differential equation whose solution space contains all the solutions of the
+construct a second linear differential equation whose solution space contains all the solutions of the
 first equation, and which does not have $\alpha$ as a singularity any more. 
 This process is called \emph{desingularization}.  There are similar techniques for the difference case. 
-Our contributions are as follows: 
+Our contributions in this area are as follows: 
 
 \begin{itemize}
-\item Contraction of Ore ideals with applications. Ore operators form a common algebraic abstraction of linear ordinary differential and recurrence equations.
+\item Contraction of Ore ideals with applications~\cite{Zhang2016}. Ore operators form a common algebraic abstraction of linear ordinary differential and recurrence equations.
 Given an Ore operator~$L$ with polynomial coefficients in~$x$, it generates a left ideal~$I$ in the Ore algebra
 over the field~$\bK(x)$ of rational functions. We present an algorithm for computing a basis of the contraction ideal of~$I$
 in the Ore algebra over the ring~$R[x]$ of polynomials, where~$R$ may be either~$\bK$ or a domain with~$\bK$ as its fraction field.
-This algorithm is based on recent work on desingularization for Ore operators by Chen, Jaroschek, Kauers and Singer.
+This algorithm is based on recent work on desingularization for Ore operators by Chen, Jaroschek, Kauers, and Singer.
 Using a basis of the contraction ideal,
 we compute a completely desingularized operator for~$L$ whose leading coefficient not only
 has minimal degree in~$x$ but also has minimal content. Completely desingularized operators have interesting applications
 such as certifying integer sequences and checking special cases of a conjecture of Krattenthaler.
 
-\item Desingularization in the $q$-Weyl algebra. 
+\item Desingularization in the $q$-Weyl algebra~\cite{KZ2018}. 
 We give an order bound for desingularized operators, and thus derive
 an algorithm for computing desingularized operators in the first $q$-Weyl
 algebra.  Moreover, an algorithm is presented for computing a generating set
@@ -202,7 +203,7 @@ application, we certify that several instances of the colored Jones polynomial
 are Laurent polynomial sequences by computing the corresponding desingularized
 operator.
 
-\item Apparent singularities of D-finite systems. We generalize the notions of  ordinary points and singularities
+\item Apparent singularities of D-finite systems~\cite{Yi2017}. We generalize the notions of  ordinary points and singularities
 from linear ordinary differential equations to D-finite systems.
 Ordinary points and apparent singularities of a D-finite system are characterized in terms of its formal power series solutions.
 We also show that apparent singularities can be removed like in the univariate
@@ -212,7 +213,7 @@ In addition,  an algorithm is given for computing formal power series solutions 
 at apparent singularities.
 \end{itemize}
 
-Possible future work is as follows: 
+I plan to work on the following problems in the near future:
 
 \begin{itemize}
 \item Design algorithms for determining a generating set of a contraction ideal in the multivariate Ore algebra.
@@ -228,32 +229,32 @@ An algebraic ordinary difference equation ({\AODE}) is a difference equation of 
 \[
 F(x, y(x), y(x + 1), \cdots, y(x + m))=0,
 \]
-where $F$ is a nonzero polynomial in $y(x), y(x + 1), \cdots, y(x + m)$ with coefficients in the field $\bK(x)$ of rational functions over an algebraically closed field $\bK$ of characteristic zero, and~$m \in \bN$.
+where $m \in \mathbb{N}$ and $F$ is a nonzero polynomial in $y(x), y(x + 1), \cdots, y(x + m)$ with coefficients in the field $\bK(x)$ of rational functions over an algebraically closed field $\bK$ of characteristic zero.
 %We say that an AO{$\Delta$}E is \emph{autonomous}  if the independent variable $x$ does not appear in it explicitly.
 %For computational purpose, we may choose $\bK=\bar{\mathbb{Q}}$, the field of algebraic numbers.
-{\AODE}s naturally appear from various problems, such as symbolic summation, 
-factorization of linear difference operators, 
+{\AODE}s arise naturally in various kinds of problems, such as symbolic summation, 
+factorization of linear difference operators, and the 
 analysis of time or space complexity of computer programs with recursive calls. 
-Thus, to determine (closed form) solutions of a given {\AODE}  is a fundamental problem in difference algebra and is of general interest. 
-We can define algebraic ordinary differential equations (AODEs) analogously.  Our contributions are as follows: 
+In these and other applications, the determination of the (closed form) solutions of a given {\AODE}  is a fundamental problem of general interest. 
+We can define algebraic ordinary differential equations (AODEs) analogously.  Our contributions in this area are as follows: 
 
 \begin{itemize}
-\item Rational solutions of first-order \AODEs.We propose an algebraic geometric approach for studying rational solutions of first-order \AODEs. 
+\item Rational solutions of first-order \AODEs~\cite{VZ2019}. We propose an algebraic geometric approach for studying rational solutions of first-order \AODEs. 
 For an autonomous first-order \AODE, we give an upper bound for the degrees of its rational solutions, and thus derive a complete algorithm for 
 computing corresponding rational solutions.
 
-\item  Rational solutions of high-order algebraic ordinary differential equations. 
+\item  Rational solutions of  algebraic ordinary differential equations of arbitrary order~\cite{VoZhang2019}. 
 We first prove a sufficient condition for the existence of a bound on the degree of the possible polynomial solutions to an AODE.
 An AODE satisfying this condition is called \emph{noncritical}. 
 Then we prove that some common classes of low-order AODEs are noncritical.
-For rational solutions, we determine a class of AODEs, which are called \emph{maximally comparable}, 
+For the rational solutions, we determine a class of AODEs, which are called \emph{maximally comparable}, 
 such that the possible poles of any rational solutions are recognizable from their coefficients. 
-This generalizes the well-known fact that any rational solutions to a linear ODE are contained in the set of zeros of the leading coefficient.
+This generalizes the well-known fact that all the rational solutions to a given linear ODE are contained in the set of zeros of the leading coefficient.
 Finally, we develop an algorithm to compute all rational solutions of certain maximally comparable AODEs, 
 which is applicable to $78.54\%$ of the AODEs in Kamke's collection of standard differential equations.
 \end{itemize}
 
-Possible future work is as follows: 
+I plan to work on the following problems in the near future:
 
 \begin{itemize}
 \item  Design algorithms to compute polynomial and rational solutions of high-order \AODEs.
@@ -262,10 +263,37 @@ Possible future work is as follows:
 
 
 
-%\bibliographystyle{abbrv}
+\bibliographystyle{abbrv}
 %% \bibliography{reference}
-%%\def\cprime{$'$}
-%\begin{thebibliography}{10}
+\def\cprime{$'$}
+\begin{thebibliography}{10}
+\bibitem{Yi2017}
+S.~Chen, M.~Kauers, Z.~Li, and Y.~Zhang.
+\newblock Apparent singularities of {D}-finite systems.
+\newblock {\em Journal of Symbolic Computation}, in press, 2019.
+
+\bibitem{KZ2018}
+C.~Koutschan and Y.~Zhang.
+\newblock Desingularization in the $q$-Weyl algebra. \\
+\newblock {\em Advances in Applied Mathematics}, 97, pp.\ 80–101, 2018. 
+
+\bibitem{VoZhang2019}
+N.T.~Vo and Y.~Zhang.
+\newblock {Rational Solutions of High-Order Algebraic Ordinary Differential Equations}.
+\newblock {\em accepted by Journal of Systems Sciences and Complexity}, 2019.
+
+\bibitem{VZ2019}
+N.T.~Vo and Y.~Zhang.
+\newblock {Rational Solutions of First-Order Algebraic Ordinary Difference Equations}.
+\newblock {\em arXiv 1901.11048}, 1--25, 2019.
+
+\bibitem{Zhang2016}
+Y.~Zhang.
+\newblock {\em Contraction of {O}re ideals with applications}.
+\newblock In {\em Proc.\ of ISSAC'16},  413--420, New York, NY, USA, 2016, ACM.
+
+
+\end{thebibliography}
 %
 %\bibitem{Abramov2006}
 %S.~A. Abramov, M.~Barkatou, and M.~van Hoeij.
