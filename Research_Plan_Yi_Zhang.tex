@@ -497,6 +497,20 @@ This work is available in~\cite{KZ2018}.
 
 \subsection{Introduction}
 
+Studying problems in differential equations which arose in statistics will lead us a remarkable advances in the algebraic and algorithmic study of differential equations and the combination of algebraic algorithms and numerical algorithms for differential equations. An important approach in the algebraic analysis of differential equation is the holonomic gradient method. 
+
+  Let us first recall the idea of the holonomic gradient method~\cite{Nakayama2011}. A holonomic function with n variables is a function which satisfies n linear ordinary differential equations with multivariate polynomial coefficients for each independent variable. Those differential equations satisfied by a holonomic function is called a holonomic system. The holonomic gradient method (HGM) is an approach to evaluate numerically normalizing constants and their derivatives of holonomic probability distributions. HGM consists of three steps: 
+\begin{enumerate}
+  \item Finding a holonomic system satisfied by the normalizing constant. We may use the restriction algorithm from D-module theory and related methods to compute it. 
+  \item Finding an initial value vector for the holonomic system. It is equivalent to evaluating the normalizing constant and its derivatives at a point. This step is usually performed by numerical integration.
+  \item Solving the holonomic system numerically. We can use classical methods in numerical analysis such as the Runge-Kutta method of solving ordinary differential equations and efficient solvers of systems of linear equations.
+  \end{enumerate}
+
+For the first step of HGM, there are efficient algorithms (such as the creative telescoping method) to derive a holonomic system for the target normalizing constant. The holonomic system can be translated into a linear ODE system (Pfaffian system) for the normalizing constant and its derivatives. However, if the normalizing constant is not the dominant~\cite{Danufane2018} solution among all the solutions of the corresponding linear ODE system as the independent variable goes to infinity, then the usual methods involved in the third step of HGM only works for a small interval. Besides, the evaluation step relies on the precision of initial values of the target normalizing constant and its derivatives. The current methods for evaluating initial values with high-precision are also not satisfactory.
+  
+  We want to design an enhanced HGM by combining theoretical study of ODEs, algebraic algorithms, and numerical algorithms for ODEs to give a more efficient numerical evaluator in the second and third step of HGM. Furthermore, we will apply the improved HGM to study problems in differential equations which arose in statistics, combinatorics and so on.  
+
+
 \subsection{Main results}
 
 \subsection{Future work}
@@ -512,41 +526,7 @@ S.~A. Abramov, M.~Barkatou, and M.~van Hoeij.
 \newblock Apparent singularities of linear difference equations with polynomial
   coefficients.
 \newblock {\em AAECC}, 117--133, 2006.
-% 
-% \bibitem{Abramov1999}
-% S.~A. Abramov and M.~van Hoeij.
-% \newblock Desingularization of linear difference operators with polynomial coefficients.
-% \newblock In {\em Proc.\ of ISSAC'99}, 269--275, New York, NY,USA, 1999, ACM.
-% 
 
-% \bibitem{Paule1999}
-% S.~A. Abramov, P.~Paule, and M.~Petkov\v{s}ek.
-% \newblock $q$-Hypergeometric solutions of $q$-difference equations.
-% \newblock In {\em Discrete Mathematics}, 194:3--22, 1999.
-% \bibitem{Aroca2001}
-% F.~Aroca and J.~Cano.
-% \newblock Formal solutions of linear PDEs and convex polyhedra.
-% \newblock {\em J. Symb.\ Comput.}, 32:717--737, 2001.
-% 
-% \bibitem{Barkatou2015}
-% M.~A. Barkatou and S.~S. Maddah.
-% \newblock Removing apparent singularities of systems of linear differential
-%   equations with rational function coefficients.
-% \newblock In {\em Proc.\ of ISSAC'15}, 53--60, New York, NY,
-%   USA, 2015, ACM.
-% 
-% \bibitem{Weispfenning1993}
-% T.~Becker and V.~Weispfenning.
-% \newblock {\em Gr\"{o}bner bases, a computational approach to commutative
-%   algebra}.
-% \newblock Springer-Verlag, New York, USA, 1993.
-% 
-
-% \bibitem{Chen2013}
-% S.~Chen, M.~Jaroschek, M.~Kauers, and M.~F. Singer.
-% \newblock Desingularization explains order-degree curves for {O}re operators.
-% \newblock In {\em Proc.\ of ISSAC'13}, 157--164, New York, NY,
-%   USA, 2013, ACM.
 
 \bibitem{BronsteinPetkovsek1996}
 M.~Bronstein and M.~Petkov{\v{s}}ek.
@@ -556,37 +536,13 @@ M.~Bronstein and M.~Petkov{\v{s}}ek.
 \bibitem{Yi2017}
 S.~Chen, M.~Kauers, Z.~Li, and Y.~Zhang.
 \newblock Apparent singularities of {D}-finite systems.
-\newblock {\em arXiv 1705.00838}, pages 1--26, 2017.
+\newblock {\em arXiv 1705.00838}, 1--26, 2017.
   
-% \bibitem{Chen2016}
-% S.~Chen, M.~Kauers, and M.~F. Singer.
-% \newblock Desingularization of {O}re operators.
-% \newblock {\em J. Symb.\ Comput.}, 74:617--626, 2016.
-
-% \bibitem{Zhang2009}
-% R.~C. Churchill and Y.~Zhang.
-% \newblock Irreducibility criteria for skew polynomials.
-% \newblock {\em Journal of Algebra}, 322:3797--3822, 2009.
-% 
-% \bibitem{Chyzak2008}
-% F.~Chyzak.
-% \newblock Mgfun Project.
-% \newblock http://algo.inria.fr/chyzak/mgfun.html.
-% \bibitem{Chyzak2016}
-% F.~Chyzak, T.~Dreyfus, P.~Dumas and M.~Mezzarobba.
-% \newblock Computing solutions of linear Mahler equations.
-% \newblock {\em arXiv 1612.05518}, pages 1--42, 2016.
-
-% \bibitem{Chyzak2010}
-% F.~Chyzak, P.~Dumas, H.~Le, J.~Martin, M.~Mishna and B.~Salvy.
-% \newblock Taming apparent singularities via {O}re closure.
-% \newblock Manuscript, 2010.
-
-% \bibitem{Salvy1998}
-% F.~Chyzak and B.~Salvy.
-% \newblock Non-commutative elimination in {O}re algebras proves multivariate
-%   identities.
-% \newblock {\em J. Symb.\ Comput.\ }, 26:187--227, 1998.
+\bibitem{Danufane2018}
+F.~H.~Danufane, C.~Siriteanu, K.~Ohara, N.~Takayama,
+\newblock Holonomic gradient method-based CDF evaluation for the largest eigenvalue
+of a complex noncentral Wishart matrix.
+\newblock {\em arXiv:1707.02564}, 2018 .
 
 \bibitem{DenefLipshitz}
 J.~Denef and L.~Lipshitz.
@@ -744,6 +700,11 @@ J.~J. Kovacic.
 \newblock An algorithm for solving second order linear homogeneous differential
   equations.
 \newblock {\em Journal of Symbolic Computation}, 2(1):3--43, 1986.
+
+\bibitem{Nakayama2011}
+H.~Nakayama, K.~Nishiyama, M.~Noro, K.~Ohara,T.~Sei, N.~Takayama, and A.~Takemura.
+\newblock {Holonomic gradient descent and its application to the Fisher–Bingham integral.}
+\newblock {\em Advances in Applied Mathematics}, 47(3): 639--658, 2011. 
 
 
 % 
