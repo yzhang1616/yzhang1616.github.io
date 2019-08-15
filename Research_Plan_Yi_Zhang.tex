@@ -106,37 +106,7 @@
 \title{\bf{\Huge{Research Plan}}}
 
 \author{Yi Zhang}
-% \thanks{Supported by the Austrian Science Fund (FWF): P29467-N32.\\
-% E-mail addresses:  zhangy@amss.ac.cn}\ }
-% % \author[2]{Ziming Li\thanks{Supported by the NSFC grants (91118001, 60821002/F02)
-% % and a 973 project (2011CB302401). Email: zmli@mmrc.iss.ac.cn}}
-% % \author{Yi Zhang$^{\ast}$}
-% %\thanks{Supported by the Austrian Science Fund (FWF): P29467-N32. E-mail: zhangy@amss.ac.cn}}
-% %\author[1]{Author C\thanks{C.C@university.edu}}
-% %\author[2]{Author D\thanks{D.D@university.edu}}
-% %\author[2]{Author E\thanks{E.E@university.edu}}
-% % \affil[2]{KLMM, AMSS, Chinese Academy of Sciences, Beijing, China}
-% % \affil[1, 3]{Institute for Algebra, Johannes Kepler University Linz, Austria}
-% \affil{Johann Radon Institute for Computational and Applied Mathematics (RICAM), Austrian Academy of Sciences, Austria}
-%\affil[2]{KLMM, AMSS, Chinese Academy of Sciences, Beijing 100190, China}
 
-%\renewcommand\Authands{ and }
-
-% \alignauthor
-% \leavevmode
-% \mathstrut
-% Ziming Li\titlenote{Supported by the NSFC grants (91118001, 60821002/F02)
-% and a 973 project (2011CB302401).\vspace{5pt}}\\[\smallskipamount]
-%  \affaddr{\leavevmode\mathstrut KLMM, AMSS, Chinese Academy of Sciences, Beijing 100190, China}\\
-%  \affaddr{\mathstrut 4040 Linz, Austria}\\
-%  \affaddr{\mathstrut zmli@mmrc.iss.ac.cn}
-% \and
-%% \mathstrut
-% Yi Zhang\titlenote{Supported by the Austrian Science Fund (FWF) grants Y464-N18, NSFC grants (91118001, 60821002/F02)
-% and a 973 project (2011CB302401).\vspace{-4pt}}\\[\smallskipamount]
-%  \affaddr{\leavevmode\mathstrut Institute for Algebra, Johannes Kepler University, Linz A-4040, Austria}\\
-%  \affaddr{\leavevmode\mathstrut KLMM, AMSS, Chinese Academy of Sciences, Beijing 100190, China}\\
-%  \affaddr{\leavevmode\mathstrut zhangy@amss.ac.cn}
 
 
 \date{}
@@ -147,9 +117,6 @@ and cryptography.  Symbolic computation aims to give algorithmic and constructiv
 to various problems in mathematics and computer science, such as polynomial factorization, computing solutions of systems of polynomial equations, 
 and quantifier elimination. Systems of algebraic differential equations and difference equations are important research subjects in mathematics, physics, and related areas. 
 The algebraic study of such systems gives useful information about their applications in physics, statistics, and other areas. 
-%Computing solutions and illustrating algebraic structures of those systems give essential answers to their applications in physics, statistics and so on.  
-%%Functions defined by systems of differential equations and difference equations are a principal focus of study in many areas of math and physics. Understanding the algebraic properties %of these functions is essential in many of their physical and mathematical applications. 
-%Much of my work is devoted to developing algorithms that can discover these properties automatically.
 Much of my work is devoted to developing algorithms for  computing solutions and illustrating algebraic structures of differential equations and difference equations
 by using constructive tools (such as Gr\"obner bases and resultant theory) in computer algebra and differential algebra. 
 My work has found interesting applications in the certification of integer sequences, checking special cases of a conjecture of Krattenthaler, and verifying 
@@ -164,7 +131,6 @@ F(x, y(x), y(x + 1), \cdots, y(x + m))=0,
 \end{equation}
 where $F$ is a nonzero polynomial in $y(x), y(x + 1), \cdots, y(x + m)$ with coefficients in the field $\bK(x)$ of rational functions over an algebraically closed field $\bK$ 
 of characteristic zero, and~$m \in \bN$. We call $m$ the \emph{order} of~\eqref{EQ:AODE}. 
-%{\red add some motivations for studying {\AODE}s}. 
 {\AODE}s naturally appear from various problems, such as symbolic summation~\cite{PWZbook1996, KoutschanThesis}, 
 factorization of linear difference operators~\cite{BronsteinPetkovsek1996}, 
 analysis of time or space complexity of computer programs with recursive calls~\cite{Eekelen2018}. 
@@ -189,15 +155,7 @@ Possible future work is as follows:
 \item  Design algorithms to compute polynomial and rational solutions of high-order \AODEs.
 \item Compute rational solutions of non-autonomous first-order \AODEs. 
 \end{itemize}	
-% Next, we will
-% Next, we will study how to use this algebraic-geometric approach to compute other types of solutions 
-% (such as algebraic solutions, polynomial solutions, series solutions) of first-order and higher-order {\AODE}s. 
 
-
-
-
-
-%\section*{Fast computation of intersections of zero-dimensional ideals of linear partial differential operators} \label{SECT:lclm}
 
 \section*{The improved holonomic gradient method via gauge transformation} \label{SECT:hgm}
 
@@ -355,9 +313,6 @@ where $F$ is a polynomial in $y,y',\ldots,y^{(n)}$ with coefficients in $\mathbb
 algebraically closed field of characteristic zero, and $n \in \bN$. 
 Many problems from applications (such as physics, combinatorics and statistics) 
 can be characterized in terms of AODEs.  
-% The laws of natural world are usually modelled in the form of differential equations. 
-% In many cases, these equations are AODEs. 
-% Or the problem of solving these equations can be reduced to that of solving AODEs. 
 Therefore, determining (closed form) solutions of an AODE is one of the central problems in mathematics and computer science.
  
 Although linear ODEs~\cite{Ince1926} have been intensively studied, there are still many challenging problems for solving
@@ -367,8 +322,7 @@ which have the form $y'=f_0(x)+f_1(x)y+f_2(x)y^2$ for some $f_0,f_1,f_2 \in \mat
 can be considered as the simplest form of nonlinear AODEs. 
 In \cite{Kovacic}, Kovacic gives a complete algorithm for determining Liouvillian solutions of 
 a Riccati equation with rational function coefficients. 
-% The study of general solutions without movable singularities 
-% can be found in \cite{Fuchs, Malmquist, Poincare} for first-order, and in \cite{Eremenko2, Ince1926} for higher-order AODEs. 
+
 
 Since the problem of solving an arbitrary AODE is very difficult, 
 it is natural to ask whether a given AODE admits some special kinds of solutions, 
@@ -376,7 +330,6 @@ such as polynomials, rational functions, or formal power series.
 During the last two decades, an algebraic-geometric approach for finding symbolic solutions of AODEs has been developed. 
 The work by Feng and Gao in \cite{FengGao, FengGao06} for computing rational general solutions of first-order autonomous AODEs 
 can be considered as the starting point. 
-% In \cite{NgoWinkler11b, GraseggerThesis, VoWinkler2015, VoGraseggerWinkler2017}, 
 The authors of~\cite{NgoWinkler11b, GraseggerThesis, VoWinkler2015, VoGraseggerWinkler2017} 
 developed methods for finding different kinds of solutions of non-autonomous, higher-order AODEs. 
 For formal power series solutions, we refer to \cite{DenefLipshitz,SingerFormalSolutions}.
@@ -392,12 +345,7 @@ Our main purpose is to give a method for determining such solutions.
  \item As applications, new algorithms are presented for determining all particular polynomial and rational solutions of certain classes of AODEs.
 \end{enumerate}
 
-% In this paper, we consider Laurent series solutions of algebraic ordinary differential equations (AODEs). 
-% We first present several approaches to compute formal power series solutions of a given AODE. 
-% Then we determine a bound for the order of its Laurent series solutions. 
-% Using the order bound, one can transform a given AODE into a new one whose Laurent series solutions are only formal power series.
-% The idea is basically inherited from the Frobenius method for linear ordinary differential equations. 
-% As applications, new algorithms are presented for determining all particular polynomial and rational solutions of certain classes of AODEs.
+
 
 This work is available in~\cite{VoZhang2017}.
 
@@ -455,13 +403,7 @@ a monic (and hence: desingularized) operator of order~$2$:
 \end{equation}
 The process of deriving~\eqref{EQ:qdesin} from~\eqref{EQ:qrecurrence} to called desingularization in the $q$-Weyl algebra.
 
-% From this representation it is a routine task (but possibly computationally
-% expensive) to compute a $q$-holonomic recurrence equation for
-% $J^{\mathrm{twist}}_p(n)$ when $p$ is a fixed integer. This can be done either
-% by $q$-holonomic summation methods (as implemented in the \texttt{qMultiSum}
-% package~\cite{Riese03} or \texttt{HolonomicFunctions}
-% package~\cite{Christoph2010}) or by guessing (as implemented in the
-% \texttt{Guess} package~\cite{Kauers2009a}).
+
 
 \subsection{Main results}
 
@@ -475,14 +417,7 @@ of the first $q$-Weyl closure of a given $q$-difference operator.
  satisfy the properties specified in Conjecture~\ref{CONJ:stavros}.  
 \end{enumerate}
 
-% In this paper, we study the desingularization problem in the first $q$-Weyl
-% algebra.  We give an order bound for desingularized operators, and thus derive
-% an algorithm for computing desingularized operators in the first $q$-Weyl
-% algebra.  Moreover, an algorithm is presented for computing a generating set
-% of the first $q$-Weyl closure of a given $q$-difference operator.  As an
-% application, we certify that several instances of the colored Jones polynomial
-% are Laurent polynomial sequences by computing the corresponding desingularized
-% operator.
+
 
 This work is available in~\cite{KZ2018}.
 
