@@ -123,314 +123,416 @@ My work has found interesting applications in the certification of integer seque
 several instances of the colored Jones polynomial are Laurent polynomial sequences.  
 The following sections describe my research plans in the future. 
 
-\section*{The algebraic-geometric method for solving algebraic difference equations} \label{SECT:AODE}
+\section*{Desingularization of linear differential and difference operators}
 
-An algebraic ordinary difference equation (\AODE) is a difference equation of the form
-\begin{equation} \label{EQ:AODE}
-F(x, y(x), y(x + 1), \cdots, y(x + m))=0,
-\end{equation}
-where $F$ is a nonzero polynomial in $y(x), y(x + 1), \cdots, y(x + m)$ with coefficients in the field $\bK(x)$ of rational functions over an algebraically closed field $\bK$ 
-of characteristic zero, and~$m \in \bN$. We call $m$ the \emph{order} of~\eqref{EQ:AODE}. 
-{\AODE}s naturally appear from various problems, such as symbolic summation~\cite{PWZbook1996, KoutschanThesis}, 
-factorization of linear difference operators~\cite{BronsteinPetkovsek1996}, 
-analysis of time or space complexity of computer programs with recursive calls~\cite{Eekelen2018}. 
-We are interested in computing symbolic solutions (for instance, polynomials solutions, rational solutions) of {\AODE}s.
-In particular, for a first-order {\AODE}, the corresponding algebraic equation $F(x, y, z) = 0$ defines an algebraic curve in the two dimensional affine plane 
-over the field $\overline{\mathbb{K}(x)}$. A solution in a certain class of
-functions, such a rational or algebraic functions, determines a parametrization of this algebraic curve. 
-Thus, we may apply algebraic tools from parametrization theory of algebraic curves to study solutions of first-order {\AODE}s. 
-Based on this observation, we propose an algebraic-geometric approach to solve first-order {\AODE}s: 
+A D-finite function is specified by a linear ordinary differential equation with polynomial 
+coefficients and finitely many initial values. Each singularity of a D-finite function 
+must be a root of the coefficient of the highest order derivative appearing 
+in the corresponding differential equation. 
+For instance, $x^{-1}$ is a solution of the equation $x f'(x) + f(x) = 0$, 
+and the singularity at the origin is also the root of the polynomial $x$. 
+However, the converse is not true. For example, the solution space of 
+the differential equation $x f'(x) - 4 f(x) = 0$ is spanned by $x^4$ as a vector space, 
+but none of those functions has singularity at the origin. 
+
+More specifically, for an ordinary equation $p_0(x)f(x) + \cdots + p_r(x)f^{(r)}(x) = 0$ with
+polynomial coefficients $p_0,\dots,p_r$ and $p_r\neq0$, the roots of $p_r$ are called the
+singularities of the equation. A root $\alpha$ of $p_r$ is called \emph{an apparent singularity} if the
+differential equation admits $r$ linearly independent formal power series solutions in 
+$x - \alpha$. Deciding whether a singularity is apparent is therefore the same as
+checking whether the equation admits a fundamental system of formal power series
+solutions at this point. This can be done by inspecting the so-called
+\emph{indicial polynomial} of the equation at~$\alpha$ and solving a system of finitely many linear equations. 
+If a singularity $\alpha$ of an ordinary differential equation is apparent, then we can always 
+construct a second linear differential equation whose solution space contains all the solutions of the
+first equation, and which does not have $\alpha$ as a singularity any more. 
+This process is called \emph{desingularization}.  There are similar techniques for the difference case. 
+Our contributions in this area are as follows: 
+
 \begin{itemize}
- \item [1] Decide whether a given first-order {\AODE} can be parametrized with functions form a given class, 
-such as rational parametrization;
- \item [2] Solve the corresponding reduced {\AODE} by using techniques from computer algebra 
-and differential algebra.
+\item Contraction of Ore ideals with applications~\cite{Zhang2016}. Ore operators form a common algebraic abstraction of linear ordinary differential and recurrence equations.
+Given an Ore operator~$L$ with polynomial coefficients in~$x$, it generates a left ideal~$I$ in the Ore algebra
+over the field~$\bK(x)$ of rational functions. We present an algorithm for computing a basis of the contraction ideal of~$I$
+in the Ore algebra over the ring~$R[x]$ of polynomials, where~$R$ may be either~$\bK$ or a domain with~$\bK$ as its fraction field.
+This algorithm is based on recent work on desingularization for Ore operators by Chen, Jaroschek, Kauers, and Singer.
+Using a basis of the contraction ideal,
+we compute a completely desingularized operator for~$L$ whose leading coefficient not only
+has minimal degree in~$x$ but also has minimal content. Completely desingularized operators have interesting applications
+such as certifying integer sequences and checking special cases of a conjecture of Krattenthaler.
+
+\item Desingularization in the $q$-Weyl algebra~\cite{KZ2018}. 
+We give an order bound for desingularized operators, and thus derive
+an algorithm for computing desingularized operators in the first $q$-Weyl
+algebra.  Moreover, an algorithm is presented for computing a generating set
+of the first $q$-Weyl closure of a given $q$-difference operator.  As an
+application, we certify that several instances of the colored Jones polynomial
+are Laurent polynomial sequences by computing the corresponding desingularized
+operator.
+
+\item Apparent singularities of D-finite systems~\cite{Yi2017}. We generalize the notions of  ordinary points and singularities
+from linear ordinary differential equations to D-finite systems.
+Ordinary points and apparent singularities of a D-finite system are characterized in terms of its formal power series solutions.
+We also show that apparent singularities can be removed like in the univariate
+case by adding suitable additional solutions to the system at hand.
+Several algorithms are presented for removing and detecting apparent singularities.
+In addition,  an algorithm is given for computing formal power series solutions of a D-finite system
+at apparent singularities.
 \end{itemize}
-This idea is inherited from the differential case and turns out to be successful for solving algebraic 
-differential equations. For details, see~\cite{Winkler2019}. 
-Using this method, we give an complete algorithm~\cite{VoZhang2019} to compute rational solutions of first-order autonomous {\AODE}s. 
-Possible future work is as follows: 
+
+I plan to work on the following problems in the near future:
+
+\begin{itemize}
+\item Design algorithms for determining a generating set of a contraction ideal in the multivariate Ore algebra.
+
+\item Develop the desingularization technique for linear Mahler equations. 
+
+\item Study the desingularization problem for the multivariate linear difference equations with polynomial coefficients. 
+\end{itemize}
+
+\section*{Computing symbolic solutions of algebraic differential and difference equations}
+
+An algebraic ordinary difference equation ({\AODE}) is a difference equation of the form
+\[
+F(x, y(x), y(x + 1), \cdots, y(x + m))=0,
+\]
+where $m \in \mathbb{N}$ and $F$ is a nonzero polynomial in $y(x), y(x + 1), \cdots, y(x + m)$ with coefficients in the field $\bK(x)$ of rational functions over an algebraically closed field $\bK$ of characteristic zero.
+{\AODE}s arise naturally in various kinds of problems, such as symbolic summation, 
+factorization of linear difference operators, and the 
+analysis of time or space complexity of computer programs with recursive calls. 
+In these and other applications, the determination of the (closed form) solutions of a given {\AODE}  is a fundamental problem of general interest. 
+We can define algebraic ordinary differential equations (AODEs) analogously.  Our contributions in this area are as follows: 
+
+\begin{itemize}
+\item Rational solutions of first-order \AODEs~\cite{VZ2019}. We propose an algebraic geometric approach for studying rational solutions of first-order \AODEs. 
+For an autonomous first-order \AODE, we give an upper bound for the degrees of its rational solutions, and thus derive a complete algorithm for 
+computing corresponding rational solutions.
+
+\item  Rational solutions of  algebraic ordinary differential equations of arbitrary order~\cite{VoZhang2019}. 
+We first prove a sufficient condition for the existence of a bound on the degree of the possible polynomial solutions to an AODE.
+An AODE satisfying this condition is called \emph{noncritical}. 
+Then we prove that some common classes of low-order AODEs are noncritical.
+For the rational solutions, we determine a class of AODEs, which are called \emph{maximally comparable}, 
+such that the possible poles of any rational solutions are recognizable from their coefficients. 
+This generalizes the well-known fact that all the rational solutions to a given linear ODE are contained in the set of zeros of the leading coefficient.
+Finally, we develop an algorithm to compute all rational solutions of certain maximally comparable AODEs, 
+which is applicable to $78.54\%$ of the AODEs in Kamke's collection of standard differential equations.
+\end{itemize}
+
+I plan to work on the following problems in the near future:
 
 \begin{itemize}
 \item  Design algorithms to compute polynomial and rational solutions of high-order \AODEs.
 \item Compute rational solutions of non-autonomous first-order \AODEs. 
 \end{itemize}	
 
-
-\section*{The improved holonomic gradient method via gauge transformation} \label{SECT:hgm}
-
-
-\section{Contraction of Ore ideals with applications} \label{SECT:contraction}
-
-\subsection{Introduction}
-Let $\bK$ be a field of characteristic $0$. 
-Consider the following linear recurrence equation:
-\begin{equation} \label{EQ:recurrence}
- a_0(n)f(n) + \cdots + a_r(n)f(n+r)=0,
-\end{equation}
-where $a_i \in \bK[n]$ with $a_r \neq 0$, and $i = 0, \ldots, r$. The roots of $a_r(n)$ is called 
-the singularities of~\eqref{EQ:recurrence}.  
-There is a strong connection between the roots of $a_r$ 
-and the singularities of a solution of~\eqref{EQ:recurrence} . 
-
-It is well know that every singularity of a solution of~\eqref{EQ:recurrence} 
-must be a root of~$a_r$. However, the converse is not true.
-Generally speaking, the leading coefficient~$a_r$ may have roots at a point where no solution is singular. 
-Such points are called
-apparent singularities, and it is sometimes useful to
-identify them. The technique for doing so is called desingularization.
-For instance, consider the recurrence operator
-\[
- L = (1 + 16 n)^2 \pa^2 - 32 (7 + 16 n) \pa - (1 + n)(17 + 16 n)^2,
-\]
-which comes from~\cite[Section 4.1]{Abramov2006}. 
-In this, we use $\pa$ to denote the shift operator $f(n) \mapsto f(n + 1)$.
-For any choice of two initial values
-$u_0,u_1\in  \bQ$, there is a unique sequence $u \colon
-\bN \to \bQ$ with $u(0)=u_0$, $u(1)=u_1$ and $L$ applied to $u$
-gives the zero sequence. A priori, it is not obvious whether or
-not $u$ is actually an integer sequence, if we choose $u_0,u_1$
-from~$\bZ$, because the calculation of the $(n+2)$nd term
-from the earlier terms via the recurrence encoded by $L$ requires
-a division by $(1+16n)^2$, which could introduce fractions. In order
-to show that this division never introduces a denominator, 
-we note that every solution of $L$ is also a solution
-of its left multiple
-\begin{equation} \label{EQ:ah}
-\begin{array}{ccl}
-T  & = & \pa^3 +\left(128 n^3-104 n^2-11 n-3\right) \pa^2 + \\
-          &   & \left(-256 n^2+127 n + 94 \right) \pa - \\
-          &   & (128 n^2+24 n-131)(1 + n)^2,
-\end{array}
-\end{equation}
-The operator $T$ has the interesting property that the factor
-$(1+16n)^2$ has been ``removed'' from the leading
-coefficient, which immediately certifies the integrality of its solutions. 
-The process of obtaining the operator $T$ from $L$ is called
-desingularization, because there is a polynomial factor in the
-leading coefficient of $L$ which does not appear in the leading
-coefficient of~$T$. 
+%\section*{The algebraic-geometric method for solving algebraic difference equations} \label{SECT:AODE}
+%
+%An algebraic ordinary difference equation (\AODE) is a difference equation of the form
+%\begin{equation} \label{EQ:AODE}
+%F(x, y(x), y(x + 1), \cdots, y(x + m))=0,
+%\end{equation}
+%where $F$ is a nonzero polynomial in $y(x), y(x + 1), \cdots, y(x + m)$ with coefficients in the field $\bK(x)$ of rational functions over an algebraically closed field $\bK$ 
+%of characteristic zero, and~$m \in \bN$. We call $m$ the \emph{order} of~\eqref{EQ:AODE}. 
+%{\AODE}s naturally appear from various problems, such as symbolic summation~\cite{PWZbook1996, KoutschanThesis}, 
+%factorization of linear difference operators~\cite{BronsteinPetkovsek1996}, 
+%analysis of time or space complexity of computer programs with recursive calls~\cite{Eekelen2018}. 
+%We are interested in computing symbolic solutions (for instance, polynomials solutions, rational solutions) of {\AODE}s.
+%In particular, for a first-order {\AODE}, the corresponding algebraic equation $F(x, y, z) = 0$ defines an algebraic curve in the two dimensional affine plane 
+%over the field $\overline{\mathbb{K}(x)}$. A solution in a certain class of
+%functions, such a rational or algebraic functions, determines a parametrization of this algebraic curve. 
+%Thus, we may apply algebraic tools from parametrization theory of algebraic curves to study solutions of first-order {\AODE}s. 
+%Based on this observation, we propose an algebraic-geometric approach to solve first-order {\AODE}s: 
+%\begin{itemize}
+% \item [1] Decide whether a given first-order {\AODE} can be parametrized with functions form a given class, 
+%such as rational parametrization;
+% \item [2] Solve the corresponding reduced {\AODE} by using techniques from computer algebra 
+%and differential algebra.
+%\end{itemize}
+%This idea is inherited from the differential case and turns out to be successful for solving algebraic 
+%differential equations. For details, see~\cite{Winkler2019}. 
+%Using this method, we give an complete algorithm~\cite{VoZhang2019} to compute rational solutions of first-order autonomous {\AODE}s. 
+%Possible future work is as follows: 
+%
+%\begin{itemize}
+%\item  Design algorithms to compute polynomial and rational solutions of high-order \AODEs.
+%\item Compute rational solutions of non-autonomous first-order \AODEs. 
+%\end{itemize}	
 
 
-In more algebraic terms, we consider the following problem. Given
-an operator $L\in \bZ[x][\pa]$, where $\bZ[x][\pa]$
-is an Ore algebra, we consider
-the left ideal $\langle L \rangle = \bQ(x)[\pa]L$ generated by $L$ in the
-extended algebra $\bQ(x)[\pa]$. The contraction of $\langle L \rangle$ to
-$\bZ[x][\pa]$ is defined as $\cont(L) := \langle L \rangle \cap
-\bZ[x][\pa]$. This is a left ideal of $\bZ[x][\pa]$ which
-contains $\bZ[x][\pa]L$, but in general more operators.
-Our goal is to compute a $\bZ[x][\pa]$-generating set of $\cont(L)$.
-In the example above, such a generating set is given by $\{L, T\}$ 	.
-The traditional desingularization problem corresponds to computing
-a generating set of the $\bQ[x][\pa]$-left ideal $\langle L \rangle \cap \bQ[x][\pa]$.
-
-
-\subsection{Main results}
-Given an Ore operator~$L$ with polynomial coefficients in~$x$, it generates a left ideal~$I$ in the Ore algebra
-over the field~$\bK(x)$ of rational functions. 
-
-\begin{enumerate}
- \item We present an algorithm for computing a generating set of the contraction ideal of~$I$
-in the Ore algebra over the ring~$R[x]$ of polynomials, where~$R$ may be either~$\bK$ or a domain with~$\bK$ as its fraction field.
- \item Using a generating set of the contraction ideal,
-we compute a completely desingularized operator for~$L$ whose leading coefficient not only
-has minimal degree in~$x$ but also has minimal content.
- \item Using completely desingularized operators, we study how to certify the integrality of a sequence and 
- check special cases of a conjecture of Krattenthaler.
-\end{enumerate} 
-
-This work is published in ISSAC'16~\cite{Zhang2016}.
-
-\subsection{Future work}
-
-\begin{enumerate}
- \item Our algorithms rely heavily on the computation of Gr\"{o}bner bases over a principal ideal domain~$R$.
-At present, the computation of Gr\"{o}bner bases over $R$ is not fully available in a computer algebra system. 
-So the algorithms are not yet implemented. We would like to implement our algorithm in Maple or Mathematica 
-by using linear algebra over $R$ as much as possible.
- \item Design algorithms for determining a generating set of a contraction ideal in the multivariate Ore algebra.
-\end{enumerate}
-
-\section{Apparent singularities of D-finite systems} \label{SECT:apparent}
-
-\subsection{Introduction}
-
-A D-finite function is specified by a linear ordinary differential equation with polynomial 
-coefficients and finitely many initial values. Each singularity of a D-finite function 
-will be a root of the coefficient of the highest order derivative appearing 
-in the corresponding differential equation. 
-For instance, $x^{-1}$ is a solution of the equation $x f'(x) + f(x) = 0$, 
-and the singularity at the origin is also the root of the polynomial $x$. 
-However, the converse is not true. For instance, the solution space of 
-the differential equation $x f'(x) - 3 f(x) = 0$ is spanned by $x^3$ as a vector space, 
-but none of those functions has singularity at the origin.
-
-More specifically, we consider the following ordinary differential equation 
-$$p_0(x)f(x) + \cdots + p_r(x)f^{(r)}(x) = 0,,$$ 
-where $p_i \in \bK[x]$ with $p_r\neq0$, and $\bK$ is a field of characteristic $0$.  
-The roots of $p_r$ are called the
-singularities of the equation. A root $\alpha$ of $p_r$ is call \emph{apparent} if the
-differential equation admits $r$ linearly independent formal power series solutions in 
-$x - \alpha$. Deciding whether a singularity is apparent is therefore the same as
-checking whether the equation admits a fundamental system of formal power series
-solutions at this point. This can be done by inspecting the so-called
-\emph{indicial polynomial} of the equation at~$\alpha$ and solving a system of finitely many linear equations. 
-If a singularity $\alpha$ of an ordinary differential is apparent, then we can always 
-construct a second ordinary differential equation whose solution space contains all the solutions of the
-first equation, and which does not have $\alpha$ as a singularity any more. 
-This process is called \emph{desingularization}. The purpose of our work is to generalize the facts sketched above to
-the multivariate setting.
-
-\subsection{Main results}
-
-\begin{enumerate}
- \item We generalize the notions of singularities and ordinary points from linear ordinary differential equations to D-finite systems. 
- Ordinary points of a D-finite system are characterized in terms of its formal power series solutions.
- \item We show that apparent singularities can be removed like in the univariate
-case by adding suitable additional solutions to the system at hand.
- \item Several algorithms are presented for removing and detecting apparent singularities of D-finite systems.
- \item An algorithm is given for computing formal power series solutions of a D-finite system
-at apparent singularities.
-\end{enumerate}
-
-This work is available in~\cite{Yi2017}.
-
-\subsection{Future work}
-
-\begin{enumerate}
- \item Generalize our algorithms for removing and detecting apparent singularities of D-finite systems to other singularities.
- \item Study the desingularization problem for the multivariate linear difference equations with polynomial coefficients. 
-\end{enumerate}
-
-\section{Laurent series solutions of algebraic ordinary differential equations} \label{SECT:Laurentsols}
-
-\subsection{Introduction}
-
-An algebraic ordinary differential equation (AODE) is of the form 
-$$F(x,y,y',\ldots,y^{(n)})=0,$$ 
-where $F$ is a polynomial in $y,y',\ldots,y^{(n)}$ with coefficients in $\mathbb{K}(x)$, the field $\bK$ is 
-algebraically closed field of characteristic zero, and $n \in \bN$. 
-Many problems from applications (such as physics, combinatorics and statistics) 
-can be characterized in terms of AODEs.  
-Therefore, determining (closed form) solutions of an AODE is one of the central problems in mathematics and computer science.
- 
-Although linear ODEs~\cite{Ince1926} have been intensively studied, there are still many challenging problems for solving
-(nonlinear) AODEs. As far as we know, approaches for solving AODEs are only available for very specific subclasses. 
-For example, Riccati equations, 
-which have the form $y'=f_0(x)+f_1(x)y+f_2(x)y^2$ for some $f_0,f_1,f_2 \in \mathbb{K}(x)$, %(like: $y' = 1 + y^2$) 
-can be considered as the simplest form of nonlinear AODEs. 
-In \cite{Kovacic}, Kovacic gives a complete algorithm for determining Liouvillian solutions of 
-a Riccati equation with rational function coefficients. 
-
-
-Since the problem of solving an arbitrary AODE is very difficult, 
-it is natural to ask whether a given AODE admits some special kinds of solutions, 
-such as polynomials, rational functions, or formal power series. 
-During the last two decades, an algebraic-geometric approach for finding symbolic solutions of AODEs has been developed. 
-The work by Feng and Gao in \cite{FengGao, FengGao06} for computing rational general solutions of first-order autonomous AODEs 
-can be considered as the starting point. 
-The authors of~\cite{NgoWinkler11b, GraseggerThesis, VoWinkler2015, VoGraseggerWinkler2017} 
-developed methods for finding different kinds of solutions of non-autonomous, higher-order AODEs. 
-For formal power series solutions, we refer to \cite{DenefLipshitz,SingerFormalSolutions}.
-As far as we know, there is few results concerning Laurent series solutions of AODEs. 
-Our main purpose is to give a method for determining such solutions.
-
-\subsection{Main results}
-
-\begin{enumerate}
- \item We present several approaches to compute formal power series solutions of a given AODE.
- \item Given an AODE, we determine a bound for the order of its Laurent series solutions. 
- Using the order bound, one can transform a given AODE into a new one whose Laurent series solutions are only formal power series.
- \item As applications, new algorithms are presented for determining all particular polynomial and rational solutions of certain classes of AODEs.
-\end{enumerate}
-
-
-
-This work is available in~\cite{VoZhang2017}.
-
-\subsection{Future work}
-
-\begin{enumerate}
- \item Design algorithms for computing formal power series solutions of AODEs, which extends the classic Implicit Function Theorem of AODEs.
- \item Compute rational solutions of first-order algebraic difference equations by using the parametrization of algebraic curves.  
-\end{enumerate}
-
-
-\section{Desingularization in the \texorpdfstring{$q$}{q}-Weyl algebra} \label{SECT:qdesing}
-
-\subsection{Introduction}
-
-Prof.\ Stavros Garoufalidis, who is an expert for knot theory, 
-presented the following conjecture in an email with the author:
-
-\begin{conj} \label{CONJ:stavros}
-(Garoufalidis): Let $J_{K,n}(q)$ denote the Jones polynomial of a knot colored by the $n$-dimensional irreducible 
-representation of $\mathfrak{sl}_2$ and normalized by $J_{\text{Unknot},n}(q)=1$. 
-Then, (a) $(1-q^n)*J_{K,n}(q)$ satisfies a bimonic recursion relation. (b) $J_{K,n}(q)$ does not satisfy a monic recursion relation.
-\end{conj}
-
-Using $q$-holonomic summation methods (as implemented in the \texttt{qMultiSum}
-package~\cite{Riese03} or \texttt{HolonomicFunctions}
-package~\cite{Christoph2010}) or by guessing (as implemented in the
-\texttt{Guess} package~\cite{Kauers2009a}), 
-we can always compute $q$-holonomic recurrence equations for $(1-q^n)*J_{K,n}(q)$ and $J_{K,n}(q)$, respectively. 
-However, the equation for $(1-q^n)*J_{K,n}(q)$ usually does not satisfy the property in Conjecture~\ref{CONJ:stavros}. 
-Furthermore, we can not see immediately that $J_{K,n}(q)$ does not satisfy a monic recursion relation.
-
-In order to certify Conjecture~\ref{CONJ:stavros} for some specific $J_{K,n}(q)$, 
-we develop the desingularization technique in the $q$-Weyl algebra. 
-
-As an example, consider the $q$-holonomic sequence
-\[
-  f(n) = [n]_q := \frac{q^n-1}{q-1}
-\]
-that is a $q$-analog of the natural numbers.  The minimal-order homogeneous
-$q$-recurrence satisfied by $f(n)$ is
-\[
-  (q^n-1)f(n+1) - (q^{n+1}-1)f(n) = 0,
-\]
-in operator notation:
-\begin{equation} \label{EQ:qrecurrence}
- \bigl((q^n-1)\pa - q^{n+1} + 1\bigr) \cdot f(n) = 0.
-\end{equation}
-
-When we multiply this operator by a suitable left factor, we obtain
-a monic (and hence: desingularized) operator of order~$2$:
-\begin{equation} \label{EQ:qdesin}
-  \frac{1}{q^{n+1}-1}\bigl(\pa - q\bigr)\bigl((q^n-1)\pa - q^{n+1} + 1\bigr) =
-  \pa^2 - (q+1)\pa + q.
-\end{equation}
-The process of deriving~\eqref{EQ:qdesin} from~\eqref{EQ:qrecurrence} to called desingularization in the $q$-Weyl algebra.
-
-
-
-\subsection{Main results}
-
-\begin{enumerate}
- \item We give an order bound for desingularized operators, and thus derive
-an algorithm for computing desingularized operators in the first $q$-Weyl
-algebra.
- \item An algorithm is presented for computing a generating set
-of the first $q$-Weyl closure of a given $q$-difference operator.
- \item As an application, we certify that several instances of $J_{K,n}(q)$ always 
- satisfy the properties specified in Conjecture~\ref{CONJ:stavros}.  
-\end{enumerate}
-
-
-
-This work is available in~\cite{KZ2018}.
-
-\subsection{Future work}
-
-\begin{enumerate}
- \item Study the desingularization problem in the multivariate $q$-Weyl algebra.
- \item Develop the desingularization technique for linear Mahler equations. 
-\end{enumerate}
+%\section*{The improved holonomic gradient method via gauge transformation} \label{SECT:hgm}
+%
+%
+%\section{Contraction of Ore ideals with applications} \label{SECT:contraction}
+%
+%\subsection{Introduction}
+%Let $\bK$ be a field of characteristic $0$. 
+%Consider the following linear recurrence equation:
+%\begin{equation} \label{EQ:recurrence}
+% a_0(n)f(n) + \cdots + a_r(n)f(n+r)=0,
+%\end{equation}
+%where $a_i \in \bK[n]$ with $a_r \neq 0$, and $i = 0, \ldots, r$. The roots of $a_r(n)$ is called 
+%the singularities of~\eqref{EQ:recurrence}.  
+%There is a strong connection between the roots of $a_r$ 
+%and the singularities of a solution of~\eqref{EQ:recurrence} . 
+%
+%It is well know that every singularity of a solution of~\eqref{EQ:recurrence} 
+%must be a root of~$a_r$. However, the converse is not true.
+%Generally speaking, the leading coefficient~$a_r$ may have roots at a point where no solution is singular. 
+%Such points are called
+%apparent singularities, and it is sometimes useful to
+%identify them. The technique for doing so is called desingularization.
+%For instance, consider the recurrence operator
+%\[
+% L = (1 + 16 n)^2 \pa^2 - 32 (7 + 16 n) \pa - (1 + n)(17 + 16 n)^2,
+%\]
+%which comes from~\cite[Section 4.1]{Abramov2006}. 
+%In this, we use $\pa$ to denote the shift operator $f(n) \mapsto f(n + 1)$.
+%For any choice of two initial values
+%$u_0,u_1\in  \bQ$, there is a unique sequence $u \colon
+%\bN \to \bQ$ with $u(0)=u_0$, $u(1)=u_1$ and $L$ applied to $u$
+%gives the zero sequence. A priori, it is not obvious whether or
+%not $u$ is actually an integer sequence, if we choose $u_0,u_1$
+%from~$\bZ$, because the calculation of the $(n+2)$nd term
+%from the earlier terms via the recurrence encoded by $L$ requires
+%a division by $(1+16n)^2$, which could introduce fractions. In order
+%to show that this division never introduces a denominator, 
+%we note that every solution of $L$ is also a solution
+%of its left multiple
+%\begin{equation} \label{EQ:ah}
+%\begin{array}{ccl}
+%T  & = & \pa^3 +\left(128 n^3-104 n^2-11 n-3\right) \pa^2 + \\
+%          &   & \left(-256 n^2+127 n + 94 \right) \pa - \\
+%          &   & (128 n^2+24 n-131)(1 + n)^2,
+%\end{array}
+%\end{equation}
+%The operator $T$ has the interesting property that the factor
+%$(1+16n)^2$ has been ``removed'' from the leading
+%coefficient, which immediately certifies the integrality of its solutions. 
+%The process of obtaining the operator $T$ from $L$ is called
+%desingularization, because there is a polynomial factor in the
+%leading coefficient of $L$ which does not appear in the leading
+%coefficient of~$T$. 
+%
+%
+%In more algebraic terms, we consider the following problem. Given
+%an operator $L\in \bZ[x][\pa]$, where $\bZ[x][\pa]$
+%is an Ore algebra, we consider
+%the left ideal $\langle L \rangle = \bQ(x)[\pa]L$ generated by $L$ in the
+%extended algebra $\bQ(x)[\pa]$. The contraction of $\langle L \rangle$ to
+%$\bZ[x][\pa]$ is defined as $\cont(L) := \langle L \rangle \cap
+%\bZ[x][\pa]$. This is a left ideal of $\bZ[x][\pa]$ which
+%contains $\bZ[x][\pa]L$, but in general more operators.
+%Our goal is to compute a $\bZ[x][\pa]$-generating set of $\cont(L)$.
+%In the example above, such a generating set is given by $\{L, T\}$ 	.
+%The traditional desingularization problem corresponds to computing
+%a generating set of the $\bQ[x][\pa]$-left ideal $\langle L \rangle \cap \bQ[x][\pa]$.
+%
+%
+%\subsection{Main results}
+%Given an Ore operator~$L$ with polynomial coefficients in~$x$, it generates a left ideal~$I$ in the Ore algebra
+%over the field~$\bK(x)$ of rational functions. 
+%
+%\begin{enumerate}
+% \item We present an algorithm for computing a generating set of the contraction ideal of~$I$
+%in the Ore algebra over the ring~$R[x]$ of polynomials, where~$R$ may be either~$\bK$ or a domain with~$\bK$ as its fraction field.
+% \item Using a generating set of the contraction ideal,
+%we compute a completely desingularized operator for~$L$ whose leading coefficient not only
+%has minimal degree in~$x$ but also has minimal content.
+% \item Using completely desingularized operators, we study how to certify the integrality of a sequence and 
+% check special cases of a conjecture of Krattenthaler.
+%\end{enumerate} 
+%
+%This work is published in ISSAC'16~\cite{Zhang2016}.
+%
+%\subsection{Future work}
+%
+%\begin{enumerate}
+% \item Our algorithms rely heavily on the computation of Gr\"{o}bner bases over a principal ideal domain~$R$.
+%At present, the computation of Gr\"{o}bner bases over $R$ is not fully available in a computer algebra system. 
+%So the algorithms are not yet implemented. We would like to implement our algorithm in Maple or Mathematica 
+%by using linear algebra over $R$ as much as possible.
+% \item Design algorithms for determining a generating set of a contraction ideal in the multivariate Ore algebra.
+%\end{enumerate}
+%
+%\section{Apparent singularities of D-finite systems} \label{SECT:apparent}
+%
+%\subsection{Introduction}
+%
+%A D-finite function is specified by a linear ordinary differential equation with polynomial 
+%coefficients and finitely many initial values. Each singularity of a D-finite function 
+%will be a root of the coefficient of the highest order derivative appearing 
+%in the corresponding differential equation. 
+%For instance, $x^{-1}$ is a solution of the equation $x f'(x) + f(x) = 0$, 
+%and the singularity at the origin is also the root of the polynomial $x$. 
+%However, the converse is not true. For instance, the solution space of 
+%the differential equation $x f'(x) - 3 f(x) = 0$ is spanned by $x^3$ as a vector space, 
+%but none of those functions has singularity at the origin.
+%
+%More specifically, we consider the following ordinary differential equation 
+%$$p_0(x)f(x) + \cdots + p_r(x)f^{(r)}(x) = 0,,$$ 
+%where $p_i \in \bK[x]$ with $p_r\neq0$, and $\bK$ is a field of characteristic $0$.  
+%The roots of $p_r$ are called the
+%singularities of the equation. A root $\alpha$ of $p_r$ is call \emph{apparent} if the
+%differential equation admits $r$ linearly independent formal power series solutions in 
+%$x - \alpha$. Deciding whether a singularity is apparent is therefore the same as
+%checking whether the equation admits a fundamental system of formal power series
+%solutions at this point. This can be done by inspecting the so-called
+%\emph{indicial polynomial} of the equation at~$\alpha$ and solving a system of finitely many linear equations. 
+%If a singularity $\alpha$ of an ordinary differential is apparent, then we can always 
+%construct a second ordinary differential equation whose solution space contains all the solutions of the
+%first equation, and which does not have $\alpha$ as a singularity any more. 
+%This process is called \emph{desingularization}. The purpose of our work is to generalize the facts sketched above to
+%the multivariate setting.
+%
+%\subsection{Main results}
+%
+%\begin{enumerate}
+% \item We generalize the notions of singularities and ordinary points from linear ordinary differential equations to D-finite systems. 
+% Ordinary points of a D-finite system are characterized in terms of its formal power series solutions.
+% \item We show that apparent singularities can be removed like in the univariate
+%case by adding suitable additional solutions to the system at hand.
+% \item Several algorithms are presented for removing and detecting apparent singularities of D-finite systems.
+% \item An algorithm is given for computing formal power series solutions of a D-finite system
+%at apparent singularities.
+%\end{enumerate}
+%
+%This work is available in~\cite{Yi2017}.
+%
+%\subsection{Future work}
+%
+%\begin{enumerate}
+% \item Generalize our algorithms for removing and detecting apparent singularities of D-finite systems to other singularities.
+% \item Study the desingularization problem for the multivariate linear difference equations with polynomial coefficients. 
+%\end{enumerate}
+%
+%\section{Laurent series solutions of algebraic ordinary differential equations} \label{SECT:Laurentsols}
+%
+%\subsection{Introduction}
+%
+%An algebraic ordinary differential equation (AODE) is of the form 
+%$$F(x,y,y',\ldots,y^{(n)})=0,$$ 
+%where $F$ is a polynomial in $y,y',\ldots,y^{(n)}$ with coefficients in $\mathbb{K}(x)$, the field $\bK$ is 
+%algebraically closed field of characteristic zero, and $n \in \bN$. 
+%Many problems from applications (such as physics, combinatorics and statistics) 
+%can be characterized in terms of AODEs.  
+%Therefore, determining (closed form) solutions of an AODE is one of the central problems in mathematics and computer science.
+% 
+%Although linear ODEs~\cite{Ince1926} have been intensively studied, there are still many challenging problems for solving
+%(nonlinear) AODEs. As far as we know, approaches for solving AODEs are only available for very specific subclasses. 
+%For example, Riccati equations, 
+%which have the form $y'=f_0(x)+f_1(x)y+f_2(x)y^2$ for some $f_0,f_1,f_2 \in \mathbb{K}(x)$, %(like: $y' = 1 + y^2$) 
+%can be considered as the simplest form of nonlinear AODEs. 
+%In \cite{Kovacic}, Kovacic gives a complete algorithm for determining Liouvillian solutions of 
+%a Riccati equation with rational function coefficients. 
+%
+%
+%Since the problem of solving an arbitrary AODE is very difficult, 
+%it is natural to ask whether a given AODE admits some special kinds of solutions, 
+%such as polynomials, rational functions, or formal power series. 
+%During the last two decades, an algebraic-geometric approach for finding symbolic solutions of AODEs has been developed. 
+%The work by Feng and Gao in \cite{FengGao, FengGao06} for computing rational general solutions of first-order autonomous AODEs 
+%can be considered as the starting point. 
+%The authors of~\cite{NgoWinkler11b, GraseggerThesis, VoWinkler2015, VoGraseggerWinkler2017} 
+%developed methods for finding different kinds of solutions of non-autonomous, higher-order AODEs. 
+%For formal power series solutions, we refer to \cite{DenefLipshitz,SingerFormalSolutions}.
+%As far as we know, there is few results concerning Laurent series solutions of AODEs. 
+%Our main purpose is to give a method for determining such solutions.
+%
+%\subsection{Main results}
+%
+%\begin{enumerate}
+% \item We present several approaches to compute formal power series solutions of a given AODE.
+% \item Given an AODE, we determine a bound for the order of its Laurent series solutions. 
+% Using the order bound, one can transform a given AODE into a new one whose Laurent series solutions are only formal power series.
+% \item As applications, new algorithms are presented for determining all particular polynomial and rational solutions of certain classes of AODEs.
+%\end{enumerate}
+%
+%
+%
+%This work is available in~\cite{VoZhang2017}.
+%
+%\subsection{Future work}
+%
+%\begin{enumerate}
+% \item Design algorithms for computing formal power series solutions of AODEs, which extends the classic Implicit Function Theorem of AODEs.
+% \item Compute rational solutions of first-order algebraic difference equations by using the parametrization of algebraic curves.  
+%\end{enumerate}
+%
+%
+%\section{Desingularization in the \texorpdfstring{$q$}{q}-Weyl algebra} \label{SECT:qdesing}
+%
+%\subsection{Introduction}
+%
+%Prof.\ Stavros Garoufalidis, who is an expert for knot theory, 
+%presented the following conjecture in an email with the author:
+%
+%\begin{conj} \label{CONJ:stavros}
+%(Garoufalidis): Let $J_{K,n}(q)$ denote the Jones polynomial of a knot colored by the $n$-dimensional irreducible 
+%representation of $\mathfrak{sl}_2$ and normalized by $J_{\text{Unknot},n}(q)=1$. 
+%Then, (a) $(1-q^n)*J_{K,n}(q)$ satisfies a bimonic recursion relation. (b) $J_{K,n}(q)$ does not satisfy a monic recursion relation.
+%\end{conj}
+%
+%Using $q$-holonomic summation methods (as implemented in the \texttt{qMultiSum}
+%package~\cite{Riese03} or \texttt{HolonomicFunctions}
+%package~\cite{Christoph2010}) or by guessing (as implemented in the
+%\texttt{Guess} package~\cite{Kauers2009a}), 
+%we can always compute $q$-holonomic recurrence equations for $(1-q^n)*J_{K,n}(q)$ and $J_{K,n}(q)$, respectively. 
+%However, the equation for $(1-q^n)*J_{K,n}(q)$ usually does not satisfy the property in Conjecture~\ref{CONJ:stavros}. 
+%Furthermore, we can not see immediately that $J_{K,n}(q)$ does not satisfy a monic recursion relation.
+%
+%In order to certify Conjecture~\ref{CONJ:stavros} for some specific $J_{K,n}(q)$, 
+%we develop the desingularization technique in the $q$-Weyl algebra. 
+%
+%As an example, consider the $q$-holonomic sequence
+%\[
+%  f(n) = [n]_q := \frac{q^n-1}{q-1}
+%\]
+%that is a $q$-analog of the natural numbers.  The minimal-order homogeneous
+%$q$-recurrence satisfied by $f(n)$ is
+%\[
+%  (q^n-1)f(n+1) - (q^{n+1}-1)f(n) = 0,
+%\]
+%in operator notation:
+%\begin{equation} \label{EQ:qrecurrence}
+% \bigl((q^n-1)\pa - q^{n+1} + 1\bigr) \cdot f(n) = 0.
+%\end{equation}
+%
+%When we multiply this operator by a suitable left factor, we obtain
+%a monic (and hence: desingularized) operator of order~$2$:
+%\begin{equation} \label{EQ:qdesin}
+%  \frac{1}{q^{n+1}-1}\bigl(\pa - q\bigr)\bigl((q^n-1)\pa - q^{n+1} + 1\bigr) =
+%  \pa^2 - (q+1)\pa + q.
+%\end{equation}
+%The process of deriving~\eqref{EQ:qdesin} from~\eqref{EQ:qrecurrence} to called desingularization in the $q$-Weyl algebra.
+%
+%
+%
+%\subsection{Main results}
+%
+%\begin{enumerate}
+% \item We give an order bound for desingularized operators, and thus derive
+%an algorithm for computing desingularized operators in the first $q$-Weyl
+%algebra.
+% \item An algorithm is presented for computing a generating set
+%of the first $q$-Weyl closure of a given $q$-difference operator.
+% \item As an application, we certify that several instances of $J_{K,n}(q)$ always 
+% satisfy the properties specified in Conjecture~\ref{CONJ:stavros}.  
+%\end{enumerate}
+%
+%
+%
+%This work is available in~\cite{KZ2018}.
+%
+%\subsection{Future work}
+%
+%\begin{enumerate}
+% \item Study the desingularization problem in the multivariate $q$-Weyl algebra.
+% \item Develop the desingularization technique for linear Mahler equations. 
+%\end{enumerate}
 
 \section{An enhanced holonomic gradient method with algebraic and numerical analysis of differential equations} \label{SECT:HGM}
 
-\subsection{Introduction}
+%\subsection{Introduction}
 
 Studying problems in differential equations which arose in statistics will lead us a remarkable advances in the algebraic and algorithmic study of differential equations and the combination of algebraic algorithms and numerical algorithms for differential equations. An important approach in the algebraic analysis of differential equation is the holonomic gradient method. 
 
@@ -443,26 +545,22 @@ Studying problems in differential equations which arose in statistics will lead 
 
 For the first step of HGM, there are efficient algorithms (such as the creative telescoping method) to derive a holonomic system for the target normalizing constant. The holonomic system can be translated into a linear ODE system (Pfaffian system) for the normalizing constant and its derivatives. However, if the normalizing constant is not the dominant~\cite{Danufane2018} solution among all the solutions of the corresponding linear ODE system as the independent variable goes to infinity, then the usual methods involved in the third step of HGM only works for a small interval. Besides, the evaluation step relies on the precision of initial values of the target normalizing constant and its derivatives. The current methods for evaluating initial values with high-precision are also not satisfactory.
   
-  We want to design an enhanced HGM by combining theoretical study of ODEs, algebraic algorithms, and numerical algorithms for ODEs to give a more efficient numerical evaluator in the second and third step of HGM. Furthermore, we will apply the improved HGM to study problems in differential equations which arose in statistics, combinatorics and so on.  
+  We want to design an enhanced HGM by combining theoretical study of ODEs, algebraic algorithms, and numerical algorithms for ODEs to give a more efficient numerical evaluator in the second and third step of HGM. Furthermore, we will apply the improved HGM to study problems in differential equations which arose in statistics, combinatorics and so on.  Our contributions in this area is as follows: 
 
-
-\subsection{Main results}
-
-We give an approximate formula of the distribution of the largest
+\begin{itemize}
+\item Computations of the Expected Euler Characteristic for the Largest Eigenvalue of a Real non-central Wishart Matrix~\cite{Takayama2019}.We give an approximate formula of the distribution of the largest
 eigenvalue of real Wishart matrices by the expected Euler characteristic
 method for the general dimension.
 The formula is expressed in terms of a definite integral with parameters.
 We derive a differential equation satisfied by the integral
 for the $2 \times 2$ matrix case and perform a numerical analysis of it.
+\end{itemize}
 
-This work is available in~\cite{Takayama2019}.
-
-\subsection{Future work}
 For the first step of HGM, there are efficient algorithms (such as the creative telescoping method) to derive a holonomic system for the target normalizing constant. The holonomic system can be translated into a linear ODE system (Pfaffian system) for the normalizing constant and its derivatives. However, if the normalizing constant is not the dominant solution among all the solutions of the corresponding linear ODE system as the independent variable goes to infinity, then the usual methods involved in the third step of HGM only works for a small interval. Besides, the evaluation step relies on the precision of initial values of the target normalizing constant and its derivatives. The current methods for evaluating initial values with high-precision are also not satisfactory. 
  
   We want to design an enhanced HGM by combining theoretical study of ODEs, algebraic algorithms, and numerical algorithms for ODEs to give a more efficient numerical evaluator in the second and third step of HGM. Furthermore, we will apply the improved HGM to study problems in differential equations which arose in statistics, combinatorics and so on.  
 
-We want to achieve our goals from the following aspects.
+I plan to work on the following problems in the near future:
 
 \begin{enumerate}
 \item Euler characteristic method to approximate the tail probability of the maximum of a bivariate Gaussian process.A Gaussian process is a stochastic process with important applications in probability theory and statistical modelling. We can show that the tail probability of the maximum of a bivariate Gauss process can be approximated by the expectation of products of two Euler characteristic numbers when two parameters involved are large. The expected Euler characteristic can be expressed as a sum of four definite integrals $F_i(a, b)$’s, where $F_i(a, b)$ is at most $4$-fold with a holonomic integrand, and $a$, $b$ are parameters. We will use our enhanced HGM (see below) to numerically evaluate those integrals, and thus derive good approximations for the tail probability of the maximum of a bivariate Gaussian process.
@@ -638,8 +736,13 @@ N.T.~Vo and Y.~Zhang.
 
 \bibitem{VoZhang2019}
 N.T.~Vo and Y.~Zhang.
+\newblock {Rational Solutions of High-Order Algebraic Ordinary Differential Equations}.
+\newblock {\em accepted by Journal of Systems Sciences and Complexity}, 2019.
+
+\bibitem{VZ2019}
+N.T.~Vo and Y.~Zhang.
 \newblock {Rational Solutions of First-Order Algebraic Ordinary Difference Equations}.
-\newblock {\em arXiv: 1901.11048}, pages 1--25,  2019.
+\newblock {\em arXiv 1901.11048}, 1--25, 2019.
 
 \bibitem{Winkler2019}
 F.~Winkler.
